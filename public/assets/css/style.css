@@ -550,7 +550,7 @@ span.input-group-text {
 	-o-border-radius: 10px;
 	-ms-border-radius: 10px;
 	padding: 50px 85px;
-	margin-top: 100px;
+	margin-top: 50px;
 }
 
 .form-group {
@@ -609,4 +609,30 @@ span.input-group-text {
 
 .title-font {
 	color: cadetblue;
+}
+
+.home_section {
+	min-height: 100vh;
+	background: url(https://backgrounddownload.com/wp-content/uploads/2018/09/background-website-design-7.jpg) no-repeat center/cover;
+	text-align: center;
+	color: #fff;
+}
+
+.login-section {
+	min-height: 100vh;
+	background: url(https://backgrounddownload.com/wp-content/uploads/2018/09/background-website-design-7.jpg) no-repeat center/cover;
+	text-align: center;
+	color: #fff;
+}
+
+.bg-trs {
+	background: rgba(0, 0, 0, 0.2);
+}
+
+.navbar-dark .navbar-nav .nav-link {
+	color: white;
+}
+
+.login-section .fixed-top {
+	position: relative;
 }

@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
+import Header from './Header';
+
 
 class ForgotPassword extends Component {
 	constructor() {
@@ -66,34 +68,37 @@ class ForgotPassword extends Component {
 		const { email, invalidEmail, errors } = this.state;
 		return (
 
-			<section className="page-container">
-				<div className="content">
-					<h3 className="text-center title-font mb-3">Reset Password</h3>
-					<h6 className="text-center mb-5">Enter your email address below and we'll send you an email with instructions.</h6>
+			<section className="login-section">
+				<Header />
+				<div className="page-container">
+					<div className="content">
+						<h3 className="text-center title-font mb-3">Reset Password</h3>
+						<h6 className="text-center w3-text-gray mb-5">Enter your email address below and we'll send you an email with instructions.</h6>
 
-					<div className="form-group">
-						<input
-							type="email"
-							className="form-input"
-							name="email"
-							value={email}
-							onChange={this.handleChange}
-							onBlur={this.handleValidate}
-							placeholder="Enter Email" />
-						{
-							errors.emailError &&
-							<span className="errorMsg">Please enter email</span>
-						}
-						{
-							invalidEmail &&
-							<span className="errorMsg">Please enter valid email</span>
-						}
-					</div>
-					<div className="form-group">
-						<button onClick={this.handleSubmit} className="form-submit">Reset</button>
-					</div>
+						<div className="form-group">
+							<input
+								type="email"
+								className="form-input"
+								name="email"
+								value={email}
+								onChange={this.handleChange}
+								onBlur={this.handleValidate}
+								placeholder="Enter Email" />
+							{
+								errors.emailError &&
+								<span className="errorMsg">Please enter email</span>
+							}
+							{
+								invalidEmail &&
+								<span className="errorMsg">Please enter valid email</span>
+							}
+						</div>
+						<div className="form-group">
+							<button onClick={this.handleSubmit} className="form-submit">Reset</button>
+						</div>
 
-					<p className="loginhere mt-0" ><Link to="login" className="loginhere-link"><i className="fas fa-sign-in-alt mr-2"></i>Back to Login</Link></p>
+						<p className="loginhere mt-0" ><Link to="login" className="loginhere-link"><i className="fas fa-sign-in-alt mr-2"></i>Back to Login</Link></p>
+					</div>
 				</div>
 			</section>
 
