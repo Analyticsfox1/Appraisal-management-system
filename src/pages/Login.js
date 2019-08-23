@@ -48,6 +48,9 @@ class Login extends Component {
 			if (errors[val] === null || errors[val]) {
 				errors[val] = true;
 			}
+			else {
+				this.props.history.push('/dashboard')
+			}
 		}
 		this.setState({ errors: { ...errors } });
 	}

@@ -169,7 +169,7 @@ input:focus {
 	color: #fff;
 	text-transform: uppercase;
 	border: none;
-	background-color: cadetblue;
+	background-color: #e29262;
 	/* background-image: -moz-linear-gradient(to left, #74ebd5, #9face6);
 	background-image: -ms-linear-gradient(to left, #74ebd5, #9face6);
 	background-image: -o-linear-gradient(to left, #74ebd5, #9face6);
@@ -605,14 +605,26 @@ span.input-group-text {
 }
 
 .title-font {
-	color: cadetblue;
+	color: #e46a22;
 }
 
 .home-section {
-	min-height: 100vh;
-	background: url('../images/Banner.jpg') no-repeat center/cover;
+	min-height: 70vh;
+	background: url('../images/Banner-home.jpg') no-repeat center/cover;
+	/* background: url("https://www.vtldesign.hu/wp-content/uploads/2014/07/web-development-background.jpg") no-repeat center/cover; */
 	text-align: center;
 	color: #fff;
+}
+
+.about-section {
+	min-height: 62vh;
+	background: url('../images/Banner_about.jpg') no-repeat center/cover;
+	text-align: center;
+	color: #fff;
+}
+
+.about-page .bg-trs {
+	background: none;
 }
 
 .login-section {
@@ -623,7 +635,8 @@ span.input-group-text {
 }
 
 .bg-trs {
-	background: rgba(255, 255, 255, 0.1);
+	/* background: rgba(255, 255, 255, 0.1); */
+	background: none;
 }
 
 .navbar-dark .navbar-nav .nav-link {
@@ -651,11 +664,11 @@ span.input-group-text {
 .white_box h3 {
 	font-weight: 400;
 	font-size: 27px;
-	color: #4badb7;
+	color: #e87025;
 }
 
 .navbar-dark .navbar-nav .active .nav-link, .navbar-dark .navbar-nav .nav-link:Active, .navbar-dark .navbar-nav .nav-link:hover {
-	color: #4aacb7;
+	color: #e87025;
 }
 
 .login-section .page-container {
@@ -671,4 +684,227 @@ span.input-group-text {
 
 .login-section .form-group {
 	text-align: left;
+}
+
+.logo-image {
+	background-image: url('../images/Bannerlogo.png');
+	height: 50px;
+	width: 270px;
+	display: inline-block
+}
+
+.dash_grid {
+	display: flex;
+	min-height: 100vh;
+}
+
+.dash_grid aside {
+	width: 250px;
+}
+
+.dash_grid main {
+	background: #eee;
+	flex: 1;
+}
+
+.dash_grid aside {
+	background: #333;
+}
+
+.dash_grid aside ul {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.dash_grid aside ul li a {
+	text-decoration: none;
+	padding: 10px 15px;
+	display: block;
+	color: #fff;
+	border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+	opacity: 0.9;
+	transition: .3s;
+}
+
+.dash_grid aside ul li a i {
+	margin-right: 15px;
+}
+
+.dash_grid aside ul li a:hover, .dash_grid aside ul li.active a {
+	background: #e46a22;
+	opacity: 1 !important;
+	border-color: transparent;
+}
+
+.active {
+	background: #e46a22;
+	opacity: 1;
+	border-color: transparent;
+}
+
+.has_drop {
+	position: relative;
+}
+
+.has_drop .custom_drop li a {
+	padding-left: 40px;
+}
+
+.has_drop .custom_drop {
+	background: #101010;
+	display: none;
+}
+
+.dash_head {
+	display: flex;
+	justify-content: space-between;
+	padding: 10px 30px;
+	background: #fff;
+	box-shadow: 0px 0px 10px 0px #ccc;
+}
+
+.dash_head p {
+	margin: 0;
+	line-height: 1;
+	color: #888;
+	font-weight: 300;
+}
+
+.dash_head {
+	align-items: center;
+}
+
+.dash_head .time_check {
+	margin-right: auto;
+	margin-left: 20px;
+}
+
+.dash_head .time_check .btn {
+	margin-right: 10px;
+	font-weight: 300;
+}
+
+.dash_head .time_check .btn i {
+	margin-left: 5px;
+}
+
+.btn2 {
+	padding: 5px 15px;
+}
+
+.dash_grid .logo-image {
+	background-repeat: no-repeat;
+	background-position: center;
+	display: block;
+	background-color: #fff;
+	background-size: 180px;
+	height: 54px;
+}
+
+.dash_head {
+	box-shadow: 6px 0px 10px 0px #ccc;
+}
+
+.icon_light {
+	height: 40px;
+	width: 40px;
+	border-radius: 50%;
+	background: rgba(220, 53, 69, 0.15);
+	color: #dc3545;
+	text-align: center;
+	font-size: 18px;
+	line-height: 40px;
+	margin-right: 10px;
+}
+
+.card2_head {
+	padding: 10px 16px;
+	border-bottom: 1px solid #eee;
+}
+
+.no_data img {
+	width: auto;
+	height: 100px;
+	display: block;
+	margin: 30px auto;
+}
+
+.icon_light.bg2 {
+	background: rgba(33, 150, 243, .15);
+	color: #2196f3;
+}
+
+.icon_light.bg3 {
+	background: rgba(0, 150, 136, .15);
+	color: #009688;
+}
+
+.icon_light.bg4 {
+	background: #fd7e1440;
+	color: #fd7e14;
+}
+
+.dash_space {
+	padding: 30px;
+}
+
+.btn-rounded {
+	border-radius: 20px;
+}
+
+img.logo-size {
+	height: 30px;
+	margin-right: 10px;
+}
+
+section.footer-bg {
+	min-height: 15vh;
+	background: #2e3b44;
+}
+
+.social-network {
+	width: 100%;
+	font-size: 24px;
+	line-height: 24px;
+}
+
+.social-network a {
+	display: inline-block;
+	color: #b6b6b6;
+	margin: 0 2px 5px 2px;
+}
+
+.title-orange {
+	color: #e46a22;
+}
+
+.title-blue {
+	color: #313e62;
+}
+
+.bg-trs.f1 {
+	background: #fff;
+	box-shadow: 5px 0px 10px -6px #000;
+}
+
+.bg-trs.f1.navbar-dark .navbar-nav .nav-link {
+	color: #000;
+}
+
+.bg_trs {
+	transition: .3s;
+}
+
+.landing-page hr {
+	border: 0.5px solid #d8d4d2;
+}
+
+.w3-quarter .icon_light {
+	width: 100px;
+	height: 100px;
+	line-height: 100px;
+	font-size: 40px !important;
+	background: #fd7e1440;
+	color: #e88753;
 }
