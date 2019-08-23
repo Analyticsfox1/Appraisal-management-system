@@ -105,8 +105,8 @@ class Login extends Component {
 							<button onClick={this.handleSubmit} className="form-submit" > Login</button>
 						</div>
 
-						<div className="form-group">
-							<p className="loginhere mt-0"> Do you haven't an account ? <Link className="loginhere-link" to="/register">Create account</Link></p>
+						<div className="form-group m-0">
+							<p className="loginhere mt-0 mn-0"> Do you haven't an account ? <Link className="loginhere-link" to="/register">Create account</Link></p>
 						</div>
 					</div>
 				</div>

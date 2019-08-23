@@ -1,13 +1,11 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap');
 body {
 	font-size: 14px;
 	line-height: 1.8;
+	font-family: 'Poppins', sans-serif;
 	height: 100%;
 	color: #222;
 	font-weight: 400;
-}
-
-body, h1, h2, h3, h4, h5, h6 {
-	font-family: "Raleway", sans-serif
 }
 
 img {
@@ -85,7 +83,7 @@ input:focus {
 	-webkit-border-radius: 5px;
 	-o-border-radius: 5px;
 	-ms-border-radius: 5px;
-	padding: 17px 20px;
+	padding: 12px 20px;
 	box-sizing: border-box;
 	font-size: 14px;
 	font-weight: 500;
@@ -164,7 +162,7 @@ input:focus {
 	-webkit-border-radius: 5px;
 	-o-border-radius: 5px;
 	-ms-border-radius: 5px;
-	padding: 17px 20px;
+	padding: 12px 20px;
 	box-sizing: border-box;
 	font-size: 14px;
 	font-weight: 700;
@@ -500,9 +498,9 @@ span.input-group-text {
 }
 
 .page-container {
-	width: 660px;
+	width: 400px;
 	position: relative;
-	margin: 0 auto;
+	margin: 0 30px 0 auto;
 }
 
 .display-flex {
@@ -549,8 +547,7 @@ span.input-group-text {
 	-webkit-border-radius: 10px;
 	-o-border-radius: 10px;
 	-ms-border-radius: 10px;
-	padding: 50px 85px;
-	margin-top: 50px;
+	padding: 35px 30px;
 }
 
 .form-group {
@@ -611,22 +608,22 @@ span.input-group-text {
 	color: cadetblue;
 }
 
-.home_section {
+.home-section {
 	min-height: 100vh;
-	background: url(https://backgrounddownload.com/wp-content/uploads/2018/09/background-website-design-7.jpg) no-repeat center/cover;
+	background: url('../images/Banner.jpg') no-repeat center/cover;
 	text-align: center;
 	color: #fff;
 }
 
 .login-section {
 	min-height: 100vh;
-	background: url(https://backgrounddownload.com/wp-content/uploads/2018/09/background-website-design-7.jpg) no-repeat center/cover;
+	background: url('../images/Banner.jpg') no-repeat center/cover;
 	text-align: center;
 	color: #fff;
 }
 
 .bg-trs {
-	background: rgba(0, 0, 0, 0.2);
+	background: rgba(255, 255, 255, 0.1);
 }
 
 .navbar-dark .navbar-nav .nav-link {
@@ -635,4 +632,43 @@ span.input-group-text {
 
 .login-section .fixed-top {
 	position: relative;
+}
+
+.white_box {
+	background: rgba(255, 255, 255, 0.7);
+	padding: 40px;
+	border-radius: 14px;
+	max-width: 700px;
+	margin: 100px auto 40px;
+	color: #000;
+}
+
+.white_box p {
+	font-weight: 300;
+	color: #555;
+}
+
+.white_box h3 {
+	font-weight: 400;
+	font-size: 27px;
+	color: #4badb7;
+}
+
+.navbar-dark .navbar-nav .active .nav-link, .navbar-dark .navbar-nav .nav-link:Active, .navbar-dark .navbar-nav .nav-link:hover {
+	color: #4aacb7;
+}
+
+.login-section .page-container {
+	padding: 40px 0;
+}
+
+.login-section .page-container {
+	min-height: calc(100vh - 75px);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.login-section .form-group {
+	text-align: left;
 }
