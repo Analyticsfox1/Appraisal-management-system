@@ -908,3 +908,80 @@ section.footer-bg {
 	background: #fd7e1440;
 	color: #e88753;
 }
+
+.LeftMenu .logo-image {
+	width: 250px;
+}
+
+.user-box {
+	background: #d26425;
+	color: white;
+	width: 450px;
+	height: 50px;
+	border: 1px solid #d26425;
+	border-radius: 10px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.search-input {
+	width: 600px;
+	border: 1px solid #dcd8d8;
+	margin-top: 10px;
+	border-radius: 5px;
+}
+
+button.add-btn {
+	height: 51px;
+	background: #285a90;
+	color: white;
+	width: 120px;
+	border-radius: 5px;
+}
+
+.rt-tr-group {
+	text-align: center;
+	height: 45px;
+	padding-top: 5px;
+}
+
+.rt-thead.-header {
+	height: 45px;
+	padding-top: 6px;
+	background: #d26425;
+	color: white;
+}
+
+.css-2b097c-container {
+	width: 230px;
+	margin-left: 15px;
+}
+
+textarea {
+	margin-left: 15px;
+	width: 700px;
+	height: 200px;
+	border-color: lightgray;
+}
+
+button.save-btn {
+	width: 90px;
+	background: var(--primary);
+	color: white;
+	border: 1px solid var(--primary);
+	border-radius: 5px;
+}
+
+button.discard-btn.mr-2 {
+	width: 150px;
+	background: #3b7cfe;
+	color: white;
+	border: 1px solid var(--primary);
+	border-radius: 5px;
+}
+
+label.notification-label {
+	min-width: 160px;
+	text-align: right;
+}

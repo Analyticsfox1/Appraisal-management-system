@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom';
 import Header from './Header';
 import Footer from './Footer';
 
@@ -11,7 +10,7 @@ class LandingPage extends Component {
 				<section className="home-section align-items-center d-flex justify-content-center">
 					<div className="container">
 						<div className="white_box">
-							<h3><img src="./assets/images/logo.png" className="logo-size" /><span>Uprise - Appraisal Management</span></h3>
+							<h3><img alt="logo" src="./assets/images/logo.png" className="logo-size" /><span>Uprise - Appraisal Management</span></h3>
 						</div>
 					</div>
 				</section>

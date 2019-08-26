@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 import Header from './Header';
 
-
 class ForgotPassword extends Component {
 	constructor() {
 		super();
@@ -59,7 +58,7 @@ class ForgotPassword extends Component {
 			isSuccess = false;
 		}
 		if (isSuccess) {
-			this.props.history.push(`/login`);
+			this.props.history.push(`/OTP-code`);
 		}
 		this.setState({ errors: { ...errors } });
 	}
@@ -73,7 +72,7 @@ class ForgotPassword extends Component {
 				<div className="page-container">
 					<div className="content">
 						<h3 className="text-center title-font mb-3">Reset Password</h3>
-						<h6 className="text-center w3-text-gray mb-5">Enter your email address below and we'll send you an email with instructions.</h6>
+						<p className="text-center w3-text-gray mb-5">Enter your email address below and we'll send you an email with instructions.</p>
 
 						<div className="form-group">
 							<input
@@ -94,7 +93,7 @@ class ForgotPassword extends Component {
 							}
 						</div>
 						<div className="form-group">
-							<button onClick={this.handleSubmit} className="form-submit">Reset</button>
+							<button onClick={this.handleSubmit} className="form-submit">Send Mail</button>
 						</div>
 
 						<p className="loginhere mt-0" ><Link to="login" className="loginhere-link"><i className="fas fa-sign-in-alt mr-2"></i>Back to Login</Link></p>

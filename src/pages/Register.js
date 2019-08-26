@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 import Header from './Header';
+import { register } from '../utils/user';
 
 
 class Register extends Component {
@@ -81,8 +82,10 @@ class Register extends Component {
 	}
 
 	handleSubmit = (event) => {
-		const { errors, invalidPassword, invalidEmail, invalidConfPassword } = this.state;
+		const { errors, invalidPassword, invalidEmail, invalidConfPassword, username, email, password, conf_password } = this.state;
 		let isRegister = true;
+		let obj = { username, email, password, conf_password }
+		console.log(obj)
 		for (var val in errors) {
 			if (errors[val] === null || errors[val]) {
 				errors[val] = true;
@@ -91,6 +94,16 @@ class Register extends Component {
 		}
 		if (invalidPassword || invalidEmail || invalidConfPassword) {
 			isRegister = false;
+		}
+		if (isRegister) {
+			register(obj).then(response => {
+				console.log("response...", response)
+				if (response.error) {
+					console.log("response error")
+					return false;
+				}
+			}
+			);
 		}
 		this.setState({ errors: { ...errors } });
 	}

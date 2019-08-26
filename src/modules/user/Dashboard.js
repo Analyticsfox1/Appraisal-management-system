@@ -1,35 +1,15 @@
 import React, { Component } from 'react';
-import { NavLink } from 'react-router-dom';
+import LeftMenu from './LeftMenu';
+import UserHeader from './UserHeader';
 
 class Dashboard extends Component {
 	render() {
+		console.log("called Dashboard")
 		return (
 			<div className="dash_grid">
-				<aside>
-					<div className="logo-image"></div>
-					<ul className="dash_ul">
-						<li><NavLink to="/dashboard" activeClassName="active"><i className="fas fa-home"></i><span>My Dashboard</span></NavLink></li>
-						<li><NavLink activeClassName="active"><i className="fas fa-tasks"></i><span>KRA Management</span></NavLink></li>
-						<li className="has_drop">
-							<NavLink>
-								<i className="fas fa-graduation-cap"></i><span>Appraisal</span>
-							</NavLink>
-							<ul className="custom_drop">
-								<li><NavLink activeClassName="active"><i className="fas fa-theater-masks"></i><span>Performance</span></NavLink></li>
-								<li><NavLink activeClassName="active">&nbsp;<i className="far fa-calendar-alt"></i><span>&nbsp;Monthly</span></NavLink></li>
-							</ul>
-						</li>
-						<li><NavLink activeClassName="active"><i className="far fa-user"></i><span>My Account</span></NavLink></li>
-					</ul>
-				</aside>
+				<LeftMenu />
 				<main>
-					<header>
-						<div className="dash_head">
-							<p>Welcome, User Name</p>
-							<div className="time_check"><button className="btn btn2 btn-success btn-rounded">Check In <i className="far fa-clock"></i></button> 00:00 Hrs</div>
-							<button className="btn btn-danger btn2"><i className="fas fa-power-off"></i> Logout	</button>
-						</div>
-					</header>
+					<UserHeader { ...this.props} />
 					<section className="container-fluid dash_space">
 						<div className="row">
 							<div className="col-md-3">
@@ -40,7 +20,7 @@ class Dashboard extends Component {
 									</div>
 									<div className="card-body">
 										<div className="no_data text-center">
-											<img src="https://www.svgrepo.com/show/243571/confetti-birthday.svg" />
+											<img alt="birthday" src="./assets/images/birthday.svg" />
 											No Birthday Buddies Found.
 											</div>
 									</div>
@@ -54,7 +34,7 @@ class Dashboard extends Component {
 									</div>
 									<div className="card-body">
 										<div className="no_data text-center">
-											<img src="https://cdn4.iconfinder.com/data/icons/pretty_office_3/256/Add-Male-User.png" />
+											<img alt="user" src="./assets/images/user.png" />
 											No New Joinees i past 15 days.
 											</div>
 									</div>
@@ -68,7 +48,7 @@ class Dashboard extends Component {
 									</div>
 									<div className="card-body">
 										<div className="no_data text-center">
-											<img src="https://www.svgrepo.com/show/122958/group.svg" />
+											<img alt="team" src="./assets/images/team.png" />
 											No Teams are Found.
 											</div>
 									</div>
@@ -82,8 +62,8 @@ class Dashboard extends Component {
 									</div>
 									<div className="card-body">
 										<div className="no_data text-center">
-											<img src="https://image.flaticon.com/icons/svg/1738/1738646.svg" />
-											No Data Found.
+											<img alt="announcement" src="./assets/images/announcement.svg" />
+											No Announcement Found.
 											</div>
 									</div>
 								</div>
