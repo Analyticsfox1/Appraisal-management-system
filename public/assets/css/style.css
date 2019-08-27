@@ -926,7 +926,7 @@ section.footer-bg {
 }
 
 .search-input {
-	width: 600px;
+	width: 1000px;
 	border: 1px solid #dcd8d8;
 	margin-top: 10px;
 	border-radius: 5px;
@@ -985,3 +985,59 @@ label.notification-label {
 	min-width: 160px;
 	text-align: right;
 }
+
+.modal-header {
+	color: #225182;
+	background: #fd7e149e;
+	border-bottom: 1px solid gray;
+}
+
+.modal-title.h4 {
+	font-size: 20px;
+}
+
+.modal-dialog {
+	max-width: 740px;
+}
+
+.add-user input.form-input {
+	height: 40px;
+	border: 1px solid #cccccc;
+}
+
+.add-user .css-2b097c-container {
+	width: auto;
+	margin-left: 0;
+}
+
+.add-user .btn {
+	width: 100px;
+	height: 40px;
+}
+
+.add-user .modal-dialog {
+	max-width: 900px;
+}
+
+.cursor-pointer {
+	cursor: pointer;
+}
+
+.add-role textarea {
+	margin-left: 0;
+	border: 1px solid #cccccc;
+}
+
+.add-role input.form-input {
+	border: 1px solid #cccccc;
+}
+
+.add-role .btn {
+	width: 100px;
+	height: 40px;
+}
+
+.add-role .modal-dialog {
+	max-width: 600px;
+}
+

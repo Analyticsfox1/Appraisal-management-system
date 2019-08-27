@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import LeftMenu from '../admin/LeftMenu';
 import AdminHeader from '../admin/AdminHeader';
 import Select from 'react-select';
+import { Button } from 'react-bootstrap';
+
 
 const messageOption = [
 	{ value: 'Off', label: 'Off' },
@@ -66,8 +68,8 @@ class PushNotification extends Component {
 							/>
 						</div>
 						<div className="mt-4 col-md-9 d-flex justify-content-end">
-							<button className="discard-btn mr-2">Discard Changes</button>
-							<button className="save-btn">Save</button>
+							<Button className="btn-success mr-2">Save</Button>
+							<Button className="btn-danger ">Discard Changes</Button>
 						</div>
 					</section>
 				</main>

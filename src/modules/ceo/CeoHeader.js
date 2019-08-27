@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-class AdminHeader extends Component {
+class CeoHeader extends Component {
 
 	onLogOut = () => {
 		this.props.history.push('/')
@@ -17,4 +17,4 @@ class AdminHeader extends Component {
 	}
 }
 
-export default AdminHeader
+export default CeoHeader

@@ -3,18 +3,34 @@ import LeftMenu from '../admin/LeftMenu';
 import AdminHeader from '../admin/AdminHeader';
 import 'react-table/react-table.css';
 import ReactTable from 'react-table';
+import AddRole from './AddRole';
+import EditRole from './EditRole';
 
 class RoleManagement extends Component {
 	constructor() {
 		super();
 		this.state = {
 			search: '',
+			showAddModal: false,
+			showEditModal: false
 		}
 	}
 
 	handleChange = (e) => {
 		this.setState({
 			[e.target.name]: e.target.value
+		})
+	}
+
+	addRole = () => {
+		this.setState({
+			showAddModal: !this.state.showAddModal
+		})
+	}
+
+	editRole = () => {
+		this.setState({
+			showEditModal: !this.state.showEditModal
 		})
 	}
 
@@ -41,8 +57,8 @@ class RoleManagement extends Component {
 		}, {
 			Header: 'Action',
 			accessor: 'action',
-			width: 100,
-			Cell: <div><i className="fa fa-trash" /></div>
+			width: 150,
+			Cell: <div><i onClick={this.editRole} className="fa fa-edit mr-3" /><i onClick={() => alert("Role Deleted")} className="fa fa-trash" /></div>
 		},]
 
 		return (
@@ -63,7 +79,9 @@ class RoleManagement extends Component {
 									onBlur={this.handleValidate}
 									placeholder="Search..." />
 							</div>
-							<button className="add-btn ml-auto"> Add Role </button>
+							<button onClick={this.addRole} className="add-btn ml-auto"> Add Role </button>
+							{this.state.showAddModal && <AddRole addRole={this.addRole}/>}
+							{this.state.showEditModal && <EditRole editRole={this.editRole}/>}
 						</div>
 						<div className="mt-4">
 							<ReactTable

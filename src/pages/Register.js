@@ -115,7 +115,7 @@ class Register extends Component {
 			<section className="login-section">
 				<Header />
 				<div className="page-container">
-					<div className="content">
+					<div style={{width:'400px'}} className="content">
 						<h3 className="text-center title-font mb-3">SIGN UP</h3>
 						<div className="form-group">
 							<input

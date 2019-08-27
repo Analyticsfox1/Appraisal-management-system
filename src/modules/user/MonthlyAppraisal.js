@@ -8,10 +8,10 @@ class MonthlyAppraisal extends Component {
 			<div className="dash_grid">
 				<LeftMenu />
 				<main>
-					<UserHeader {...this.props}/>
+					<UserHeader {...this.props} />
 					<section className="container-fluid">
-						Monthly Appraisal
-				</section>
+						<h5 className="text-center mt-2 mx-auto user-box">Monthly Appraisal</h5>
+					</section>
 				</main>
 			</div>
 		)

@@ -8,10 +8,10 @@ class MyAccount extends Component {
 			<div className="dash_grid">
 				<LeftMenu />
 				<main>
-					<UserHeader {...this.props}/>
+					<UserHeader {...this.props} />
 					<section className="container-fluid">
-						My Account
-				</section>
+						<h5 className="text-center mt-2 mx-auto user-box">My Account</h5>
+					</section>
 				</main>
 			</div>
 		)

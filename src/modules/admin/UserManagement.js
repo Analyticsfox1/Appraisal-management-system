@@ -3,13 +3,16 @@ import LeftMenu from '../admin/LeftMenu';
 import AdminHeader from '../admin/AdminHeader';
 import 'react-table/react-table.css';
 import ReactTable from 'react-table';
-
-
+import ViewUserDetails from './ViewUserDetails';
+import AddUser from './AddUser';
+import EditUser from './EditUser';
 class UserManagement extends Component {
 	constructor() {
 		super();
 		this.state = {
 			search: '',
+			showAddModal: false,
+			showEditModal: false,
 		}
 	}
 
@@ -18,6 +21,19 @@ class UserManagement extends Component {
 			[e.target.name]: e.target.value
 		})
 	}
+
+	addUser = () => {
+		this.setState({
+			showAddModal: !this.state.showAddModal
+		})
+	}
+
+	editUser = () => {
+		this.setState({
+			showEditModal: !this.state.showEditModal
+		})
+	}
+
 	render() {
 		const { search } = this.state;
 		const data = [{
@@ -32,10 +48,15 @@ class UserManagement extends Component {
 			Header: 'Employee ID',
 			accessor: 'employee_id',
 			width: 180,
+
 		}, {
 			Header: 'Employee Name',
-			accessor: 'name',
 			width: 200,
+			Cell: ({ original }) => {
+				return (
+					<ViewUserDetails name={original.name} />
+				);
+			},
 		}, {
 			Header: 'Email ID',
 			accessor: 'email',
@@ -52,14 +73,14 @@ class UserManagement extends Component {
 			Header: 'Action',
 			accessor: 'action',
 			width: 100,
-			Cell: <div><i className="fa fa-trash" /></div>
+			Cell: <div className="cursor-pointer"><i onClick={this.editUser} className="fa fa-edit mr-3" /><i onClick={() => alert("User Deleted")} className="fa fa-trash" /></div>
 		},]
 
 		return (
 			<div className="dash_grid">
 				<LeftMenu />
 				<main className="bg-white">
-					<AdminHeader {...this.props}/>
+					<AdminHeader {...this.props} />
 					<section className="container-fluid">
 						<h5 className="text-center mt-2 mx-auto user-box">User Management</h5>
 						<div className="d-flex align-items-center mt-3">
@@ -73,7 +94,9 @@ class UserManagement extends Component {
 									onBlur={this.handleValidate}
 									placeholder="Search..." />
 							</div>
-							<button className="add-btn ml-auto"> Add User </button>
+							<button onClick={this.addUser} className="add-btn ml-auto"> Add User </button>
+							{this.state.showAddModal && <AddUser addUser={this.addUser}/>}
+							{this.state.showEditModal && <EditUser editUser={this.editUser}/>}
 						</div>
 						<div className="mt-4">
 							<ReactTable

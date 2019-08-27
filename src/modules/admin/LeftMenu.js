@@ -7,6 +7,7 @@ class LeftMenu extends Component {
 			<aside className="LeftMenu">
 				<div className="logo-image"></div>
 				<ul className="dash_ul">
+				<p className="text-white"><img src="./assets/images/admin.png" style={{ height: '100px', width: '100px' }} />Welcome, Admin</p>
 					<li><NavLink to="/user-management" activeClassName="active"><i className="fas fa-user"></i><span>User Management</span></NavLink></li>
 					<li><NavLink to="/role-management" activeClassName="active"><i className="fas fa-tasks"></i><span>Role Management</span></NavLink></li>
 					<li><NavLink to="/team-management" activeClassName="active"><i className="fas fa-users"></i><span>Team Management</span></NavLink></li>
