@@ -10,13 +10,15 @@
 	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
 	 crossorigin="anonymous"></script>
 
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-	 crossorigin="anonymous"></script>
+	<!-- w3schools CSS -->
 
 	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 
-
 	<!--Bootsrap 4 CDN-->
+
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+	 crossorigin="anonymous"></script>
+
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
 	 crossorigin="anonymous">
 
@@ -25,15 +27,17 @@
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
 	 crossorigin="anonymous">
 
-	<link rel="stylesheet" href="fonts/material-icon/css/material-design-iconic-font.min.css">
-
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 	<!-- Bootstrap core CSS -->
+
 	<link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
+	<!-- Custom CSS -->
 
 	<link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
 	<link rel="stylesheet" href="%PUBLIC_URL%/assets/css/style.css">
 	<link rel="stylesheet" href="%PUBLIC_URL%/assets/css/responsive.css">
+
 	<title>Uprise - Appraisal Management</title>
 </head>
 
@@ -46,12 +50,17 @@
 	<script src="js/main.js"></script>
 
 	<script>
+
+		// Script for Left menu toggle
+
 		$(document).ready(function () {
 			$(document).on("click", ".has_drop a", function (e) {
 				e.preventDefault();
 				$(".custom_drop").slideToggle();
 			})
 		});
+
+		// Script for header background white on Scroll
 
 		$(document).scroll(function () {
 			if ($(this).scrollTop()) {
@@ -61,7 +70,6 @@
 			}
 		});
 	</script>
-
 </body>
 
 </html>

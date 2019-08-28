@@ -42,6 +42,12 @@ class UserManagement extends Component {
 			email: 'piyer@teracrunch.com',
 			role: 'Admin',
 			status: 'Active'
+		},{
+			employee_id: 'PR2108196040',
+			name: 'Prakash',
+			email: 'prakash2207@gmail.com',
+			role: 'Admin',
+			status: 'Active'
 		}]
 
 		const columns = [{
@@ -63,16 +69,16 @@ class UserManagement extends Component {
 		}, {
 			Header: 'Role',
 			accessor: 'role',
-			width: 180,
+			width: 160,
 		},
 		{
 			Header: 'Status',
 			accessor: 'status',
-			width: 180,
+			width: 160,
 		}, {
 			Header: 'Action',
 			accessor: 'action',
-			width: 100,
+			width: 140,
 			Cell: <div className="cursor-pointer"><i onClick={this.editUser} className="fa fa-edit mr-3" /><i onClick={() => alert("User Deleted")} className="fa fa-trash" /></div>
 		},]
 

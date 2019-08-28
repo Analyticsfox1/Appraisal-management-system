@@ -13,10 +13,6 @@ img {
 	height: auto;
 }
 
-figure {
-	margin: 0;
-}
-
 p {
 	margin-bottom: 0px;
 	font-size: 15px;
@@ -53,10 +49,6 @@ hr {
 
 .fs-26 {
 	font-size: 26px;
-}
-
-.w3-bar .w3-button {
-	padding: 16px;
 }
 
 .w3-aboutbg {
@@ -390,14 +382,6 @@ ul.dropdown-menu.notifications:after {
 	border-left: .5em solid transparent;
 }
 
-.w3-height {
-	height: 85vh;
-	border-radius: 10px;
-	border: 1px solid black;
-	border: 1px solid #9e9b9b;
-	font-size: 22px;
-}
-
 span.input-group-text {
 	border-top-right-radius: 4px;
 	border-bottom-right-radius: 4px;
@@ -410,17 +394,6 @@ span.input-group-text {
 	border-bottom-right-radius: 0px;
 	border-top-left-radius: 4px;
 	border-bottom-left-radius: 4px;
-}
-
-.remember {
-	color: white;
-}
-
-.remember input {
-	width: 20px;
-	height: 20px;
-	margin-left: 15px;
-	margin-right: 5px;
 }
 
 .login_btn {
@@ -447,30 +420,8 @@ span.input-group-text {
 	margin-left: 4px;
 }
 
-#sidebar-wrapper {
-	min-height: 100vh;
-	margin-left: -15rem;
-	-webkit-transition: margin .25s ease-out;
-	-moz-transition: margin .25s ease-out;
-	-o-transition: margin .25s ease-out;
-	transition: margin .25s ease-out;
-}
-
-#sidebar-wrapper .sidebar-heading {
-	padding: 0.75rem 1rem;
-	font-size: 1.2rem;
-}
-
-#sidebar-wrapper .list-group {
-	width: 15rem;
-}
-
 #page-content-wrapper {
 	min-width: 100vw;
-}
-
-#wrapper.toggled #sidebar-wrapper {
-	margin-left: 0;
 }
 
 .text-underline {
@@ -484,11 +435,6 @@ span.input-group-text {
 .logo-name {
 	font-weight: 600;
 	letter-spacing: 3px;
-}
-
-.invoice-lable {
-	font-size: 16px;
-	font-weight: 500;
 }
 
 .input-group>.custom-select:not(:first-child), .input-group>.form-control:not(:first-child) {
@@ -555,16 +501,6 @@ span.input-group-text {
 	margin-bottom: 20px;
 }
 
-.label-agree-term {
-	font-size: 12px;
-	font-weight: 600;
-	color: #555;
-}
-
-.term-service {
-	color: #555;
-}
-
 .loginhere {
 	color: #555;
 	font-weight: 500;
@@ -582,15 +518,6 @@ span.input-group-text {
 	font-weight: 700;
 	color: #6daaa5;
 	font-size: 16px;
-}
-
-.field-icon {
-	float: right;
-	margin-right: 17px;
-	margin-top: -32px;
-	position: relative;
-	z-index: 2;
-	color: #555;
 }
 
 .forgot-password {
@@ -611,7 +538,6 @@ span.input-group-text {
 .home-section {
 	min-height: 70vh;
 	background: url('../images/Banner-home.jpg') no-repeat center/cover;
-	/* background: url("https://www.vtldesign.hu/wp-content/uploads/2014/07/web-development-background.jpg") no-repeat center/cover; */
 	text-align: center;
 	color: #fff;
 }
@@ -635,7 +561,6 @@ span.input-group-text {
 }
 
 .bg-trs {
-	/* background: rgba(255, 255, 255, 0.1); */
 	background: none;
 }
 
@@ -777,7 +702,6 @@ span.input-group-text {
 
 .dash_head .time_check {
 	margin-right: auto;
-	margin-left: 20px;
 }
 
 .dash_head .time_check .btn {
@@ -1041,3 +965,50 @@ label.notification-label {
 	max-width: 600px;
 }
 
+div.ReactTable .rt-thead .rt-th.-sort-asc, div.ReactTable .rt-thead .rt-td.-sort-asc {
+	box-shadow: none;
+}
+
+div.ReactTable .rt-thead .rt-th.-sort-desc, div.ReactTable .rt-thead .rt-td.-sort-desc {
+	box-shadow: none;
+}
+
+.rt-th.rt-resizable-header.-sort-asc.-cursor-pointer {
+	position: relative;
+}
+
+.rt-th.rt-resizable-header.-sort-asc.-cursor-pointer::after {
+	font-family: "Font Awesome 5 Free";
+	-moz-osx-font-smoothing: grayscale;
+	-webkit-font-smoothing: antialiased;
+	display: inline-block;
+	font-style: normal;
+	font-variant: normal;
+	text-rendering: auto;
+	line-height: 1;
+	content: "\f007";
+	position: absolute;
+	top: 42%;
+	right: 15px;
+	transform: translateY(-50%);
+}
+
+.rt-th.rt-resizable-header.-sort-desc.-cursor-pointer {
+	position: relative;
+}
+
+.rt-th.rt-resizable-header.-sort-desc.-cursor-pointer::after {
+	font-family: "Font Awesome 5 Free";
+	-moz-osx-font-smoothing: grayscale;
+	-webkit-font-smoothing: antialiased;
+	display: inline-block;
+	font-style: normal;
+	font-variant: normal;
+	text-rendering: auto;
+	line-height: 1;
+	content: "\f007";
+	position: absolute;
+	top: 42%;
+	right: 15px;
+	transform: translateY(-50%);
+}

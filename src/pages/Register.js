@@ -167,7 +167,6 @@ class Register extends Component {
 								invalidPassword &&
 								<span className="errorMsg">Password must contain at least 8 characters, including uppercase, lowercase and numbers</span>
 							}
-							{/* <span toggle="#password" className="zmdi zmdi-eye field-icon toggle-password"></span> */}
 						</div>
 						<div className="form-group">
 							<input
