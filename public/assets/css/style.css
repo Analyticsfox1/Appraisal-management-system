@@ -628,7 +628,7 @@ span.input-group-text {
 }
 
 .dash_grid main {
-	background: #eee;
+	background: #fff;
 	flex: 1;
 }
 
@@ -885,7 +885,7 @@ button.add-btn {
 textarea {
 	margin-left: 15px;
 	width: 700px;
-	height: 200px;
+	height: 100px;
 	border-color: lightgray;
 }
 
@@ -1011,4 +1011,88 @@ div.ReactTable .rt-thead .rt-th.-sort-desc, div.ReactTable .rt-thead .rt-td.-sor
 	top: 42%;
 	right: 15px;
 	transform: translateY(-50%);
+}
+
+.fade.tab-pane.active.show {
+	background: none;
+}
+
+.tabs .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
+	color: #fff !important;
+	background-color: #d26425;
+	border: 1px solid #a9a1a1;
+	width: 205px;
+	text-align: center;
+	height: 45px;
+	font-size: 15px;
+}
+
+.tabs a.nav-item.nav-link {
+	color: #d26425;
+	width: 205px;
+	text-align: center;
+}
+
+.tab-body {
+	background: #fff;
+	box-shadow: 0px 3px 12px -5px #555;
+	padding: 30px;
+}
+
+.border_0 .nav-tabs {
+	border: none;
+}
+
+.tab-content .tab-pane {
+	transition: .3s;
+	transform: scaleY(0);
+	transform-origin: top center;
+}
+
+.tab-content .tab-pane.active.show {
+	transform: scaleY(1);
+}
+
+.btn.btn-success.dark {
+	background: #3a923a;
+}
+
+.btn.btn-success.new {
+	padding: 0;
+	line-height: 1;
+	position: relative;
+	padding-right: 27px;
+	overflow: hidden;
+}
+
+.btn.btn-success.new span {
+	margin-right: 12px;
+	background: #388e38;
+	padding: 11px 13px;
+}
+
+.tab-body textarea {
+	margin-left: 0;
+	border: 1px solid #cccccc;
+}
+
+.tab-body input {
+	border: 1px solid #cccccc;
+}
+
+.tab-body .css-2b097c-container{
+	width: 100%;
+	margin-left: 0;
+}
+
+.tab-body .react-datepicker__input-container {
+	width: 100%;
+}
+
+.tab-body .react-datepicker-wrapper {
+	width: 100%;
+}
+
+.tab-body input[type="checkbox"] {
+	height: 14px;
 }

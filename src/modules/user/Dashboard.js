@@ -4,12 +4,11 @@ import UserHeader from './UserHeader';
 
 class Dashboard extends Component {
 	render() {
-		console.log("called Dashboard")
 		return (
 			<div className="dash_grid">
 				<LeftMenu />
 				<main>
-					<UserHeader { ...this.props} />
+					<UserHeader {...this.props} />
 					<section className="container-fluid dash_space">
 						<div className="row">
 							<div className="col-md-3">
