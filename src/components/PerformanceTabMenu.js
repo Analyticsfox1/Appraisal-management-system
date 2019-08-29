@@ -2,9 +2,8 @@ import React, { Component } from 'react'
 import { Tabs, Tab } from 'react-bootstrap';
 import KraSettings from '../modules/user/KraSettings';
 import SelfDevelopmentGoal from '../modules/user/SelfDevelopmentGoal';
-import OneToOneMeeting from '../modules/user/OneToOneMeeting';
 
-class TabMenu extends Component {
+class PerformanceTabMenu extends Component {
 	state = {
 		key: 'KRA'
 	}
@@ -20,13 +19,10 @@ class TabMenu extends Component {
 					<Tab eventKey="self-dev" title="Self Development Goal">
 						<SelfDevelopmentGoal />
 					</Tab>
-					<Tab eventKey="meeting" title="One to One Meeting">
-						<OneToOneMeeting />
-					</Tab>
 				</Tabs>
 			</div>
 		)
 	}
 }
 
-export default TabMenu
+export default PerformanceTabMenu

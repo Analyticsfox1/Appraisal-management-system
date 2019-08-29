@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import Select from 'react-select';
+import StarRatingComponent from 'react-star-rating-component';
+
 
 class KraSettings extends Component {
 
@@ -8,19 +10,23 @@ class KraSettings extends Component {
 		this.state = {
 			goal: '',
 			managerGoal: '',
-			employeeFeedback: '',
+			employeeAchievement: '',
 			managerFeedback: '',
-			employeeRating: '',
-			managerRating: '',
+			employeeRating: 0,
+			managerRating: 0,
 			errors: {
 				goalError: null,
 				managerGoalError: null,
-				employeeFeedbackError: null,
+				employeeAchievementError: null,
 				managerFeedbackError: null,
 				employeeRatingError: null,
 				managerRatingError: null
 			}
 		}
+	}
+
+	onStarClick = (nextValue, prevValue, name) => {
+		this.setState({ [name]: nextValue });
 	}
 
 	handleChange = (e) => {
@@ -52,13 +58,13 @@ class KraSettings extends Component {
 	}
 
 	render() {
-		const { goal, managerGoal, employeeFeedback, managerFeedback, employeeRating, managerRating, errors } = this.state;
+		const { goal, managerGoal, employeeAchievement, managerFeedback, employeeRating, managerRating, errors } = this.state;
 		return (
 			<div>
 				<section className="tab-body mb-5">
 					<div className="row">
 						<div className="col-md-12 text-right">
-							<button type="button" class="btn btn-rounded btn-success new"><span class="fa fa-plus"></span> Add Goal</button>
+							<button type="button" className="btn btn-rounded btn-success new"><span className="fa fa-plus"></span> Add Goal</button>
 						</div>
 						<div className="col-md-6 mt-4 ">
 							<div>
@@ -82,19 +88,20 @@ class KraSettings extends Component {
 
 						<div className="col-md-6 mt-4">
 							<div>
-								<label className="fix_label_width">Manager Goal:</label>
+								<label className="fix_label_width">Manager Goal Description:</label>
 								<div className="flex-grow-1">
-									<input
+									<textarea
 										type="text"
 										className="form-input"
 										name="managerGoal"
 										value={managerGoal}
 										onChange={this.handleChange}
 										onBlur={this.handleValidate}
-										placeholder="Enter Manager Goal" />
+										disabled={true}
+										placeholder="Enter Manager Goal Description" />
 									{
 										errors.managerGoalError &&
-										<span className="errorMsg">Please enter manager goal</span>
+										<span className="errorMsg">Please enter manager goal description</span>
 									}
 								</div>
 							</div>
@@ -103,19 +110,19 @@ class KraSettings extends Component {
 					<div className="row">
 						<div className="col-md-6 mt-4">
 							<div>
-								<label className="fix_label_width">Employee Feedback:</label>
+								<label className="fix_label_width">Employee Achievement:</label>
 								<div className="flex-grow-1">
 									<textarea
 										type="text"
 										className="form-input"
-										name="employeeFeedback"
-										value={employeeFeedback}
+										name="employeeAchievement"
+										value={employeeAchievement}
 										onChange={this.handleChange}
 										onBlur={this.handleValidate}
-										placeholder="Enter Employee Feedback" />
+										placeholder="Enter Employee Achievement" />
 									{
-										errors.employeeFeedbackError &&
-										<span className="errorMsg">Please enter employee feedback</span>
+										errors.employeeAchievementError &&
+										<span className="errorMsg">Please enter employee achievement</span>
 									}
 								</div>
 							</div>
@@ -131,6 +138,7 @@ class KraSettings extends Component {
 										value={managerFeedback}
 										onChange={this.handleChange}
 										onBlur={this.handleValidate}
+										disabled={true}
 										placeholder="Enter Manager Feedback" />
 									{
 										errors.managerFeedbackError &&
@@ -140,45 +148,31 @@ class KraSettings extends Component {
 							</div>
 						</div>
 					</div>
-					<div className="row">
+					<div className="row star-rating">
 						<div className="col-md-6 mt-4 ">
-							<div>
-								<label className="fix_label_width">Employee Rating:</label>
-								<div className="flex-grow-1">
-									<input
-										type="number"
-										className="form-input"
-										name="employeeRating"
-										value={employeeRating}
-										onChange={this.handleChange}
-										onBlur={this.handleValidate}
-										onKeyPress={this.restrictAlphabets}
-										placeholder="Enter Employee Rating" />
-									{
-										errors.employeeRatingError &&
-										<span className="errorMsg">Please enter employee rating</span>
-									}
-								</div>
+							<div className="d-flex align-items-center">
+								<label className="fix_label_width mr-3">Employee Self Rating: </label>
+								<StarRatingComponent
+									name="employeeRating"
+									starCount={5}
+									renderStarIcon={() => <span><i className="fas fa-star"></i></span>}
+									value={employeeRating}
+									onStarClick={this.onStarClick}
+								/>
 							</div>
 						</div>
 						<div className="col-md-6 mt-4 ">
-							<div>
-								<label className="fix_label_width">Manager Rating:</label>
-								<div className="flex-grow-1">
-									<input
-										type="number"
-										className="form-input"
-										name="managerRating"
-										value={managerRating}
-										onChange={this.handleChange}
-										onBlur={this.handleValidate}
-										onKeyPress={this.restrictAlphabets}
-										placeholder="Enter Manager Rating" />
-									{
-										errors.managerRatingError &&
-										<span className="errorMsg">Please enter manager rating</span>
-									}
-								</div>
+							<div className="d-flex align-items-center">
+								<label className="fix_label_width mr-3">Manager Rating: </label>
+								<StarRatingComponent
+									name="managerRating"
+									starCount={5}
+									renderStarIcon={() => <span><i className="fas fa-star"></i></span>}
+									value={managerRating}
+									onStarClick={this.onStarClick}
+									emptyStarColor={"lightgray"}
+									editing={false}
+								/>
 							</div>
 						</div>
 					</div>

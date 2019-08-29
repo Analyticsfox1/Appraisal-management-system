@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Select from 'react-select';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { Button } from 'react-bootstrap';
 
 class OneToOneMeeting extends Component {
 
@@ -9,7 +10,8 @@ class OneToOneMeeting extends Component {
 		selectedYear: null,
 		selectedMonth: null,
 		discussion: '',
-		startDate: new Date(),
+		update: '',
+		startDate: '',
 		accept: false,
 		reject: false,
 		errors: {
@@ -56,12 +58,16 @@ class OneToOneMeeting extends Component {
 	}
 
 	render() {
-		const { selectedYear, selectedMonth, discussion, accept, reject, errors } = this.state;
+		const { selectedYear, selectedMonth, discussion, accept, reject, update, errors } = this.state;
 		return (
 			<div>
 				<section className="tab-body">
 					<div className="row">
-						<div className="col-md-4">
+						<div className="col-md-12 text-right">
+							<button type="button" className="btn btn-rounded btn-success new"><span className="fa fa-plus"></span> Add Meeting</button>
+						</div>
+
+						<div className="col-md-4 mt-4">
 							<Select
 								cl
 								value={selectedYear}
@@ -69,31 +75,25 @@ class OneToOneMeeting extends Component {
 								placeholder="Year"
 							/>
 						</div>
-						
-						<div className="col-md-4">
+
+						<div className="col-md-4 mt-4">
 							<Select
 								value={selectedMonth}
 								onChange={this.handleMonth}
 								placeholder="Month"
 							/>
 						</div>
-						<div className="col-md-2 text-center">
-							<label style={{color:'var(--success)'}} className="mr-2">Accept</label>
-							<input
-								name="accept"
-								type="checkbox"
-								checked={accept}
-								onChange={this.handleCheckedChange} />
-						</div>
-						<div className="col-md-2">
-							<label style={{color:'var(--danger)'}} className="mr-2">Reject</label>
-							<input
-								name="reject"
-								type="checkbox"
-								checked={reject}
-								onChange={this.handleCheckedChange} />
+						<div className="col-md-4 mt-4">
+							<DatePicker
+								className="form-input date"
+								selected={this.state.startDate}
+								onChange={this.handleDateChange}
+								dateFormat="dd-MMM-yyyy"
+								placeholderText="dd-MMM-yyyy"
+							/>
 						</div>
 					</div>
+
 					<div className="row mt-4">
 						<div className="col-md-8">
 							<div>
@@ -116,17 +116,44 @@ class OneToOneMeeting extends Component {
 						</div>
 						<div className="col-md-4">
 							<div>
-								<label className="fix_label_width">Date:</label>
-								<div>
-									<DatePicker
+								<label className="fix_label_width">Update:</label>
+								<div className="flex-grow-1">
+									<input
+										type="text"
 										className="form-input"
-										selected={this.state.startDate}
-										onChange={this.handleDateChange}
-										dateFormat="dd-MMM-yyyy"
-									/>
+										name="update"
+										value={update}
+										onChange={this.handleChange}
+										onBlur={this.handleValidate}
+										placeholder="Please Enter" />
+									{
+										errors.updateError &&
+										<span className="errorMsg">Please enter</span>
+									}
+								</div>
+
+								<div className="mt-2">
+									<label style={{ color: 'var(--success)' }}>
+										<input
+											name="accept"
+											type="checkbox"
+											checked={accept}
+											onChange={this.handleCheckedChange} />
+										Accept </label>
+									<label style={{ color: 'var(--danger)' }}>
+										<input
+											className="ml-2"
+											name="reject"
+											type="checkbox"
+											checked={reject}
+											onChange={this.handleCheckedChange} />
+										Reject </label>
 								</div>
 							</div>
 						</div>
+					</div>
+					<div className="d-flex">
+						<Button className="btn-success mt-3 ml-auto">Submit</Button>
 					</div>
 				</section>
 			</div >

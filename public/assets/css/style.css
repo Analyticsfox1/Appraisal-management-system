@@ -1027,9 +1027,25 @@ div.ReactTable .rt-thead .rt-th.-sort-desc, div.ReactTable .rt-thead .rt-td.-sor
 	font-size: 15px;
 }
 
+.probation-tabs .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
+	color: #fff !important;
+	background-color: #d26425;
+	border: 1px solid #a9a1a1;
+	width: 260px;
+	text-align: center;
+	height: 45px;
+	font-size: 15px;
+}
+
 .tabs a.nav-item.nav-link {
 	color: #d26425;
 	width: 205px;
+	text-align: center;
+}
+
+.probation-tabs a.nav-item.nav-link {
+	color: #d26425;
+	width: 260px;
 	text-align: center;
 }
 
@@ -1080,7 +1096,7 @@ div.ReactTable .rt-thead .rt-th.-sort-desc, div.ReactTable .rt-thead .rt-td.-sor
 	border: 1px solid #cccccc;
 }
 
-.tab-body .css-2b097c-container{
+.tab-body .css-2b097c-container {
 	width: 100%;
 	margin-left: 0;
 }
@@ -1095,4 +1111,37 @@ div.ReactTable .rt-thead .rt-th.-sort-desc, div.ReactTable .rt-thead .rt-td.-sor
 
 .tab-body input[type="checkbox"] {
 	height: 14px;
+}
+
+.form-input:disabled {
+	background: #eee;
+}
+
+.form-input:disabled:hover {
+	cursor: not-allowed;
+}
+
+.star-rating i {
+	font-size: 25px;
+	margin-right: 6px;
+}
+
+input.form-input.date {
+	height: 40px;
+}
+
+.rating-box {
+	background: #f5eae4;
+	border: 1px solid #e46a22;
+	border-radius: 5px;
+	padding: 10px;
+	font-size: 10px;
+}
+
+input.form-input.signature {
+	border-bottom: 1px solid #bfbebe;
+	border-top: 0px;
+	border-left: 0px;
+	border-right: 0px;
+	border-radius: 0px;
 }

@@ -2,9 +2,9 @@ import React, { Component } from 'react'
 import { Route } from "react-router";
 //  User Routes 
 import Dashboard from '../modules/user/Dashboard';
-import KraManagement from '../modules/user/KraManagement';
 import PerformanceAppraisal from '../modules/user/PerformanceAppraisal';
-import MonthlyAppraisal from '../modules/user/MonthlyAppraisal';
+import MonthlyMeeting from '../modules/user/MonthlyMeeting';
+import ProbationForm from '../modules/user/ProbationForm';
 import MyAccount from '../modules/user/MyAccount';
 //  Admin Routes 
 import UserManagement from '../modules/admin/UserManagement';
@@ -24,10 +24,10 @@ class PrivateRoutes extends Component {
 			<>
 				{/* User Routes  */}
 				<Route exact path='/dashboard' component={Dashboard} />
-				<Route exact path='/kra-management' component={KraManagement} />
 				<Route exact path='/performance-appraisal' component={PerformanceAppraisal} />
-				<Route exact path='/monthly-appraisal' component={MonthlyAppraisal} />
+				<Route exact path='/monthly-meeting' component={MonthlyMeeting} />
 				<Route exact path='/account' component={MyAccount} />
+				<Route exact path='/probation-form' component={ProbationForm} />
 				{/* Admin Routes */}
 				<Route exact path='/user-management' component={UserManagement} />
 				<Route exact path='/role-management' component={RoleManagement} />

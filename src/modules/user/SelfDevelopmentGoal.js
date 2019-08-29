@@ -1,4 +1,5 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import StarRatingComponent from 'react-star-rating-component';
 
 class SelfDevelopmentGoal extends Component {
 
@@ -11,6 +12,7 @@ class SelfDevelopmentGoal extends Component {
 			managerQ1: '',
 			managerQ2: '',
 			managerQ3: '',
+			overallRating: 0,
 			errors: {
 				employeeQ1Error: null,
 				employeeQ2Error: null,
@@ -28,6 +30,10 @@ class SelfDevelopmentGoal extends Component {
 		})
 	}
 
+	onStarClick = (nextValue, prevValue, name) => {
+		this.setState({ [name]: nextValue });
+	}
+
 	handleValidate = (e) => {
 		const { errors } = this.state;
 		let name = e.target.name;
@@ -41,11 +47,11 @@ class SelfDevelopmentGoal extends Component {
 	}
 
 	render() {
-		const { employeeQ1, employeeQ2, employeeQ3, managerQ1, managerQ2, managerQ3, errors } = this.state;
+		const { employeeQ1, employeeQ2, employeeQ3, managerQ1, managerQ2, managerQ3, overallRating, errors } = this.state;
 		return (
 			<div>
 				<section className="tab-body">
-					<h6>Employee Form</h6>
+					<h6>Employee Feedback</h6>
 					<div className="row mt-3">
 						<p className="col-md-4">1. What are three things that you think manager should start doing.</p>
 						<div className="col-md-8">
@@ -97,9 +103,9 @@ class SelfDevelopmentGoal extends Component {
 							}
 						</div>
 					</div>
-					</section>
-					<section className="tab-body">
-					<h6>Manager Form</h6>
+				</section>
+				<section className="tab-body">
+					<h6>Manager Feedback</h6>
 					<div className="row mt-3">
 						<p className="col-md-4">1. What are three things that you think he/she should start doing.</p>
 						<div className="col-md-8">
@@ -110,6 +116,7 @@ class SelfDevelopmentGoal extends Component {
 								value={managerQ1}
 								onChange={this.handleChange}
 								onBlur={this.handleValidate}
+								disabled
 								placeholder="Enter Answer" />
 							{
 								errors.managerQ1Error &&
@@ -127,6 +134,7 @@ class SelfDevelopmentGoal extends Component {
 								value={managerQ2}
 								onChange={this.handleChange}
 								onBlur={this.handleValidate}
+								disabled
 								placeholder="Enter Answer" />
 							{
 								errors.managerQ2Error &&
@@ -144,6 +152,7 @@ class SelfDevelopmentGoal extends Component {
 								value={managerQ3}
 								onChange={this.handleChange}
 								onBlur={this.handleValidate}
+								disabled
 								placeholder="Enter Answer" />
 							{
 								errors.managerQ3Error &&
@@ -151,6 +160,20 @@ class SelfDevelopmentGoal extends Component {
 							}
 						</div>
 					</div>
+				</section>
+				<section className="tab-body">
+					<div className="row d-flex align-items-center justify-content-center star-rating">
+					
+							<label className="fix_label_width mr-3">Overall Rating: </label>
+							<StarRatingComponent
+								name="overallRating"
+								starCount={5}
+								renderStarIcon={() => <span><i className="fas fa-star"></i></span>}
+								value={overallRating}
+								onStarClick={this.onStarClick}
+							/>
+						</div>
+					
 				</section>
 			</div>
 		)
