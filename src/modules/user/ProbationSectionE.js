@@ -42,7 +42,7 @@ class ProbationSectionE extends Component {
 		return (
 			<section className="tab-body dash_space text-justify">
 				<div className="row">
-					<p className="ml-4">Select one of the two final recommendations:</p>
+					<p className="ml-4 title-orange">Select one of the two final recommendations:</p>
 					<div className="row mt-3">
 						<div style={{ paddingLeft: '70px' }} className="col-md-1">
 							<input
@@ -72,9 +72,9 @@ class ProbationSectionE extends Component {
 					</div>
 				</div>
 				<div className="row mt-4">
-					<p className="ml-4"> Signature </p>
+					<p className="ml-4 title-orange"> Signature </p>
 				</div>
-				<div className="row mt-3">
+				<div className="row mt-3 mb-4">
 					<div className="col-md-4">
 						<input
 							type="text"

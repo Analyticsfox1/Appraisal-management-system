@@ -12,6 +12,7 @@ class OneToOneMeeting extends Component {
 		discussion: '',
 		update: '',
 		startDate: '',
+		meetingStatus: '',
 		accept: false,
 		reject: false,
 		errors: {
@@ -39,10 +40,10 @@ class OneToOneMeeting extends Component {
 		})
 	}
 
-	handleCheckedChange = (e) => {
+	onChanged = (e) => {
 		this.setState({
-			[e.target.name]: e.target.checked
-		})
+			meetingStatus: e.currentTarget.value
+		});
 	}
 
 	handleValidate = (e) => {
@@ -58,7 +59,7 @@ class OneToOneMeeting extends Component {
 	}
 
 	render() {
-		const { selectedYear, selectedMonth, discussion, accept, reject, update, errors } = this.state;
+		const { selectedYear, selectedMonth, discussion, meetingStatus, update, errors } = this.state;
 		return (
 			<div>
 				<section className="tab-body">
@@ -135,18 +136,21 @@ class OneToOneMeeting extends Component {
 								<div className="mt-2">
 									<label style={{ color: 'var(--success)' }}>
 										<input
-											name="accept"
-											type="checkbox"
-											checked={accept}
-											onChange={this.handleCheckedChange} />
+											type="radio"
+											className="mr-2"
+											name="meetingStatus"
+											value="accept"
+											checked={meetingStatus === "accept"}
+											onChange={this.onChanged} />
 										Accept </label>
-									<label style={{ color: 'var(--danger)' }}>
+									<label className="ml-2" style={{ color: 'var(--danger)' }}>
 										<input
-											className="ml-2"
-											name="reject"
-											type="checkbox"
-											checked={reject}
-											onChange={this.handleCheckedChange} />
+											className="ml-2 mr-2"
+											type="radio"
+											name="meetingStatus"
+											value="reject"
+											checked={meetingStatus === "reject"}
+											onChange={this.onChanged} />
 										Reject </label>
 								</div>
 							</div>

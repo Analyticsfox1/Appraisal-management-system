@@ -1,13 +1,29 @@
 
-import { post } from "./httpInterceptor";
+import { post, get } from "./httpInterceptor";
 
-
-//Add new user
-export const register = data => {
-	return post(`uprise/authentication/addUser`, data).then(res => {
-		console.log('RESPONSE :: register ::: ', res);
+//user login API
+export const login = data => {
+	return post(`/uprise/authentication/authenticate?username=${data.email}&password=${data.password}`).then(res => {
+		console.log('RESPONSE :: login ::: ', res);
 		return res;
 	});
 }
+
+//user logout API
+export const logout = () => {
+	return get(`/uprise/authentication/logout`).then(res => {
+		console.log('RESPONSE :: logout ::: ', res);
+		return res;
+	});
+}
+
+//user Forgot Password API
+export const forgotPassword = data => {
+	return post(`/uprise/authentication/forgotPassword`, data).then(res => {
+		console.log('RESPONSE :: Forgot Password ::: ', res);
+		return res;
+	});
+}
+
 
 

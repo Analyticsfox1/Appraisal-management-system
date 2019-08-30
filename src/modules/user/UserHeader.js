@@ -1,10 +1,20 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import { logout } from '../../utils/user'
 
 class UserHeader extends Component {
 
 	onLogOut = () => {
-		this.props.history.push('/')
+		logout().then(response => {
+			if (response.error) {
+				return false;
+			}
+			if (!response.success) {
+				console.log(response.message)
+				this.props.history.push('/')
+			}
+		})
 	}
+
 	render() {
 		return (
 			<header>

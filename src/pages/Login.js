@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import Header from './Header';
+import { login } from '../utils/user';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 class Login extends Component {
 
@@ -43,14 +47,31 @@ class Login extends Component {
 	}
 
 	handleSubmit = () => {
-		const { errors } = this.state;
+		const { errors, email, password } = this.state;
+		let isLogin = true;
 		for (var val in errors) {
 			if (errors[val] === null || errors[val]) {
 				errors[val] = true;
+				isLogin = false;
 			}
-			else {
-				this.props.history.push('/dashboard')
+		}
+		let obj = { email, password }
+		if (isLogin) {
+			login(obj).then(response => {
+				if (response.error) {
+					toast.error('error', { type: toast.TYPE.ERROR, position: toast.POSITION.TOP_RIGHT, autoClose: 2000 })
+					return false;
+				} else {
+
+				}
+				if (response.data.message === "user authenticated successfully") {
+					toast.success(response.message, { type: toast.TYPE.SUCCESS, position: toast.POSITION.TOP_RIGHT, autoClose: 2000 })
+					this.props.history.push('/dashboard')
+				}
 			}
+			).catch(err => {
+				console.log(">>>>>",Error)
+			});
 		}
 		this.setState({ errors: { ...errors } });
 	}
@@ -65,9 +86,10 @@ class Login extends Component {
 		const { email, password, invalidEmail, errors } = this.state;
 		return (
 			<section className="login-section">
+			<ToastContainer />
 				<Header />
 				<div className="page-container">
-					<div style={{width:'400px'}} className="content">
+					<div style={{ width: '400px' }} className="content">
 						<h3 className="text-center title-font mb-3">SIGN IN</h3>
 						<div className="form-group">
 							<input

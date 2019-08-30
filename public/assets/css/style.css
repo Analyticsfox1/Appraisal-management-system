@@ -27,6 +27,18 @@ hr {
 	border: 0.5px solid #afaaaa;
 }
 
+.fs-13 {
+	font-size: 13px;
+}
+
+.fs-14 {
+	font-size: 14px;
+}
+
+.title-black {
+	color: #403f3f;
+}
+
 .fs-16 {
 	font-size: 16px;
 }
@@ -49,6 +61,10 @@ hr {
 
 .fs-26 {
 	font-size: 26px;
+}
+
+.font-weight-bold-600 {
+	font-weight: 600;
 }
 
 .w3-aboutbg {
@@ -628,7 +644,7 @@ span.input-group-text {
 }
 
 .dash_grid main {
-	background: #fff;
+	background: #eee;
 	flex: 1;
 }
 
@@ -1135,7 +1151,8 @@ input.form-input.date {
 	border: 1px solid #e46a22;
 	border-radius: 5px;
 	padding: 10px;
-	font-size: 10px;
+	font-size: 11px;
+	min-height: 100%;
 }
 
 input.form-input.signature {
@@ -1144,4 +1161,97 @@ input.form-input.signature {
 	border-left: 0px;
 	border-right: 0px;
 	border-radius: 0px;
+}
+
+.probation-form .css-yk16xz-control {
+	height: 51px;
+	;
+}
+
+.probation-form .css-1pahdxg-control {
+	height: 51px;
+	;
+}
+
+.table-border {
+	border: #e46a22 solid 1px;
+	padding: 8px 15px;
+	padding-top: 0px;
+	overflow: hidden;
+	border-radius: 5px;
+}
+
+.table-border-bottom {
+	border-bottom: #e46a22 solid 1px
+}
+
+.table-border-right {
+	border-right: #e46a22 solid 1px;
+}
+
+.table-border .title-orange {
+	padding-bottom: 8px;
+	line-height: normal;
+	padding-top: 8px;
+}
+
+.tabletopbottom-padd {
+	padding-top: 15px;
+	padding-bottom: 15px;
+}
+
+.light-orange {
+	background: #f5eae4;
+}
+
+.team-page input.form-input {
+	border: 1px solid #cccccc;
+	height: 40px;
+}
+
+.team-page textarea {
+	border: 1px solid #cccccc;
+}
+
+button.add-member {
+	height: 40px;
+	background: #285a90;
+	color: white;
+	width: 120px;
+	border-radius: 5px;
+}
+
+button.team-btn {
+	height: 40px;
+	color: white;
+	width: 120px;
+	border-radius: 5px;
+}
+
+input[type='radio']:after {
+	width: 17px;
+	height: 17px;
+	border-radius: 15px;
+	top: -2px;
+	left: -1px;
+	position: relative;
+	background-color: #fff;
+	content: '';
+	display: inline-block;
+	visibility: visible;
+	border: 2px solid #a7a4a4;
+}
+
+input[type='radio']:checked:after {
+	width: 17px;
+	height: 17px;
+	border-radius: 15px;
+	top: -2px;
+	left: -1px;
+	position: relative;
+	background-color: #fff;
+	content: '';
+	display: inline-block;
+	visibility: visible;
+	border: 6px solid #fb8845;
 }

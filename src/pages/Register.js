@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 import Header from './Header';
-import { register } from '../utils/user';
-
 
 class Register extends Component {
 
@@ -94,16 +92,6 @@ class Register extends Component {
 		}
 		if (invalidPassword || invalidEmail || invalidConfPassword) {
 			isRegister = false;
-		}
-		if (isRegister) {
-			register(obj).then(response => {
-				console.log("response...", response)
-				if (response.error) {
-					console.log("response error")
-					return false;
-				}
-			}
-			);
 		}
 		this.setState({ errors: { ...errors } });
 	}

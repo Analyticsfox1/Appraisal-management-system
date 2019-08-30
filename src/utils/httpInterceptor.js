@@ -1,5 +1,4 @@
 import axios from 'axios';
-const host = 'http://localhost'
 
 const handleResponse = (response) => {
 	return {
@@ -10,7 +9,7 @@ const handleResponse = (response) => {
 
 const handleError = (error) => {
 	const { response } = error;
-	let errorMsg = 'Sorry, something went wrong. Please try again.';
+	// let errorMsg = 'Sorry, something went wrong. Please try again.';
 	return {
 			error: true,
 			message: response ? response.data.message : null,
@@ -18,20 +17,18 @@ const handleError = (error) => {
 	};
 }
 
-
 export const get = (url) => {
 	const axiosObj = {
-		url:`${host}/${url}`,
+		url:`${url}`,
 		method: 'get',
 	};
-
 	return axios(axiosObj)
 		.then((response) => handleResponse(response))
 		.catch((error) => handleError(error));
 }
 
 export const post = (url, bodyObj = {}) => {
-	return axios.post(`${host}/${url}`, bodyObj)
+	return axios.post(`${url}`, bodyObj)
 		.then((response) => handleResponse(response))
 		.catch((error) => handleError(error));
 }

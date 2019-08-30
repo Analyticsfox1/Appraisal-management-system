@@ -10,7 +10,6 @@ class OrganizationGoal extends Component {
 	}
 
 	render() {
-		const { search } = this.state;
 		return (
 			<div className="dash_grid">
 				<LeftMenu />

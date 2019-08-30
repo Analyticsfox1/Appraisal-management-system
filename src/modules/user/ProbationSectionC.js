@@ -37,7 +37,7 @@ class ProbationSectionC extends Component {
 		return (
 			<section className="tab-body dash_space text-justify">
 				<div className="row mt-3">
-					<p className="col-md-4">Outline any courses the employee has attended to date.</p>
+					<span className="col-md-4">Outline any courses the employee has attended to date.</span>
 					<div className="col-md-8">
 						<input
 							type="text"
@@ -54,7 +54,7 @@ class ProbationSectionC extends Component {
 					</div>
 				</div>
 				<div className="row mt-3">
-					<p className="col-md-4">Indicate any future courses that the employee should complete and wheteher they are mandatory or recommended in order to complete the probationary period.</p>
+					<span className="col-md-4">Indicate any future courses that the employee should complete and wheteher they are mandatory or recommended in order to complete the probationary period.</span>
 					<div className="col-md-8">
 						<input
 							type="text"

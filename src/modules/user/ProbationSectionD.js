@@ -37,7 +37,7 @@ class ProbationSectionD extends Component {
 		return (
 			<section className="tab-body dash_space text-justify">
 				<div className="row mt-3">
-					<p className="col-md-4">Based on the ratings above, rate the employee's overall performance</p>
+					<span className="col-md-4">Based on the ratings above, rate the employee's overall performance</span>
 					<div className="col-md-8">
 						<input
 							type="text"
@@ -54,7 +54,7 @@ class ProbationSectionD extends Component {
 					</div>
 				</div>
 				<div className="row mt-3">
-					<p className="col-md-4">Manager Comment: (Mention whether Probation Successful, Extend Probation, Probation Failed)</p>
+					<span className="col-md-4">Manager Comment: (Mention whether Probation Successful, Extend Probation, Probation Failed)</span>
 					<div className="col-md-8">
 						<input
 							type="text"
