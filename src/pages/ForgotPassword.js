@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 import Header from './Header';
 import { forgotPassword } from '../utils/user';
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 class ForgotPassword extends Component {
 	constructor() {
 		super();
@@ -62,9 +63,11 @@ class ForgotPassword extends Component {
 		if (isSuccess) {
 			forgotPassword(obj).then(response => {
 				if (response.error) {
+					toast.error(response.data.message, { type: toast.TYPE.ERROR, autoClose: 2000 })
 					return false;
 				}
-				if (response.data && !response.success) {
+				if (response.data && !response.error) {
+					toast.success(response.message, { type: toast.TYPE.SUCCESS, autoClose: 2000 })
 					this.props.history.push(`/change-password`);
 				}
 			})
@@ -108,6 +111,7 @@ class ForgotPassword extends Component {
 						<p className="loginhere mt-0" ><Link to="login" className="loginhere-link"><i className="fas fa-sign-in-alt mr-2"></i>Back to Login</Link></p>
 					</div>
 				</div>
+				<ToastContainer />
 			</section>
 
 		)

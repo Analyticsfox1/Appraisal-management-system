@@ -4,8 +4,6 @@ import Header from './Header';
 import { login } from '../utils/user';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
-
 class Login extends Component {
 
 	constructor() {
@@ -59,19 +57,14 @@ class Login extends Component {
 		if (isLogin) {
 			login(obj).then(response => {
 				if (response.error) {
-					toast.error('error', { type: toast.TYPE.ERROR, position: toast.POSITION.TOP_RIGHT, autoClose: 2000 })
+					toast.error(response.data.message, { type: toast.TYPE.ERROR, autoClose: 2000 })
 					return false;
-				} else {
-
 				}
-				if (response.data.message === "user authenticated successfully") {
-					toast.success(response.message, { type: toast.TYPE.SUCCESS, position: toast.POSITION.TOP_RIGHT, autoClose: 2000 })
+				if (response.data && !response.error) {
 					this.props.history.push('/dashboard')
+					toast.success(response.data.message, { type: toast.TYPE.SUCCESS, autoClose: 2000 })
 				}
-			}
-			).catch(err => {
-				console.log(">>>>>",Error)
-			});
+			})
 		}
 		this.setState({ errors: { ...errors } });
 	}
@@ -86,7 +79,7 @@ class Login extends Component {
 		const { email, password, invalidEmail, errors } = this.state;
 		return (
 			<section className="login-section">
-			<ToastContainer />
+				<ToastContainer />
 				<Header />
 				<div className="page-container">
 					<div style={{ width: '400px' }} className="content">

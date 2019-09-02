@@ -1,4 +1,3 @@
-
 import { post, get } from "./httpInterceptor";
 
 //user login API
@@ -19,8 +18,16 @@ export const logout = () => {
 
 //user Forgot Password API
 export const forgotPassword = data => {
-	return post(`/uprise/authentication/forgotPassword`, data).then(res => {
+	return post(`/uprise/authentication/forgotPassword?username=${data.email}`).then(res => {
 		console.log('RESPONSE :: Forgot Password ::: ', res);
+		return res;
+	});
+}
+
+//user Update Password API
+export const updatePassword = data => {
+	return post(`uprise/authentication/updatePassword`).then(res => {
+		console.log('RESPONSE :: Update Password ::: ', res);
 		return res;
 	});
 }

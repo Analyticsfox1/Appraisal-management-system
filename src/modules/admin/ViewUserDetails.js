@@ -1,47 +1,74 @@
-import React, { useState } from 'react';
+import React, { Component } from 'react';
 import { Button, Modal } from 'react-bootstrap';
+import { getUserById } from '../../utils/admin';
 
-export default function ViewUserDetails(props) {
-	const [show, setShow] = useState(false);
+class ViewUserDetails extends Component {
 
-	const handleClose = () => setShow(false);
-	const handleShow = () => setShow(true);
+	state = {
+		show: false,
+		userDetails: [],
+	}
 
-	return (
+	handleClose = () => {
+		this.setState({
+			show: false
+		})
+	}
 
-		<>
-			<a style={{ color: '#d26425', textDecoration: 'underline', cursor: 'pointer' }} onClick={handleShow}> {props.name} </a>
+	handleShow = () => {
+		this.setState({
+			show: true
+		})
+	}
 
-			<Modal
-				aria-labelledby="contained-modal-title-vcenter"
-				centered
-				show={show}
-				onHide={handleClose}>
-				<Modal.Header>
-					<Modal.Title>User Details</Modal.Title>
-				</Modal.Header>
-				<Modal.Body>
-					<div>
-						<div className="row">
-							<div className="col-md-6">
-								<p><b>Employee ID : </b> PR2008193946</p>
-								<p><b>Employee Name : </b> Prakash</p>
-								<p><b>Email Id : </b> piyer@teracrunch.com</p>
-								<p><b>Mobile No : </b> 98744563210</p>
-							
-							</div>
-							<div className="col-md-6">
-								<p><b>DOB : </b> 15/05/1965</p>
-								<p><b>Date of Joining : </b> 01/01/2019</p>
-								<p><b>Role : </b> Admin</p>
-								<p><b>Status : </b> Active</p>
+	componentDidMount() {
+		let obj = this.props.id;
+		getUserById(obj).then(response => {
+			this.setState({
+				userDetails: response.data && response.data.data ? response.data.data : []
+			})
+		})
+	}
 
+	render() {
+		const { show, userDetails } = this.state;
+		return (
+			<>
+				<a style={{ color: '#d26425', textDecoration: 'underline', cursor: 'pointer' }} onClick={this.handleShow}> {this.props.id} </a>
+
+				<Modal
+					aria-labelledby="contained-modal-title-vcenter"
+					centered
+					show={show}
+					onHide={this.handleClose}>
+					<Modal.Header>
+						<Modal.Title>User Details</Modal.Title>
+					</Modal.Header>
+					<Modal.Body>
+						<div>
+							<div className="row">
+								<div className="col-md-6">
+									<p><b>Employee ID : </b> {userDetails.uniqueId}</p>
+									<p><b>Employee Name : </b> {userDetails.name}</p>
+									<p><b>Email Id : </b> {userDetails.officialEmail}</p>
+									<p><b>Mobile No : </b> {userDetails.primaryMobileNo}</p>
+
+								</div>
+								<div className="col-md-6">
+									<p><b>Gender : </b> {userDetails.gender}</p>
+									<p><b>Date of Joining : </b> 01/01/2019</p>
+									<p><b>Role : </b> CEO</p>
+									<p><b>Status : </b> {userDetails.status}</p>
+
+								</div>
 							</div>
 						</div>
-					</div>
-				</Modal.Body>
+					</Modal.Body>
 
-			</Modal>
-		</>
-	);
+				</Modal>
+			</>
+		);
+	}
 }
+
+export default ViewUserDetails;

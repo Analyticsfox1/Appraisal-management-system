@@ -1255,3 +1255,12 @@ input[type='radio']:checked:after {
 	visibility: visible;
 	border: 6px solid #fb8845;
 }
+
+.Toastify__toast {
+	border-radius: 5px !important;
+}
+
+.Toastify__close-button {
+	margin-top: 11px;
+	margin-right: 10px;
+}

@@ -6,6 +6,7 @@ import ReactTable from 'react-table';
 import ViewUserDetails from './ViewUserDetails';
 import AddUser from './AddUser';
 import EditUser from './EditUser';
+import { getUserList } from '../../utils/admin';
 class UserManagement extends Component {
 	constructor() {
 		super();
@@ -13,12 +14,25 @@ class UserManagement extends Component {
 			search: '',
 			showAddModal: false,
 			showEditModal: false,
+			userData: []
 		}
+	}
+
+	componentDidMount() {
+		this.UserList();
 	}
 
 	handleChange = (e) => {
 		this.setState({
 			[e.target.name]: e.target.value
+		})
+	}
+
+	UserList = () => {
+		getUserList().then(response => {
+			this.setState({
+				userData: response.data && response.data.data ? response.data.data : []
+			})
 		})
 	}
 
@@ -35,52 +49,59 @@ class UserManagement extends Component {
 	}
 
 	render() {
-		const { search } = this.state;
-		const data = [{
-			employee_id: 'PR2008193946',
-			name: 'Prakash',
-			email: 'piyer@teracrunch.com',
-			role: 'Admin',
-			status: 'Active'
-		},{
-			employee_id: 'PR2108196040',
-			name: 'Prakash',
-			email: 'prakash2207@gmail.com',
-			role: 'Admin',
-			status: 'Active'
-		}]
-
-		const columns = [{
-			Header: 'Employee ID',
-			accessor: 'employee_id',
-			width: 180,
-
-		}, {
-			Header: 'Employee Name',
-			width: 200,
-			Cell: ({ original }) => {
-				return (
-					<ViewUserDetails name={original.name} />
-				);
+		const { search, userData } = this.state;
+		const columns = [
+			{
+				Header: 'Employee ID',
+				width: 180,
+				Cell: ({ original }) => {
+					return (
+						<ViewUserDetails id={original.uniqueId} />
+					);
+				},
 			},
-		}, {
-			Header: 'Email ID',
-			accessor: 'email',
-		}, {
-			Header: 'Role',
-			accessor: 'role',
-			width: 160,
-		},
-		{
-			Header: 'Status',
-			accessor: 'status',
-			width: 160,
-		}, {
-			Header: 'Action',
-			accessor: 'action',
-			width: 140,
-			Cell: <div className="cursor-pointer"><i onClick={this.editUser} className="fa fa-edit mr-3" /><i onClick={() => alert("User Deleted")} className="fa fa-trash" /></div>
-		},]
+			{
+				Header: 'Employee Name',
+				width: 200,
+				Cell: ({ original }) => {
+					return (
+						original.name
+					);
+				},
+			},
+			{
+				Header: 'Email ID',
+				Cell: ({ original }) => {
+					return (
+						original.officialEmail
+					);
+				},
+			},
+			{
+				Header: 'Role',
+				width: 160,
+				Cell: ({ original }) => {
+					return (
+						original.role.roleName
+					);
+				},
+			},
+			{
+				Header: 'Status',
+				width: 160,
+				Cell: ({ original }) => {
+					return (
+						original.status
+					);
+				},
+			},
+			{
+				Header: 'Action',
+				accessor: 'action',
+				width: 140,
+				Cell: <div className="cursor-pointer"><i onClick={this.editUser} className="fa fa-edit mr-3" /><i onClick={() => alert("User Deleted")} className="fa fa-trash" /></div>
+			},
+		]
 
 		return (
 			<div className="dash_grid">
@@ -101,12 +122,12 @@ class UserManagement extends Component {
 									placeholder="Search..." />
 							</div>
 							<button onClick={this.addUser} className="add-btn ml-auto"> Add User </button>
-							{this.state.showAddModal && <AddUser addUser={this.addUser}/>}
-							{this.state.showEditModal && <EditUser editUser={this.editUser}/>}
+							{this.state.showAddModal && <AddUser addUser={this.addUser} />}
+							{this.state.showEditModal && <EditUser editUser={this.editUser} />}
 						</div>
 						<div className="mt-4">
 							<ReactTable
-								data={data}
+								data={userData}
 								columns={columns}
 								defaultPageSize={5}
 							/>

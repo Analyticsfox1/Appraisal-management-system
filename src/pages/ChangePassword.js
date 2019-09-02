@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import Header from './Header';
+import { updatePassword } from '../utils/user';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 class ChangePassword extends Component {
 
@@ -61,7 +64,7 @@ class ChangePassword extends Component {
 	}
 
 	handleSubmit = () => {
-		const { errors, invalidPassword, invalidConfPassword } = this.state;
+		const { errors, invalidPassword, invalidConfPassword, new_password, conf_password } = this.state;
 		let isSuccess = true;
 		for (var val in errors) {
 			if (errors[val] === null || errors[val]) {
@@ -72,8 +75,18 @@ class ChangePassword extends Component {
 		if (invalidPassword || invalidConfPassword) {
 			isSuccess = false;
 		}
+		let obj = { new_password, conf_password }
 		if (isSuccess) {
-			this.props.history.push(`/login`);
+			updatePassword(obj).then(response => {
+				if (response.error) {
+					toast.error(response.data.message, { type: toast.TYPE.ERROR, autoClose: 2000 })
+					return false;
+				}
+				if (response.data && !response.error) {
+					toast.success(response.data.message, { type: toast.TYPE.SUCCESS, autoClose: 2000 })
+					this.props.history.push(`/login`);
+				}
+			})
 		}
 		this.setState({ errors: { ...errors } });
 	}
