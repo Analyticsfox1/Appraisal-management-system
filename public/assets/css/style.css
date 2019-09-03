@@ -945,6 +945,11 @@ label.notification-label {
 	border: 1px solid #cccccc;
 }
 
+.add-user textarea {
+	margin-left: 0;
+	border: 1px solid #cccccc;
+}
+
 .add-user .css-2b097c-container {
 	width: auto;
 	margin-left: 0;
@@ -956,7 +961,11 @@ label.notification-label {
 }
 
 .add-user .modal-dialog {
-	max-width: 900px;
+	max-width: 1200px;
+}
+
+.add-user .react-datepicker__input-container {
+	width: 331px;
 }
 
 .cursor-pointer {
@@ -1263,4 +1272,36 @@ input[type='radio']:checked:after {
 .Toastify__close-button {
 	margin-top: 11px;
 	margin-right: 10px;
+}
+
+.detail-link {
+	color: #d26425 !important;
+	text-decoration: underline !important;
+	cursor: pointer;
+}
+
+.fileContainer p {
+	display: none;
+}
+
+.fileContainer .uploadPictureContainer {
+	width: 50% !important;
+	margin: 3% !important;
+	padding: 8px !important;
+	background: #edf2f6 !important;
+}
+
+.fileContainer .deleteImage {
+	top: -9px !important;
+	right: -16px !important;
+	background: #d48a5f !important;
+	font-size: 16px !important;
+}
+
+.fileContainer .chooseFileButton {
+	background: #f1974c !important;
+}
+
+.fileContainer {
+	background: #efecec !important;
 }

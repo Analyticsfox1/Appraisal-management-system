@@ -5,6 +5,11 @@ import 'react-table/react-table.css';
 import ReactTable from 'react-table';
 import AddRole from './AddRole';
 import EditRole from './EditRole';
+import { getRoleList, deleteRole } from '../../utils/admin';
+import ViewRoleDetails from './ViewRoleDetails';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 class RoleManagement extends Component {
 	constructor() {
@@ -12,8 +17,13 @@ class RoleManagement extends Component {
 		this.state = {
 			search: '',
 			showAddModal: false,
-			showEditModal: false
+			showEditModal: false,
+			roleData: []
 		}
+	}
+
+	componentDidMount() {
+		this.RoleList();
 	}
 
 	handleChange = (e) => {
@@ -22,10 +32,19 @@ class RoleManagement extends Component {
 		})
 	}
 
+	RoleList = () => {
+		getRoleList().then(response => {
+			this.setState({
+				roleData: response.data && response.data.data ? response.data.data : []
+			})
+		})
+	}
+
 	addRole = () => {
 		this.setState({
 			showAddModal: !this.state.showAddModal
-		})
+		}, () => this.RoleList())
+
 	}
 
 	editRole = () => {
@@ -34,35 +53,47 @@ class RoleManagement extends Component {
 		})
 	}
 
-	render() {
-		const { search } = this.state;
-		const data = [{
-			role: 'Admin',
-			description: 'It have all rights',
-		}, {
-			role: 'CEO',
-			description: 'Company Role',
-		}, {
-			role: 'Manager',
-			description: 'It will manage everything',
-		},]
+	deleteRoleData = (obj) => {
+		deleteRole(obj).then(response => {
+			console.log("Delete role", response)
+		}, () => this.RoleList())
+	}
 
+	render() {
+		const { search, roleData } = this.state;
 		const columns = [{
 			Header: 'Role Name',
-			accessor: 'role',
 			width: 250,
-		}, {
+			Cell: ({ original }) => {
+				return (
+					<ViewRoleDetails name={original.roleName} />
+				);
+			},
+		},
+		{
 			Header: 'Description',
-			accessor: 'description',
-		}, {
+			Cell: ({ original }) => {
+				return (
+					original.description
+				);
+			},
+		},
+		{
 			Header: 'Action',
 			accessor: 'action',
 			width: 150,
-			Cell: <div><i onClick={this.editRole} className="fa fa-edit mr-3" /><i onClick={() => alert("Role Deleted")} className="fa fa-trash" /></div>
+			Cell: ({ original }) => {
+				return (<div>
+					<i onClick={this.editRole} className="fa fa-edit mr-3" />
+					<i onClick={() => this.deleteRoleData(original.roleId)} className="fa fa-trash" />
+				</div>
+				);
+			}
 		},]
 
 		return (
 			<div className="dash_grid">
+				<ToastContainer />
 				<LeftMenu />
 				<main className="bg-white">
 					<AdminHeader {...this.props} />
@@ -80,14 +111,14 @@ class RoleManagement extends Component {
 									placeholder="Search..." />
 							</div>
 							<button onClick={this.addRole} className="add-btn ml-auto"> Add Role </button>
-							{this.state.showAddModal && <AddRole addRole={this.addRole}/>}
-							{this.state.showEditModal && <EditRole editRole={this.editRole}/>}
+							{this.state.showAddModal && <AddRole addRole={this.addRole} />}
+							{this.state.showEditModal && <EditRole editRole={this.editRole} />}
 						</div>
 						<div className="mt-4">
 							<ReactTable
-								data={data}
+								data={roleData}
 								columns={columns}
-								defaultPageSize={5}
+								defaultPageSize={10}
 							/>
 						</div>
 					</section>

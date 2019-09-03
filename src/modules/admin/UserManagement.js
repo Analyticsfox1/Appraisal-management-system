@@ -39,7 +39,7 @@ class UserManagement extends Component {
 	addUser = () => {
 		this.setState({
 			showAddModal: !this.state.showAddModal
-		})
+		}, () => this.UserList())
 	}
 
 	editUser = () => {
@@ -53,7 +53,7 @@ class UserManagement extends Component {
 		const columns = [
 			{
 				Header: 'Employee ID',
-				width: 180,
+				width: 150,
 				Cell: ({ original }) => {
 					return (
 						<ViewUserDetails id={original.uniqueId} />
@@ -62,10 +62,19 @@ class UserManagement extends Component {
 			},
 			{
 				Header: 'Employee Name',
-				width: 200,
+				width: 150,
 				Cell: ({ original }) => {
 					return (
 						original.name
+					);
+				},
+			},
+			{
+				Header: 'Address',
+				width: 100,
+				Cell: ({ original }) => {
+					return (
+						original.address
 					);
 				},
 			},
@@ -78,8 +87,26 @@ class UserManagement extends Component {
 				},
 			},
 			{
+				Header: 'Aadhar No.',
+				width: 140,
+				Cell: ({ original }) => {
+					return (
+						original.aadharNo
+					);
+				},
+			},
+			{
+				Header: 'Account No.',
+				width: 150,
+				Cell: ({ original }) => {
+					return (
+						original.accountNumber
+					);
+				},
+			},
+			{
 				Header: 'Role',
-				width: 160,
+				width: 100,
 				Cell: ({ original }) => {
 					return (
 						original.role.roleName
@@ -88,7 +115,7 @@ class UserManagement extends Component {
 			},
 			{
 				Header: 'Status',
-				width: 160,
+				width: 100,
 				Cell: ({ original }) => {
 					return (
 						original.status
@@ -98,7 +125,7 @@ class UserManagement extends Component {
 			{
 				Header: 'Action',
 				accessor: 'action',
-				width: 140,
+				width: 100,
 				Cell: <div className="cursor-pointer"><i onClick={this.editUser} className="fa fa-edit mr-3" /><i onClick={() => alert("User Deleted")} className="fa fa-trash" /></div>
 			},
 		]

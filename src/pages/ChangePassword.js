@@ -10,10 +10,12 @@ class ChangePassword extends Component {
 		super();
 		this.state = {
 			new_password: '',
+			old_password: '',
 			conf_password: '',
 			invalidPassword: false,
 			invalidConfPassword: false,
 			errors: {
+				old_passwordError: null,
 				new_passwordError: null,
 				conf_passwordError: null,
 			}
@@ -64,7 +66,7 @@ class ChangePassword extends Component {
 	}
 
 	handleSubmit = () => {
-		const { errors, invalidPassword, invalidConfPassword, new_password, conf_password } = this.state;
+		const { errors, invalidPassword, invalidConfPassword, old_password, new_password } = this.state;
 		let isSuccess = true;
 		for (var val in errors) {
 			if (errors[val] === null || errors[val]) {
@@ -75,7 +77,7 @@ class ChangePassword extends Component {
 		if (invalidPassword || invalidConfPassword) {
 			isSuccess = false;
 		}
-		let obj = { new_password, conf_password }
+		let obj = { new_password, old_password }
 		if (isSuccess) {
 			updatePassword(obj).then(response => {
 				if (response.error) {
@@ -92,7 +94,7 @@ class ChangePassword extends Component {
 	}
 
 	render() {
-		const { new_password, conf_password, invalidPassword, invalidConfPassword, errors } = this.state;
+		const { new_password, old_password, conf_password, invalidPassword, invalidConfPassword, errors } = this.state;
 		return (
 			<section className="login-section">
 				<Header />
@@ -103,11 +105,25 @@ class ChangePassword extends Component {
 							<input
 								type="password"
 								className="form-input"
+								name="old_password"
+								value={old_password}
+								onChange={this.handleChange}
+								onBlur={this.handleValidate}
+								placeholder="Old password" />
+							{
+								errors.old_passwordError &&
+								<span className="errorMsg">Please enter old password</span>
+							}
+						</div>
+						<div className="form-group">
+							<input
+								type="password"
+								className="form-input"
 								name="new_password"
 								value={new_password}
 								onChange={this.handleChange}
 								onBlur={this.handleValidate}
-								placeholder="Enter password" />
+								placeholder="New password" />
 							{
 								errors.new_passwordError &&
 								<span className="errorMsg">Please enter new password</span>

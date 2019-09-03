@@ -1,13 +1,16 @@
 import React, { Component } from 'react'
 import { Button, Modal } from 'react-bootstrap';
+import { addRole } from '../../utils/admin';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 class AddRole extends Component {
 	state = {
 		show: false,
-		role_name: '',
+		roleName: '',
 		description: '',
 		errors: {
-			role_nameError: null,
+			roleNameError: null,
 			descriptionError: null,
 		}
 	}
@@ -44,19 +47,33 @@ class AddRole extends Component {
 	}
 
 	handleSubmit = () => {
-		const { errors } = this.state;
+		const { errors, roleName, description } = this.state;
+		let isAdd = true;
 		for (var val in errors) {
 			if (errors[val] === null || errors[val]) {
 				errors[val] = true;
+				isAdd = false;
 			}
 		}
+		let obj = { roleName, description }
+		if (isAdd) {
+			addRole(obj).then(response => {
+				toast.success("Role Added Successfully", { type: toast.TYPE.SUCCESS, autoClose: 2000 })
+				if (response.error) {
+					toast.error(response.data.message, { type: toast.TYPE.ERROR, autoClose: 2000 })
+					return false;
+				}
+			})
+		}
+		this.handleClose();
 		this.setState({ errors: { ...errors } });
 	}
 
 	render() {
-		const { show, role_name, description, errors } = this.state;
+		const { show, roleName, description, errors } = this.state;
 		return (
 			<div>
+				<ToastContainer />
 				<Modal
 					className="add-role"
 					aria-labelledby="contained-modal-title-vcenter"
@@ -74,13 +91,13 @@ class AddRole extends Component {
 								<input
 									type="text"
 									className="form-input"
-									name="role_name"
-									value={role_name}
+									name="roleName"
+									value={roleName}
 									onChange={this.handleChange}
 									onBlur={this.handleValidate}
 									placeholder="Enter role name" />
 								{
-									errors.role_nameError &&
+									errors.roleNameError &&
 									<span className="errorMsg">Please enter role name</span>
 								}
 							</div>
