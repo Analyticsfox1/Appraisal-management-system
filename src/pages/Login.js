@@ -56,11 +56,12 @@ class Login extends Component {
 		let obj = { email, password }
 		if (isLogin) {
 			login(obj).then(response => {
-				if (response.error) {
+				if (response.data.error === "true") {
 					toast.error(response.data.message, { type: toast.TYPE.ERROR, autoClose: 2000 })
 					return false;
 				}
-				if (response.data && !response.error) {
+				if (response.data && response.data.error === "false") {
+					sessionStorage.setItem("userData", JSON.stringify(response.data.data));
 					this.props.history.push('/dashboard')
 					toast.success(response.data.message, { type: toast.TYPE.SUCCESS, autoClose: 2000 })
 				}

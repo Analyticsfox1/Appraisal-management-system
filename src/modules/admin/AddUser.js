@@ -6,6 +6,8 @@ import "react-datepicker/dist/react-datepicker.css";
 import { getRoleList, addUser } from '../../utils/admin';
 import ImageUploader from 'react-images-upload';
 import moment from 'moment';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const statusOption = [
 	{ value: 'Active', label: 'Active' },
@@ -74,7 +76,7 @@ class AddUser extends Component {
 	RoleList = () => {
 		getRoleList().then(response => {
 			this.setState({
-				roleOption: response.data && response.data.data ? response.data.data.map(val => ({ label: val.roleName, value: val.roleName })) : []
+				roleOption: response.data && response.data.data ? response.data.data : []
 			})
 		})
 	}
@@ -247,18 +249,18 @@ class AddUser extends Component {
 		let dateOfBirth = moment(DOB).format('YYYY-MM-DD HH:mm:ss');
 		let obj = {
 			name, title, officialEmail, personalEmail, dateOfJoining, dateOfBirth, primaryMobileNo,
-			secondaryMobileNo, gender, bloodGroup, aadharNo, address, bankName, accountNumber, document, role, status
+			secondaryMobileNo, gender, bloodGroup, aadharNo, address, bankName, accountNumber, document, role,
 		}
 		if (isAdd) {
 			addUser(obj).then(response => {
-				// toast.success("Role Added Successfully", { type: toast.TYPE.SUCCESS, autoClose: 2000 })
+				toast.success("Role Added Successfully", { type: toast.TYPE.SUCCESS, autoClose: 2000 })
 				if (response.error) {
-					// toast.error(response.data.message, { type: toast.TYPE.ERROR, autoClose: 2000 })
+					toast.error(response.data.message, { type: toast.TYPE.ERROR, autoClose: 2000 })
 					return false;
 				}
+				this.handleClose();
 			})
 		}
-		this.handleClose();
 		this.setState({ errors: { ...errors } });
 	}
 
@@ -266,6 +268,7 @@ class AddUser extends Component {
 		const { show, role, roleOption, status, name, title, address, gender, bloodGroup, bankName, accountNumber, invalidaccountNumber, officialEmail, personalEmail, invalidpersonalEmail, invalidofficialEmail, primaryMobileNo, invalidprimaryMobileNo, secondaryMobileNo, invalidsecondaryMobileNo, DOJ, DOB, aadharNo, invalidaadharNo, inValidRole, inValidStatus, errors } = this.state;
 		return (
 			<div>
+				<ToastContainer />
 				<Modal
 					className="add-user"
 					aria-labelledby="contained-modal-title-vcenter"
@@ -541,6 +544,11 @@ class AddUser extends Component {
 									onChange={this.handleRole}
 									onBlur={() => this.onValidate("role")}
 									options={roleOption}
+									valueKey="roleId"
+									labelKey="roleName"
+									getOptionLabel={(option) => option["roleName"]}
+									getOptionValue={(option) => option["roleId"]}
+
 									placeholder="Role"
 								/>
 								{
@@ -548,7 +556,7 @@ class AddUser extends Component {
 									<span className="errorMsg">Please select role</span>
 								}
 							</div>
-							<div className="col-md-4">
+							{/* <div className="col-md-4">
 								<label>Status</label>
 								<Select
 									value={status}
@@ -561,13 +569,13 @@ class AddUser extends Component {
 									inValidStatus &&
 									<span className="errorMsg">Please select status</span>
 								}
-							</div>
+							</div> */}
 
 						</div>
 					</Modal.Body>
 					<Modal.Footer>
-						<Button className="btn-success" onClick={this.handleSubmit}>Create</Button>
 						<Button className="btn-danger" onClick={this.handleClose}>Cancel</Button>
+						<Button className="btn-success" onClick={this.handleSubmit}>Create</Button>
 					</Modal.Footer>
 				</Modal>
 			</div>

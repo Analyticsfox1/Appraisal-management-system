@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import { Route } from "react-router";
+import PageNotFound from '../pages/PageNotFound';
+
 //  User Routes 
 import Dashboard from '../modules/user/Dashboard';
 import PerformanceAppraisal from '../modules/user/PerformanceAppraisal';
@@ -38,6 +40,7 @@ class PrivateRoutes extends Component {
 				<Route exact path='/CEO-team-management' component={CEOTeamManagement} />
 				<Route exact path='/CEO-organizational-goal' component={CEOOrganizationGoal} />
 				<Route exact path='/CEO-push-notification' component={CEOPushNotification} />
+				<Route path="*" component={PageNotFound} />
 			</>
 		)
 	}

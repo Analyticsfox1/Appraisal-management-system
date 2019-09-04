@@ -3,6 +3,7 @@ import LeftMenu from './LeftMenu';
 import UserHeader from './UserHeader';
 
 class Dashboard extends Component {
+
 	render() {
 		return (
 			<div className="dash_grid">

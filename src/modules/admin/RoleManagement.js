@@ -10,7 +10,6 @@ import ViewRoleDetails from './ViewRoleDetails';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-
 class RoleManagement extends Component {
 	constructor() {
 		super();
@@ -55,13 +54,29 @@ class RoleManagement extends Component {
 
 	deleteRoleData = (obj) => {
 		deleteRole(obj).then(response => {
-			console.log("Delete role", response)
-		}, () => this.RoleList())
+			if (response.data.error === "true") {
+				toast.error(response.data.message, { type: toast.TYPE.ERROR, autoClose: 2000 })
+				return false;
+			}
+			if (response.data.error === 'false') {
+				toast.success("Role Deleted Successfully", { type: toast.TYPE.SUCCESS, autoClose: 2000 })
+				this.RoleList()
+			}
+		})
 	}
 
 	render() {
 		const { search, roleData } = this.state;
 		const columns = [{
+			Header: 'Role ID',
+			width: 150,
+			Cell: ({ original }) => {
+				return (
+					original.roleId
+				);
+			},
+		},
+		{
 			Header: 'Role Name',
 			width: 250,
 			Cell: ({ original }) => {
@@ -84,7 +99,6 @@ class RoleManagement extends Component {
 			width: 150,
 			Cell: ({ original }) => {
 				return (<div>
-					<i onClick={this.editRole} className="fa fa-edit mr-3" />
 					<i onClick={() => this.deleteRoleData(original.roleId)} className="fa fa-trash" />
 				</div>
 				);
@@ -112,7 +126,7 @@ class RoleManagement extends Component {
 							</div>
 							<button onClick={this.addRole} className="add-btn ml-auto"> Add Role </button>
 							{this.state.showAddModal && <AddRole addRole={this.addRole} />}
-							{this.state.showEditModal && <EditRole editRole={this.editRole} />}
+							{/* {this.state.showEditModal && <EditRole editRole={this.editRole} />} */}
 						</div>
 						<div className="mt-4">
 							<ReactTable

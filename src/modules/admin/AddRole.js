@@ -63,9 +63,9 @@ class AddRole extends Component {
 					toast.error(response.data.message, { type: toast.TYPE.ERROR, autoClose: 2000 })
 					return false;
 				}
+				this.handleClose();
 			})
 		}
-		this.handleClose();
 		this.setState({ errors: { ...errors } });
 	}
 
@@ -79,7 +79,6 @@ class AddRole extends Component {
 					aria-labelledby="contained-modal-title-vcenter"
 					centered
 					show={show}
-				// onHide={this.handleClose}
 				>
 					<Modal.Header>
 						<Modal.Title>Add Role</Modal.Title>
@@ -120,8 +119,8 @@ class AddRole extends Component {
 
 					</Modal.Body>
 					<Modal.Footer>
-						<Button className="btn-success" onClick={this.handleSubmit}>Create</Button>
 						<Button className="btn-danger" onClick={this.handleClose}>Cancel</Button>
+						<Button className="btn-success" onClick={this.handleSubmit}>Create</Button>
 					</Modal.Footer>
 				</Modal>
 			</div>

@@ -4,20 +4,20 @@ import { updatePassword } from '../utils/user';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-class ChangePassword extends Component {
+class UpdatePassword extends Component {
 
 	constructor() {
 		super();
 		this.state = {
-			new_password: '',
-			old_password: '',
-			conf_password: '',
+			newPassword: '',
+			oldPassword: '',
+			confPassword: '',
 			invalidPassword: false,
 			invalidConfPassword: false,
 			errors: {
-				old_passwordError: null,
-				new_passwordError: null,
-				conf_passwordError: null,
+				oldPasswordError: null,
+				newPasswordError: null,
+				confPasswordError: null,
 			}
 		}
 	}
@@ -38,7 +38,7 @@ class ChangePassword extends Component {
 		else {
 			this.setState({ errors: { ...errors, [name + 'Error']: false } });
 		}
-		if (name === 'new_password') {
+		if (name === 'newPassword') {
 			let passwordRegx = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
 			if (value && !value.match(passwordRegx)) {
 				this.setState({
@@ -51,8 +51,8 @@ class ChangePassword extends Component {
 				});
 			}
 		}
-		if (name === 'conf_password') {
-			if (value && value !== this.state.new_password) {
+		if (name === 'confPassword') {
+			if (value && value !== this.state.newPassword) {
 				this.setState({
 					invalidConfPassword: true
 				});
@@ -66,7 +66,7 @@ class ChangePassword extends Component {
 	}
 
 	handleSubmit = () => {
-		const { errors, invalidPassword, invalidConfPassword, old_password, new_password } = this.state;
+		const { errors, invalidPassword, invalidConfPassword, oldPassword, newPassword } = this.state;
 		let isSuccess = true;
 		for (var val in errors) {
 			if (errors[val] === null || errors[val]) {
@@ -77,16 +77,16 @@ class ChangePassword extends Component {
 		if (invalidPassword || invalidConfPassword) {
 			isSuccess = false;
 		}
-		let obj = { new_password, old_password }
+		let obj = { newPassword, oldPassword }
 		if (isSuccess) {
 			updatePassword(obj).then(response => {
-				if (response.error) {
+				debugger
+				if (response.data.error === "true") {
 					toast.error(response.data.message, { type: toast.TYPE.ERROR, autoClose: 2000 })
 					return false;
 				}
-				if (response.data && !response.error) {
+				if (response.data && response.data.error === "false") {
 					toast.success(response.data.message, { type: toast.TYPE.SUCCESS, autoClose: 2000 })
-					this.props.history.push(`/login`);
 				}
 			})
 		}
@@ -94,24 +94,23 @@ class ChangePassword extends Component {
 	}
 
 	render() {
-		const { new_password, old_password, conf_password, invalidPassword, invalidConfPassword, errors } = this.state;
+		const { newPassword, oldPassword, confPassword, invalidPassword, invalidConfPassword, errors } = this.state;
 		return (
-			<section className="login-section">
-				<Header />
-				<div className="page-container">
-					<div style={{ width: '400px' }} className="content">
-						<h3 className="text-center title-font mb-3">Change Password</h3>
+			<section className="tab-body">
+				<div className="row" >
+
+					<div style={{ width: '400px' }} className="content col-md-5">
 						<div className="form-group">
 							<input
 								type="password"
 								className="form-input"
-								name="old_password"
-								value={old_password}
+								name="oldPassword"
+								value={oldPassword}
 								onChange={this.handleChange}
 								onBlur={this.handleValidate}
 								placeholder="Old password" />
 							{
-								errors.old_passwordError &&
+								errors.oldPasswordError &&
 								<span className="errorMsg">Please enter old password</span>
 							}
 						</div>
@@ -119,13 +118,13 @@ class ChangePassword extends Component {
 							<input
 								type="password"
 								className="form-input"
-								name="new_password"
-								value={new_password}
+								name="newPassword"
+								value={newPassword}
 								onChange={this.handleChange}
 								onBlur={this.handleValidate}
 								placeholder="New password" />
 							{
-								errors.new_passwordError &&
+								errors.newPasswordError &&
 								<span className="errorMsg">Please enter new password</span>
 							}
 							{
@@ -137,13 +136,13 @@ class ChangePassword extends Component {
 							<input
 								type="password"
 								className="form-input"
-								name="conf_password"
-								value={conf_password}
+								name="confPassword"
+								value={confPassword}
 								onChange={this.handleChange}
 								onBlur={this.handleValidate}
 								placeholder="Confirm password" />
 							{
-								errors.conf_passwordError &&
+								errors.confPasswordError &&
 								<span className="errorMsg">Please enter confirm password</span>
 							}
 							{
@@ -152,8 +151,11 @@ class ChangePassword extends Component {
 							}
 						</div>
 						<div className="form-group">
-							<button onClick={this.handleSubmit} className="form-submit">Change Password</button>
+							<button onClick={this.handleSubmit} className="form-submit">Update Password</button>
 						</div>
+					</div>
+					<div className="col-md-7">
+						<img className="px-5" src="./assets/images/update-password.jpg" />
 					</div>
 				</div>
 			</section>
@@ -161,4 +163,4 @@ class ChangePassword extends Component {
 	}
 }
 
-export default ChangePassword
+export default UpdatePassword

@@ -62,13 +62,12 @@ class ForgotPassword extends Component {
 		let obj = { email }
 		if (isSuccess) {
 			forgotPassword(obj).then(response => {
-				if (response.error) {
+				if (response.data.error === 'true') {
 					toast.error(response.data.message, { type: toast.TYPE.ERROR, autoClose: 2000 })
 					return false;
 				}
-				if (response.data && !response.error) {
-					toast.success(response.message, { type: toast.TYPE.SUCCESS, autoClose: 2000 })
-					this.props.history.push(`/change-password`);
+				if (response.data && response.data.error === "false") {
+					toast.success(response.data.message, { type: toast.TYPE.SUCCESS, autoClose: 2000 })
 				}
 			})
 		}
@@ -80,6 +79,7 @@ class ForgotPassword extends Component {
 		return (
 
 			<section className="login-section">
+				<ToastContainer />
 				<Header />
 				<div className="page-container">
 					<div style={{ width: '400px' }} className="content">
@@ -111,7 +111,6 @@ class ForgotPassword extends Component {
 						<p className="loginhere mt-0" ><Link to="login" className="loginhere-link"><i className="fas fa-sign-in-alt mr-2"></i>Back to Login</Link></p>
 					</div>
 				</div>
-				<ToastContainer />
 			</section>
 
 		)

@@ -126,7 +126,7 @@ class UserManagement extends Component {
 				Header: 'Action',
 				accessor: 'action',
 				width: 100,
-				Cell: <div className="cursor-pointer"><i onClick={this.editUser} className="fa fa-edit mr-3" /><i onClick={() => alert("User Deleted")} className="fa fa-trash" /></div>
+				Cell: <div className="cursor-pointer"><i onClick={this.editUser} className="fa fa-edit mr-3" /></div>
 			},
 		]
 
@@ -156,7 +156,7 @@ class UserManagement extends Component {
 							<ReactTable
 								data={userData}
 								columns={columns}
-								defaultPageSize={5}
+								defaultPageSize={10}
 							/>
 						</div>
 					</section>
