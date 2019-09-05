@@ -55,3 +55,35 @@ export const deleteRole = data => {
 		return res;
 	});
 }
+
+// get all Team list API
+export const getTeamList = () => {
+	return get(`/uprise/kra/getAllTeams`).then(res => {
+		console.log('RESPONSE :: Team List ::: ', res);
+		return res;
+	});
+}
+
+// add Team API
+export const addTeam = data => {
+	return post(`/uprise/kra/addTeam`, data).then(res => {
+		console.log('RESPONSE :: Add Team ::: ', res);
+		return res;
+	});
+}
+
+// get all Manager list API
+export const getManagerList = () => {
+	return get(`/uprise/kra/getAllManagers`).then(res => {
+		console.log('RESPONSE :: Manager List ::: ', res);
+		return res;
+	});
+}
+
+// get all Employee list API
+export const getEmployeeList = () => {
+	return get(`/uprise/kra/getAllEmployees`).then(res => {
+		console.log('RESPONSE :: Employee List ::: ', res);
+		return res;
+	});
+}

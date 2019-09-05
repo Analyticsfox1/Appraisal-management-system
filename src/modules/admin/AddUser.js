@@ -42,7 +42,7 @@ class AddUser extends Component {
 		inValidRole: false,
 		inValidStatus: false,
 		roleOption: [],
-		document: null,
+		// document: null,
 		errors: {
 			nameError: null,
 			titleError: null,
@@ -81,11 +81,11 @@ class AddUser extends Component {
 		})
 	}
 
-	onDrop = (picture) => {
-		this.setState({
-			document: picture,
-		});
-	}
+	// onDrop = (picture) => {
+	// 	this.setState({
+	// 		document: picture,
+	// 	});
+	// }
 
 	handleDOJChange = date => {
 		this.setState({
@@ -237,7 +237,7 @@ class AddUser extends Component {
 
 	handleSubmit = () => {
 		const { errors, name, title, officialEmail, personalEmail, DOJ, DOB, primaryMobileNo,
-			secondaryMobileNo, gender, bloodGroup, aadharNo, address, bankName, accountNumber, document, role, status } = this.state;
+			secondaryMobileNo, gender, bloodGroup, aadharNo, address, bankName, accountNumber, role, status } = this.state;
 		let isAdd = true;
 		for (var val in errors) {
 			if (errors[val] === null || errors[val]) {
@@ -245,21 +245,24 @@ class AddUser extends Component {
 				isAdd = false;
 			}
 		}
-		let dateOfJoining = moment(DOJ).format('YYYY-MM-DD HH:mm:ss');
-		let dateOfBirth = moment(DOB).format('YYYY-MM-DD HH:mm:ss');
+		let dateOfJoining = DOJ ? moment(DOJ).format('x') : null;
+		let dateOfBirth = DOB ? moment(DOB).format('x') : null;
+		role.createdDate = +new Date(role.createdDate);
 		let obj = {
 			name, title, officialEmail, personalEmail, dateOfJoining, dateOfBirth, primaryMobileNo,
-			secondaryMobileNo, gender, bloodGroup, aadharNo, address, bankName, accountNumber, document, role,
+			secondaryMobileNo, gender, bloodGroup, aadharNo, address, bankName, accountNumber, role,
 		}
 		if (isAdd) {
 			addUser(obj).then(response => {
-				toast.success("Role Added Successfully", { type: toast.TYPE.SUCCESS, autoClose: 2000 })
-				if (response.error) {
+				if (response.data && response.data.error === 'false') {
+					toast.success(response.data.message, { type: toast.TYPE.SUCCESS, autoClose: 2000 })
+				}
+				if (response.data.error === 'true') {
 					toast.error(response.data.message, { type: toast.TYPE.ERROR, autoClose: 2000 })
 					return false;
 				}
-				this.handleClose();
 			})
+			this.handleClose();
 		}
 		this.setState({ errors: { ...errors } });
 	}
@@ -361,7 +364,7 @@ class AddUser extends Component {
 										Female </label>
 								</div>
 							</div>
-							<div className="col-md-4">
+							{/* <div className="col-md-4">
 								<label>Profile Picture</label>
 								<ImageUploader
 									withIcon={true}
@@ -371,7 +374,7 @@ class AddUser extends Component {
 									imgExtension={['.jpg', '.gif', '.png', '.gif']}
 									maxFileSize={5242880}
 								/>
-							</div>
+							</div> */}
 							<div className="form-group col-md-4">
 								<label>Blood Group</label>
 								<input
@@ -548,7 +551,6 @@ class AddUser extends Component {
 									labelKey="roleName"
 									getOptionLabel={(option) => option["roleName"]}
 									getOptionValue={(option) => option["roleId"]}
-
 									placeholder="Role"
 								/>
 								{

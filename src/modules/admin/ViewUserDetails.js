@@ -62,8 +62,8 @@ class ViewUserDetails extends Component {
 									<p><b>Blood Group: </b> {userDetails.bloodGroup}</p>
 									<p><b>Aadhar No. : </b> {userDetails.aadharNo}</p>
 									<p><b>Bank Name : </b> {userDetails.bankName}</p>
-									<p><b>Account No. : </b> {userDetails.accountNumber}</p>									
-									<p><b>Role : </b> CEO</p>
+									<p><b>Account No. : </b> {userDetails.accountNumber}</p>
+									<p><b>Role : </b>{userDetails.role && userDetails.role.roleName}</p>
 									<p><b>Status : </b> {userDetails.status}</p>
 
 								</div>

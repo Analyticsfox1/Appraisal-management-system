@@ -1,21 +1,23 @@
 import React, { Component } from 'react';
 import LeftMenu from '../admin/LeftMenu';
 import AdminHeader from '../admin/AdminHeader';
-import Select from 'react-select';
+import AddTeam from './AddTeam';
+import { getTeamList } from '../../utils/admin';
+import 'react-table/react-table.css';
+import ReactTable from 'react-table';
 
 class TeamManagement extends Component {
 	constructor() {
 		super();
 		this.state = {
-			prj_name: '',
-			selectedManager: null,
-			selectedMember: null,
-			comments: '',
-			errors: {
-				prj_nameError: null,
-				commentsError: null,
-			}
+			search: '',
+			showAddModal: false,
+			userData: []
 		}
+	}
+
+	componentDidMount() {
+		this.TeamList();
 	}
 
 	handleChange = (e) => {
@@ -24,12 +26,18 @@ class TeamManagement extends Component {
 		})
 	}
 
-	handleManager = selectedManager => {
-		this.setState({ selectedManager })
+	addTeam = () => {
+		this.setState({
+			showAddModal: !this.state.showAddModal
+		})
 	}
 
-	handleMember = selectedMember => {
-		this.setState({ selectedMember })
+	TeamList = () => {
+		getTeamList().then(response => {
+			this.setState({
+				teamData: response.data && response.data.data ? response.data.data : []
+			})
+		})
 	}
 
 	handleValidate = (e) => {
@@ -45,98 +53,82 @@ class TeamManagement extends Component {
 	}
 
 	render() {
-		const { prj_name, selectedManager, selectedMember, comments, errors } = this.state;
+		const { search, teamData } = this.state;
+		const columns = [
+			{
+				Header: 'Project Name',
+				width: 200,
+				Cell: ({ original }) => {
+					return (
+						original.projectName
+					);
+				},
+			},
+			{
+				Header: 'Manager Name',
+				width: 200,
+				Cell: ({ original }) => {
+					return (
+						original.managerName
+					);
+				},
+			},
+			{
+				Header: 'Comment',
+				Cell: ({ original }) => {
+					return (
+						original.comment
+					);
+				},
+			},
+			{
+				Header: 'Status',
+				width: 200,
+				Cell: ({ original }) => {
+					return (
+						original.status
+					);
+				},
+			},
+
+
+			{
+				Header: 'Action',
+				accessor: 'action',
+				width: 100,
+				Cell: <div className="cursor-pointer"><i onClick={this.editUser} className="fa fa-edit mr-3" /></div>
+			},
+		]
 		return (
-			<div className="dash_grid team-page">
+			<div className="dash_grid">
 				<LeftMenu />
 				<main className="bg-white">
 					<AdminHeader {...this.props} />
-					<section className="container-fluid px-5">
+					<section className="container-fluid">
 						<h5 className="text-center mt-2 mx-auto user-box">Team Management</h5>
-
-						<div className="row mt-5">
-							<div className="col-md-2">
-								<label>Name of the project:</label>
-							</div>
-							<div className="col-md-4">
+						<div className="d-flex align-items-center mt-3">
+							<div className="form-group m-0 search-input">
 								<input
 									type="text"
 									className="form-input"
-									name="prj_name"
-									value={prj_name}
+									name="search"
+									value={search}
 									onChange={this.handleChange}
 									onBlur={this.handleValidate}
-									placeholder="Enter Project Name" />
-								{
-									errors.prj_nameError &&
-									<span className="errorMsg">Please enter project name</span>
-								}
+									placeholder="Search..." />
 							</div>
+							<button onClick={this.addTeam} className="add-btn ml-auto"> Add Team </button>
+							{this.state.showAddModal && <AddTeam addTeam={this.addTeam} />}
 						</div>
-
-						<div className="row mt-4">
-							<div className="col-md-2">
-								<label>Manager:</label>
-							</div>
-							<div className="col-md-4">
-								<Select
-									className="m-0 w-100"
-									value={selectedManager}
-									onChange={this.handleManager}
-								/>
-							</div>
+						<div className="mt-4">
+							<ReactTable
+								data={teamData}
+								columns={columns}
+								defaultPageSize={10}
+							/>
 						</div>
-
-						<div className="row mt-4">
-							<div className="col-md-2">
-								<label>Team Member:</label>
-							</div>
-							<div className="col-md-4">
-								<Select
-									className="m-0 w-100"
-									value={selectedMember}
-									onChange={this.handleMember}
-								/>
-							</div>
-							<div className="col-md-2">
-								<button className="add-member ml-auto"> Add Member</button>
-							</div>
-						</div>
-
-						<div className="row mt-4">
-							<div className="col-md-2">
-								<label>Comments:</label>
-							</div>
-							<div className="col-md-6">
-								<textarea
-									type="text"
-									className="form-input m-0 w-100"
-									name="comments"
-									value={comments}
-									onChange={this.handleChange}
-									onBlur={this.handleValidate}
-									placeholder="Enter Comments" />
-								{
-									errors.commentsError &&
-									<span className="errorMsg">Please enter comments</span>
-								}
-							</div>
-						</div>
-
-						<div className="row mt-5">
-							<div className="col-md-3">
-								<button className="btn-success team-btn"> Submit</button>
-							</div>
-							<div className="col-md-3">
-								<button className="btn-danger team-btn"> Cancel</button>
-							</div>
-							<div className="col-md-3">
-								<button className="add-member"> Initiate KRA</button>
-							</div>
-						</div>
-
-
 					</section>
+
 				</main>
 			</div>
 		)

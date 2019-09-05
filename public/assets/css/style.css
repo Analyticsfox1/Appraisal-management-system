@@ -19,6 +19,10 @@ p {
 	color: #777;
 }
 
+b {
+	font-weight: 600;
+}
+
 label {
 	color: #403c3c;
 }
@@ -966,6 +970,16 @@ label.notification-label {
 
 .add-user .react-datepicker__input-container {
 	width: 331px;
+}
+
+.add-team input.form-input {
+	height: 40px;
+	border: 1px solid #cccccc;
+}
+
+.add-team textarea {
+	margin-left: 0;
+	border: 1px solid #cccccc;
 }
 
 .cursor-pointer {

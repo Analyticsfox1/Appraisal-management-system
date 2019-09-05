@@ -58,13 +58,15 @@ class AddRole extends Component {
 		let obj = { roleName, description }
 		if (isAdd) {
 			addRole(obj).then(response => {
-				toast.success("Role Added Successfully", { type: toast.TYPE.SUCCESS, autoClose: 2000 })
-				if (response.error) {
+				if (response.data.error === 'false') {
+					toast.success("Role Added Successfully", { type: toast.TYPE.SUCCESS, autoClose: 2000 })
+				}
+				if (response.data.error === 'true') {
 					toast.error(response.data.message, { type: toast.TYPE.ERROR, autoClose: 2000 })
 					return false;
 				}
-				this.handleClose();
 			})
+			this.handleClose();
 		}
 		this.setState({ errors: { ...errors } });
 	}

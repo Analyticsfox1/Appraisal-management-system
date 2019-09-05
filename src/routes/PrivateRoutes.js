@@ -40,7 +40,7 @@ class PrivateRoutes extends Component {
 				<Route exact path='/CEO-team-management' component={CEOTeamManagement} />
 				<Route exact path='/CEO-organizational-goal' component={CEOOrganizationGoal} />
 				<Route exact path='/CEO-push-notification' component={CEOPushNotification} />
-				<Route path="*" component={PageNotFound} />
+				{/* <Route path="*" component={PageNotFound} /> */}
 			</>
 		)
 	}
