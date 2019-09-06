@@ -4,17 +4,16 @@ import AdminHeader from '../admin/AdminHeader';
 import 'react-table/react-table.css';
 import ReactTable from 'react-table';
 import ViewUserDetails from './ViewUserDetails';
-import AddUser from './AddUser';
-import EditUser from './EditUser';
+import AddEditUser from './AddEditUser';
 import { getUserList } from '../../utils/admin';
 class UserManagement extends Component {
 	constructor() {
 		super();
 		this.state = {
 			search: '',
-			showAddModal: false,
-			showEditModal: false,
-			userData: []
+			showModal: false,
+			userData: [],
+			editObj: ''
 		}
 	}
 
@@ -36,19 +35,16 @@ class UserManagement extends Component {
 		})
 	}
 
-	addUser = () => {
+	userAddEdit = (val) => {
+		let obj = this.state.userData.find(obj => obj.uniqueId === val);
 		this.setState({
-			showAddModal: !this.state.showAddModal
+			showModal: !this.state.showModal,
+			editObj: obj
 		}, () => this.UserList())
 	}
 
-	editUser = () => {
-		this.setState({
-			showEditModal: !this.state.showEditModal
-		})
-	}
-
 	render() {
+
 		const { search, userData } = this.state;
 		const columns = [
 			{
@@ -56,7 +52,7 @@ class UserManagement extends Component {
 				width: 150,
 				Cell: ({ original }) => {
 					return (
-						<ViewUserDetails id={original.uniqueId} />
+						<ViewUserDetails key={original.uniqueId} data={original} />
 					);
 				},
 			},
@@ -65,7 +61,7 @@ class UserManagement extends Component {
 				width: 150,
 				Cell: ({ original }) => {
 					return (
-						original.name
+						original.name ? original.name : null
 					);
 				},
 			},
@@ -74,7 +70,7 @@ class UserManagement extends Component {
 				width: 100,
 				Cell: ({ original }) => {
 					return (
-						original.address
+						original.address ? original.address : null
 					);
 				},
 			},
@@ -82,7 +78,7 @@ class UserManagement extends Component {
 				Header: 'Email ID',
 				Cell: ({ original }) => {
 					return (
-						original.officialEmail
+						original.officialEmail ? original.officialEmail : null
 					);
 				},
 			},
@@ -91,7 +87,7 @@ class UserManagement extends Component {
 				width: 140,
 				Cell: ({ original }) => {
 					return (
-						original.aadharNo
+						original.aadharNo ? original.aadharNo : null
 					);
 				},
 			},
@@ -100,7 +96,7 @@ class UserManagement extends Component {
 				width: 150,
 				Cell: ({ original }) => {
 					return (
-						original.accountNumber
+						original.accountNumber ? original.accountNumber : null
 					);
 				},
 			},
@@ -109,7 +105,7 @@ class UserManagement extends Component {
 				width: 100,
 				Cell: ({ original }) => {
 					return (
-						original.role.roleName
+						original.role.roleName ? 	original.role.roleName : null
 					);
 				},
 			},
@@ -118,7 +114,7 @@ class UserManagement extends Component {
 				width: 100,
 				Cell: ({ original }) => {
 					return (
-						original.status
+						original.status ? original.status : null
 					);
 				},
 			},
@@ -126,7 +122,13 @@ class UserManagement extends Component {
 				Header: 'Action',
 				accessor: 'action',
 				width: 100,
-				Cell: <div className="cursor-pointer"><i onClick={this.editUser} className="fa fa-edit mr-3" /></div>
+				Cell: ({ original }) => {
+					return (
+						<div className="cursor-pointer">
+							<i onClick={() => this.userAddEdit(original.uniqueId)} className="fa fa-edit mr-3" />
+						</div>
+					);
+				},
 			},
 		]
 
@@ -148,9 +150,8 @@ class UserManagement extends Component {
 									onBlur={this.handleValidate}
 									placeholder="Search..." />
 							</div>
-							<button onClick={this.addUser} className="add-btn ml-auto"> Add User </button>
-							{this.state.showAddModal && <AddUser addUser={this.addUser} />}
-							{this.state.showEditModal && <EditUser editUser={this.editUser} />}
+							<button onClick={() => this.userAddEdit()} className="add-btn ml-auto"> Add User </button>
+							{this.state.showModal && <AddEditUser editObj={this.state.editObj} userAddEdit={this.userAddEdit} />}
 						</div>
 						<div className="mt-4">
 							<ReactTable

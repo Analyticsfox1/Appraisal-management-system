@@ -14,7 +14,7 @@ const statusOption = [
 	{ value: 'Inactive', label: 'Inactive' },
 ];
 
-class AddUser extends Component {
+class AddEditUser extends Component {
 	state = {
 		show: false,
 		role: null,
@@ -42,7 +42,6 @@ class AddUser extends Component {
 		inValidRole: false,
 		inValidStatus: false,
 		roleOption: [],
-		// document: null,
 		errors: {
 			nameError: null,
 			titleError: null,
@@ -61,6 +60,14 @@ class AddUser extends Component {
 	componentDidMount() {
 		this.handleShow();
 		this.RoleList();
+		let obj = { ...this.props.editObj };
+		if(this.props.editObj){
+
+			obj.DOB = new Date(obj.dateOfBirth);
+			obj.DOJ = new Date(obj.dateOfJoining);
+			
+		}
+		this.setState(obj);
 	}
 
 	restrictAlphabets = (e) => {
@@ -80,12 +87,6 @@ class AddUser extends Component {
 			})
 		})
 	}
-
-	// onDrop = (picture) => {
-	// 	this.setState({
-	// 		document: picture,
-	// 	});
-	// }
 
 	handleDOJChange = date => {
 		this.setState({
@@ -111,7 +112,7 @@ class AddUser extends Component {
 
 	handleClose = () => {
 		this.setState({ show: false })
-		this.props.addUser();
+		this.props.userAddEdit();
 	}
 
 	handleRole = (role) => {
@@ -225,33 +226,47 @@ class AddUser extends Component {
 				this.setState({ inValidRole: false })
 			}
 		}
-		if (name === 'status') {
-			if (status === "" || status === null || status === undefined) {
-				this.setState({ inValidStatus: true })
-			}
-			else {
-				this.setState({ inValidStatus: false })
-			}
-		}
 	}
 
 	handleSubmit = () => {
 		const { errors, name, title, officialEmail, personalEmail, DOJ, DOB, primaryMobileNo,
 			secondaryMobileNo, gender, bloodGroup, aadharNo, address, bankName, accountNumber, role, status } = this.state;
 		let isAdd = true;
-		for (var val in errors) {
-			if (errors[val] === null || errors[val]) {
-				errors[val] = true;
-				isAdd = false;
+
+		if (this.props.editObj) {
+			for (var val in errors) {
+				if (errors[val]) {
+					errors[val] = true;
+					isAdd = false;
+				}
 			}
 		}
+		else {
+			for (var val in errors) {
+				if (errors[val] === null || errors[val]) {
+					errors[val] = true;
+					isAdd = false;
+				}
+			}
+		}
+
 		let dateOfJoining = DOJ ? moment(DOJ).format('x') : null;
 		let dateOfBirth = DOB ? moment(DOB).format('x') : null;
 		role.createdDate = +new Date(role.createdDate);
+
+		let uniqueId = this.props.editObj ? this.props.editObj.uniqueId : null;
+		let userId = this.props.editObj ? this.props.editObj.userId : null;
+		let password = this.props.editObj ? this.props.editObj.password : null;
+		let token = this.props.editObj ? this.props.editObj.token : null;
+		let updatedDate = this.props.editObj ? moment(this.props.editObj.updatedDate).format('x') : null;
+		let probationEndDate = this.props.editObj ? moment(this.props.editObj.probationEndDate).format('x') : null;
+		let createdDate = this.props.editObj ? moment(this.props.editObj.createdDate).format('x') : null;
+		
 		let obj = {
-			name, title, officialEmail, personalEmail, dateOfJoining, dateOfBirth, primaryMobileNo,
-			secondaryMobileNo, gender, bloodGroup, aadharNo, address, bankName, accountNumber, role,
+			name, title, officialEmail, personalEmail, dateOfJoining, dateOfBirth, primaryMobileNo, secondaryMobileNo,
+			gender, bloodGroup, aadharNo, address, bankName, accountNumber, role, uniqueId, userId, password, token, updatedDate, probationEndDate, createdDate
 		}
+
 		if (isAdd) {
 			addUser(obj).then(response => {
 				if (response.data && response.data.error === 'false') {
@@ -261,8 +276,8 @@ class AddUser extends Component {
 					toast.error(response.data.message, { type: toast.TYPE.ERROR, autoClose: 2000 })
 					return false;
 				}
+				this.handleClose();
 			})
-			this.handleClose();
 		}
 		this.setState({ errors: { ...errors } });
 	}
@@ -277,10 +292,9 @@ class AddUser extends Component {
 					aria-labelledby="contained-modal-title-vcenter"
 					centered
 					show={show}
-				// onHide={this.handleClose}
 				>
 					<Modal.Header>
-						<Modal.Title>Add User</Modal.Title>
+						<Modal.Title>{this.props.editObj ? 'Edit' : 'Add'} User</Modal.Title>
 					</Modal.Header>
 					<Modal.Body className="p-4">
 						<div className="row">
@@ -364,17 +378,6 @@ class AddUser extends Component {
 										Female </label>
 								</div>
 							</div>
-							{/* <div className="col-md-4">
-								<label>Profile Picture</label>
-								<ImageUploader
-									withIcon={true}
-									withPreview={true}
-									buttonText='Upload Profile Picture'
-									onChange={this.onDrop}
-									imgExtension={['.jpg', '.gif', '.png', '.gif']}
-									maxFileSize={5242880}
-								/>
-							</div> */}
 							<div className="form-group col-md-4">
 								<label>Blood Group</label>
 								<input
@@ -558,26 +561,11 @@ class AddUser extends Component {
 									<span className="errorMsg">Please select role</span>
 								}
 							</div>
-							{/* <div className="col-md-4">
-								<label>Status</label>
-								<Select
-									value={status}
-									onChange={this.handleStatus}
-									onBlur={() => this.onValidate("status")}
-									options={statusOption}
-									placeholder="Status"
-								/>
-								{
-									inValidStatus &&
-									<span className="errorMsg">Please select status</span>
-								}
-							</div> */}
-
 						</div>
 					</Modal.Body>
 					<Modal.Footer>
 						<Button className="btn-danger" onClick={this.handleClose}>Cancel</Button>
-						<Button className="btn-success" onClick={this.handleSubmit}>Create</Button>
+						<Button className="btn-success" onClick={this.handleSubmit}>{this.props.editObj ? 'Update' : 'Create'}</Button>
 					</Modal.Footer>
 				</Modal>
 			</div>
@@ -585,5 +573,5 @@ class AddUser extends Component {
 	}
 }
 
-export default AddUser
+export default AddEditUser
 

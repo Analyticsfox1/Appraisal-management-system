@@ -4,9 +4,12 @@ import { getUserById } from '../../utils/admin';
 
 class ViewUserDetails extends Component {
 
-	state = {
-		show: false,
-		userDetails: [],
+	constructor(props) {
+		super(props);
+		this.state = {
+			show: false,
+			userDetails: props.data,
+		}
 	}
 
 	handleClose = () => {
@@ -21,21 +24,12 @@ class ViewUserDetails extends Component {
 		})
 	}
 
-	componentDidMount() {
-		let obj = this.props.id;
-		getUserById(obj).then(response => {
-			this.setState({
-				userDetails: response.data && response.data.data ? response.data.data : []
-			})
-		})
-	}
-
 	render() {
 		const { show, userDetails } = this.state;
+		const { data } = this.props;
 		return (
 			<>
-				<a className="detail-link" onClick={this.handleShow}> {this.props.id} </a>
-
+				<a className="detail-link" onClick={this.handleShow}> {data.uniqueId} </a>
 				<Modal
 					aria-labelledby="contained-modal-title-vcenter"
 					centered
@@ -55,7 +49,6 @@ class ViewUserDetails extends Component {
 									<p><b>Email Id : </b> {userDetails.officialEmail}</p>
 									<p><b>Primary Mobile No : </b> {userDetails.primaryMobileNo}</p>
 									<p><b>Secondary Mobile No : </b> {userDetails.secondaryMobileNo}</p>
-
 								</div>
 								<div className="col-md-6">
 									<p><b>Gender : </b> {userDetails.gender}</p>
@@ -65,7 +58,6 @@ class ViewUserDetails extends Component {
 									<p><b>Account No. : </b> {userDetails.accountNumber}</p>
 									<p><b>Role : </b>{userDetails.role && userDetails.role.roleName}</p>
 									<p><b>Status : </b> {userDetails.status}</p>
-
 								</div>
 							</div>
 						</div>

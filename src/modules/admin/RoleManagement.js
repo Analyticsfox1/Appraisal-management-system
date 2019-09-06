@@ -81,7 +81,7 @@ class RoleManagement extends Component {
 			width: 250,
 			Cell: ({ original }) => {
 				return (
-					<ViewRoleDetails name={original.roleName} />
+					<ViewRoleDetails key={original.roleId} data={original} />
 				);
 			},
 		},
@@ -126,7 +126,6 @@ class RoleManagement extends Component {
 							</div>
 							<button onClick={this.addRole} className="add-btn ml-auto"> Add Role </button>
 							{this.state.showAddModal && <AddRole addRole={this.addRole} />}
-							{/* {this.state.showEditModal && <EditRole editRole={this.editRole} />} */}
 						</div>
 						<div className="mt-4">
 							<ReactTable

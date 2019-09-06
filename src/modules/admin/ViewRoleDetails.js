@@ -5,9 +5,12 @@ import moment from 'moment';
 
 class ViewRoleDetails extends Component {
 
-	state = {
-		show: false,
-		roleDetails: [],
+	constructor(props) {
+		super(props);
+		this.state = {
+			show: false,
+			roleDetails: props.data,
+		}
 	}
 
 	handleClose = () => {
@@ -22,20 +25,12 @@ class ViewRoleDetails extends Component {
 		})
 	}
 
-	componentDidMount() {
-		let obj = this.props.name;
-		getRoleByName(obj).then(response => {
-			this.setState({
-				roleDetails: response.data && response.data.data ? response.data.data : []
-			})
-		})
-	}
-
 	render() {
 		const { show, roleDetails } = this.state;
+		const { data } = this.props;
 		return (
 			<>
-				<a className="detail-link" onClick={this.handleShow}> {this.props.name} </a>
+				<a className="detail-link" onClick={this.handleShow}> {data.roleName} </a>
 
 				<Modal
 					aria-labelledby="contained-modal-title-vcenter"

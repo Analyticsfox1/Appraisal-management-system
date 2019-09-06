@@ -29,7 +29,7 @@ class TeamManagement extends Component {
 	addTeam = () => {
 		this.setState({
 			showAddModal: !this.state.showAddModal
-		})
+		}, () => this.TeamList())
 	}
 
 	TeamList = () => {
@@ -57,7 +57,7 @@ class TeamManagement extends Component {
 		const columns = [
 			{
 				Header: 'Project Name',
-				width: 200,
+				width: 250,
 				Cell: ({ original }) => {
 					return (
 						original.projectName
@@ -66,7 +66,7 @@ class TeamManagement extends Component {
 			},
 			{
 				Header: 'Manager Name',
-				width: 200,
+				width: 250,
 				Cell: ({ original }) => {
 					return (
 						original.managerName
@@ -89,14 +89,6 @@ class TeamManagement extends Component {
 						original.status
 					);
 				},
-			},
-
-
-			{
-				Header: 'Action',
-				accessor: 'action',
-				width: 100,
-				Cell: <div className="cursor-pointer"><i onClick={this.editUser} className="fa fa-edit mr-3" /></div>
 			},
 		]
 		return (

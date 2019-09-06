@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import Select from 'react-select';
 import { Button, Modal } from 'react-bootstrap';
-import { findIndex } from 'lodash';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { getManagerList, getEmployeeList, addTeam } from '../../utils/admin';
@@ -40,6 +39,7 @@ class AddTeam extends Component {
 
 	EmployeeList = () => {
 		getEmployeeList().then(response => {
+    console.log("TCL: AddTeam -> EmployeeList -> response", response)
 			this.setState({
 				employeeOption: response.data && response.data.data ? response.data.data : []
 			})
@@ -90,7 +90,8 @@ class AddTeam extends Component {
 				isAdd = false;
 			}
 		}
-		let obj = { projectName, manager, employees, comment }
+		let managerId = manager.userId
+		let obj = { projectName, managerId, employees, comment }
 		if (isAdd) {
 			addTeam(obj).then(response => {
 				if (response.data && response.data.error === 'false') {
@@ -100,15 +101,16 @@ class AddTeam extends Component {
 					toast.error(response.data.message, { type: toast.TYPE.ERROR, autoClose: 2000 })
 					return false;
 				}
+				this.handleClose();
 			})
-			this.handleClose();
 		}
 		this.setState({ errors: { ...errors } });
 	}
 
 	render() {
 		const { show, projectName, manager, employees, comment, managerOption, employeeOption, errors } = this.state;
-
+    console.log("TCL: AddTeam -> render -> employeeOption", employeeOption)
+   
 		return (
 			<div>
 				<ToastContainer />

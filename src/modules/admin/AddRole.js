@@ -65,8 +65,8 @@ class AddRole extends Component {
 					toast.error(response.data.message, { type: toast.TYPE.ERROR, autoClose: 2000 })
 					return false;
 				}
+				this.handleClose();
 			})
-			this.handleClose();
 		}
 		this.setState({ errors: { ...errors } });
 	}
