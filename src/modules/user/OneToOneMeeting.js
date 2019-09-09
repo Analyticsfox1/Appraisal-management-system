@@ -96,7 +96,7 @@ class OneToOneMeeting extends Component {
 					</div>
 
 					<div className="row mt-4">
-						<div className="col-md-8">
+						<div className="col-md-6">
 							<div>
 								<label className="fix_label_width">Discussion Points:</label>
 								<div className="flex-grow-1">
@@ -115,11 +115,11 @@ class OneToOneMeeting extends Component {
 								</div>
 							</div>
 						</div>
-						<div className="col-md-4">
+						<div className="col-md-6">
 							<div>
-								<label className="fix_label_width">Update:</label>
+								<label className="fix_label_width">Employee comments:</label>
 								<div className="flex-grow-1">
-									<input
+									<textarea
 										type="text"
 										className="form-input"
 										name="update"
@@ -133,27 +133,27 @@ class OneToOneMeeting extends Component {
 									}
 								</div>
 
-								<div className="mt-2">
-									<label style={{ color: 'var(--success)' }}>
-										<input
-											type="radio"
-											className="mr-2"
-											name="meetingStatus"
-											value="accept"
-											checked={meetingStatus === "accept"}
-											onChange={this.onChanged} />
-										Accept </label>
-									<label className="ml-2" style={{ color: 'var(--danger)' }}>
-										<input
-											className="ml-2 mr-2"
-											type="radio"
-											name="meetingStatus"
-											value="reject"
-											checked={meetingStatus === "reject"}
-											onChange={this.onChanged} />
-										Reject </label>
-								</div>
 							</div>
+						</div>
+						<div className="col-md-12 d-flex justify-content-center mt-3">
+							<label style={{ color: 'var(--success)' }}>
+								<input
+									type="radio"
+									className="mr-2"
+									name="meetingStatus"
+									value="accept"
+									checked={meetingStatus === "accept"}
+									onChange={this.onChanged} />
+								Accept </label>
+							<label className="ml-2" style={{ color: 'var(--danger)' }}>
+								<input
+									className="ml-2 mr-2"
+									type="radio"
+									name="meetingStatus"
+									value="reject"
+									checked={meetingStatus === "reject"}
+									onChange={this.onChanged} />
+								Reject </label>
 						</div>
 					</div>
 					<div className="d-flex">

@@ -9,17 +9,17 @@ class KraSettings extends Component {
 		super();
 		this.state = {
 			goal: '',
-			managerGoal: '',
+			managerGoalDescription: '',
 			employeeAchievement: '',
 			managerFeedback: '',
-			employeeRating: 0,
+			employeeSelfRating: 0,
 			managerRating: 0,
 			errors: {
 				goalError: null,
-				managerGoalError: null,
+				managerGoalDescriptionError: null,
 				employeeAchievementError: null,
 				managerFeedbackError: null,
-				employeeRatingError: null,
+				employeeSelfRatingError: null,
 				managerRatingError: null
 			}
 		}
@@ -47,6 +47,24 @@ class KraSettings extends Component {
 		}
 	}
 
+	handleSubmit = () => {
+		const { errors, employeeSelfRating } = this.state;
+		let isAdd = true;
+		for (var val in errors) {
+			if (errors[val] === null || errors[val]) {
+				errors[val] = true;
+				isAdd = false;
+			}
+		}
+		if (employeeSelfRating === 0) {
+			this.setState({ errors: { ...errors, employeeSelfRatingError: true } })
+		}
+		else {
+			this.setState({ errors: { ...errors, employeeSelfRatingError: false } })
+		}
+		this.setState({ errors: { ...errors } });
+	}
+
 	restrictAlphabets = (e) => {
 		const regx = "^[0-9]*$"
 		if (e.key.match(regx)) {
@@ -58,13 +76,14 @@ class KraSettings extends Component {
 	}
 
 	render() {
-		const { goal, managerGoal, employeeAchievement, managerFeedback, employeeRating, managerRating, errors } = this.state;
+		const { goal, managerGoalDescription, employeeAchievement, managerFeedback, employeeSelfRating, managerRating, errors } = this.state;
 		return (
 			<div>
 				<section className="tab-body mb-5">
 					<div className="row">
 						<div className="col-md-12 text-right">
-							<button type="button" className="btn btn-rounded btn-success new"><span className="fa fa-plus"></span> Add Goal</button>
+							<button type="button" onClick={this.handleSubmit} className="btn btn-rounded btn-success new">
+								<span className="fa fa-plus"></span> Add Goal</button>
 						</div>
 						<div className="col-md-6 mt-4 ">
 							<div>
@@ -93,14 +112,14 @@ class KraSettings extends Component {
 									<textarea
 										type="text"
 										className="form-input"
-										name="managerGoal"
-										value={managerGoal}
+										name="managerGoalDescription"
+										value={managerGoalDescription}
 										onChange={this.handleChange}
 										onBlur={this.handleValidate}
 										disabled={true}
 										placeholder="Enter Manager Goal Description" />
 									{
-										errors.managerGoalError &&
+										errors.managerGoalDescriptionError &&
 										<span className="errorMsg">Please enter manager goal description</span>
 									}
 								</div>
@@ -153,13 +172,17 @@ class KraSettings extends Component {
 							<div className="d-flex align-items-center">
 								<label className="fix_label_width mr-3">Employee Self Rating: </label>
 								<StarRatingComponent
-									name="employeeRating"
+									name="employeeSelfRating"
 									starCount={5}
 									renderStarIcon={() => <span><i className="fas fa-star"></i></span>}
-									value={employeeRating}
+									value={employeeSelfRating}
 									onStarClick={this.onStarClick}
 								/>
 							</div>
+								{
+									errors.employeeSelfRatingError &&
+									<span className="errorMsg">Please enter employee rating</span>
+								}
 						</div>
 						<div className="col-md-6 mt-4 ">
 							<div className="d-flex align-items-center">

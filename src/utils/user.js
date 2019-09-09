@@ -33,5 +33,12 @@ export const updatePassword = data => {
 	});
 }
 
+//user Dashboard API
+export const getUserDashboard = () => {
+	return get(`/uprise/authentication/getUserDashboard`).then(res => {
+		console.log('RESPONSE :: User Dashboard ::: ', res);
+		return res;
+	});
+}
 
 

@@ -6,20 +6,20 @@ class SelfDevelopmentGoal extends Component {
 	constructor() {
 		super();
 		this.state = {
-			employeeQ1: '',
-			employeeQ2: '',
-			employeeQ3: '',
-			managerQ1: '',
-			managerQ2: '',
-			managerQ3: '',
+			thingsManagerShouldStart: '',
+			thingsManagerShouldStop: '',
+			thingsManagerShouldContinue: '',
+			thingsTheyShouldStart: '',
+			thingsTheyShouldStop: '',
+			thingsTheyShouldContinue: '',
 			overallRating: 0,
 			errors: {
-				employeeQ1Error: null,
-				employeeQ2Error: null,
-				employeeQ3Error: null,
-				managerQ1Error: null,
-				managerQ2Error: null,
-				managerQ3Error: null,
+				thingsManagerShouldStartError: null,
+				thingsManagerShouldStopError: null,
+				thingsManagerShouldContinueError: null,
+				thingsTheyShouldStartError: null,
+				thingsTheyShouldStopError: null,
+				thingsTheyShouldContinueError: null,
 			}
 		}
 	}
@@ -47,7 +47,7 @@ class SelfDevelopmentGoal extends Component {
 	}
 
 	render() {
-		const { employeeQ1, employeeQ2, employeeQ3, managerQ1, managerQ2, managerQ3, overallRating, errors } = this.state;
+		const { thingsManagerShouldStart, thingsManagerShouldStop, thingsManagerShouldContinue, thingsTheyShouldStart, thingsTheyShouldStop, thingsTheyShouldContinue, overallRating, errors } = this.state;
 		return (
 			<div>
 				<section className="tab-body">
@@ -58,13 +58,13 @@ class SelfDevelopmentGoal extends Component {
 							<input
 								type="text"
 								className="form-input"
-								name="employeeQ1"
-								value={employeeQ1}
+								name="thingsManagerShouldStart"
+								value={thingsManagerShouldStart}
 								onChange={this.handleChange}
 								onBlur={this.handleValidate}
 								placeholder="Enter Answer" />
 							{
-								errors.employeeQ1Error &&
+								errors.thingsManagerShouldStartError &&
 								<span className="errorMsg">Please enter answer</span>
 							}
 						</div>
@@ -75,13 +75,13 @@ class SelfDevelopmentGoal extends Component {
 							<input
 								type="text"
 								className="form-input"
-								name="employeeQ2"
-								value={employeeQ2}
+								name="thingsManagerShouldStop"
+								value={thingsManagerShouldStop}
 								onChange={this.handleChange}
 								onBlur={this.handleValidate}
 								placeholder="Enter Answer" />
 							{
-								errors.employeeQ2Error &&
+								errors.thingsManagerShouldStopError &&
 								<span className="errorMsg">Please enter answer</span>
 							}
 						</div>
@@ -92,13 +92,13 @@ class SelfDevelopmentGoal extends Component {
 							<input
 								type="text"
 								className="form-input"
-								name="employeeQ3"
-								value={employeeQ3}
+								name="thingsManagerShouldContinue"
+								value={thingsManagerShouldContinue}
 								onChange={this.handleChange}
 								onBlur={this.handleValidate}
 								placeholder="Enter Answer" />
 							{
-								errors.employeeQ3Error &&
+								errors.thingsManagerShouldContinueError &&
 								<span className="errorMsg">Please enter answer</span>
 							}
 						</div>
@@ -112,14 +112,14 @@ class SelfDevelopmentGoal extends Component {
 							<input
 								type="text"
 								className="form-input"
-								name="managerQ1"
-								value={managerQ1}
+								name="thingsTheyShouldStart"
+								value={thingsTheyShouldStart}
 								onChange={this.handleChange}
 								onBlur={this.handleValidate}
 								disabled
 								placeholder="Enter Answer" />
 							{
-								errors.managerQ1Error &&
+								errors.thingsTheyShouldStartError &&
 								<span className="errorMsg">Please enter answer</span>
 							}
 						</div>
@@ -130,14 +130,14 @@ class SelfDevelopmentGoal extends Component {
 							<input
 								type="text"
 								className="form-input"
-								name="managerQ2"
-								value={managerQ2}
+								name="thingsTheyShouldStop"
+								value={thingsTheyShouldStop}
 								onChange={this.handleChange}
 								onBlur={this.handleValidate}
 								disabled
 								placeholder="Enter Answer" />
 							{
-								errors.managerQ2Error &&
+								errors.thingsTheyShouldStopError &&
 								<span className="errorMsg">Please enter answer</span>
 							}
 						</div>
@@ -148,14 +148,14 @@ class SelfDevelopmentGoal extends Component {
 							<input
 								type="text"
 								className="form-input"
-								name="managerQ3"
-								value={managerQ3}
+								name="thingsTheyShouldContinue"
+								value={thingsTheyShouldContinue}
 								onChange={this.handleChange}
 								onBlur={this.handleValidate}
 								disabled
 								placeholder="Enter Answer" />
 							{
-								errors.managerQ3Error &&
+								errors.thingsTheyShouldContinueError &&
 								<span className="errorMsg">Please enter answer</span>
 							}
 						</div>

@@ -3,7 +3,7 @@ import { Button, Modal } from 'react-bootstrap';
 import Select from 'react-select';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { getRoleList, addUser } from '../../utils/admin';
+import { getRoleList, addUser, getUserById } from '../../utils/admin';
 import ImageUploader from 'react-images-upload';
 import moment from 'moment';
 import { ToastContainer, toast } from 'react-toastify';
@@ -16,6 +16,7 @@ const statusOption = [
 
 class AddEditUser extends Component {
 	state = {
+		user: [],
 		show: false,
 		role: null,
 		status: null,
@@ -39,7 +40,6 @@ class AddEditUser extends Component {
 		bankName: '',
 		accountNumber: '',
 		invalidaccountNumber: false,
-		inValidRole: false,
 		inValidStatus: false,
 		roleOption: [],
 		errors: {
@@ -50,24 +50,32 @@ class AddEditUser extends Component {
 			primaryMobileNoError: null,
 			secondaryMobileNoError: null,
 			bloodGroupError: null,
+			genderError: null,
 			aadharNoError: null,
 			addressError: null,
 			bankNameError: null,
-			accountNumberError: null
+			accountNumberError: null,
+			roleError: null,
+			DOBError: null,
+			DOJError: null
 		}
 	}
 
 	componentDidMount() {
 		this.handleShow();
 		this.RoleList();
-		let obj = { ...this.props.editObj };
-		if(this.props.editObj){
-
-			obj.DOB = new Date(obj.dateOfBirth);
-			obj.DOJ = new Date(obj.dateOfJoining);
-			
+		if (this.props.editObj) {
+			this.UserData();
 		}
-		this.setState(obj);
+	}
+
+	UserData = () => {
+		getUserById(this.props.editObj).then(response => {
+			let data = response.data.data;
+			data.DOB = new Date(data.dateOfBirth);
+			data.DOJ = new Date(data.dateOfJoining);
+			this.setState(data)
+		})
 	}
 
 	restrictAlphabets = (e) => {
@@ -217,20 +225,36 @@ class AddEditUser extends Component {
 	}
 
 	onValidate = (name) => {
-		const { role, status } = this.state;
+		const { role, DOB, DOJ, errors } = this.state;
 		if (name === 'role') {
 			if (role === "" || role === null || role === undefined) {
-				this.setState({ inValidRole: true })
+				this.setState({ errors: { ...errors, roleError: true } })
 			}
 			else {
-				this.setState({ inValidRole: false })
+				this.setState({ errors: { ...errors, roleError: false } })
+			}
+		}
+		if (name === 'DOB') {
+			if (DOB === "" || DOB === null || DOB === undefined) {
+				this.setState({ errors: { ...errors, DOBError: true } })
+			}
+			else {
+				this.setState({ errors: { ...errors, DOBError: false } })
+			}
+		}
+		if (name === 'DOJ') {
+			if (DOJ === "" || DOJ === null || DOJ === undefined) {
+				this.setState({ errors: { ...errors, DOJError: true } })
+			}
+			else {
+				this.setState({ errors: { ...errors, DOJError: false } })
 			}
 		}
 	}
 
 	handleSubmit = () => {
 		const { errors, name, title, officialEmail, personalEmail, DOJ, DOB, primaryMobileNo,
-			secondaryMobileNo, gender, bloodGroup, aadharNo, address, bankName, accountNumber, role, status } = this.state;
+			secondaryMobileNo, gender, bloodGroup, aadharNo, address, bankName, accountNumber, role, status, uniqueId, userId, password, token, updatedDate, probationEndDate, createdDate } = this.state;
 		let isAdd = true;
 
 		if (this.props.editObj) {
@@ -252,19 +276,13 @@ class AddEditUser extends Component {
 
 		let dateOfJoining = DOJ ? moment(DOJ).format('x') : null;
 		let dateOfBirth = DOB ? moment(DOB).format('x') : null;
-		role.createdDate = +new Date(role.createdDate);
+		if (role) {
+			role.createdDate = +new Date(role.createdDate);
+		}
 
-		let uniqueId = this.props.editObj ? this.props.editObj.uniqueId : null;
-		let userId = this.props.editObj ? this.props.editObj.userId : null;
-		let password = this.props.editObj ? this.props.editObj.password : null;
-		let token = this.props.editObj ? this.props.editObj.token : null;
-		let updatedDate = this.props.editObj ? moment(this.props.editObj.updatedDate).format('x') : null;
-		let probationEndDate = this.props.editObj ? moment(this.props.editObj.probationEndDate).format('x') : null;
-		let createdDate = this.props.editObj ? moment(this.props.editObj.createdDate).format('x') : null;
-		
 		let obj = {
 			name, title, officialEmail, personalEmail, dateOfJoining, dateOfBirth, primaryMobileNo, secondaryMobileNo,
-			gender, bloodGroup, aadharNo, address, bankName, accountNumber, role, uniqueId, userId, password, token, updatedDate, probationEndDate, createdDate
+			gender, bloodGroup, aadharNo, address, bankName, accountNumber, role, uniqueId, userId, password, token, updatedDate: +new Date(updatedDate), probationEndDate: +new Date(probationEndDate), createdDate: +new Date(createdDate), status
 		}
 
 		if (isAdd) {
@@ -283,7 +301,7 @@ class AddEditUser extends Component {
 	}
 
 	render() {
-		const { show, role, roleOption, status, name, title, address, gender, bloodGroup, bankName, accountNumber, invalidaccountNumber, officialEmail, personalEmail, invalidpersonalEmail, invalidofficialEmail, primaryMobileNo, invalidprimaryMobileNo, secondaryMobileNo, invalidsecondaryMobileNo, DOJ, DOB, aadharNo, invalidaadharNo, inValidRole, inValidStatus, errors } = this.state;
+		const { show, role, roleOption, status, name, title, address, gender, bloodGroup, bankName, accountNumber, invalidaccountNumber, officialEmail, personalEmail, invalidpersonalEmail, invalidofficialEmail, primaryMobileNo, invalidprimaryMobileNo, secondaryMobileNo, invalidsecondaryMobileNo, DOJ, DOB, aadharNo, invalidaadharNo, inValidStatus, errors } = this.state;
 		return (
 			<div>
 				<ToastContainer />
@@ -334,10 +352,17 @@ class AddEditUser extends Component {
 								<DatePicker
 									className="form-input"
 									selected={DOB}
+									onBlur={() => this.onValidate('DOB')}
 									onChange={this.handleDOBChange}
 									dateFormat="yyyy-MM-dd"
 									placeholderText="YYYY-MM-DD"
+									showYearDropdown
+									showMonthDropdown
 								/>
+								{
+									errors.DOBError &&
+									<span className="errorMsg">Please select date</span>
+								}
 							</div>
 
 							<div className="form-group col-md-4">
@@ -365,6 +390,7 @@ class AddEditUser extends Component {
 											name="gender"
 											value="Male"
 											checked={gender === "Male"}
+											onBlur={this.handleValidate}
 											onChange={this.onChanged} />
 										Male </label>
 									<label className="ml-2">
@@ -373,10 +399,15 @@ class AddEditUser extends Component {
 											type="radio"
 											name="gender"
 											value="Female"
+											onBlur={this.handleValidate}
 											checked={gender === "Female"}
 											onChange={this.onChanged} />
 										Female </label>
 								</div>
+								{
+									errors.genderError &&
+									<span className="errorMsg">Please select gender</span>
+								}
 							</div>
 							<div className="form-group col-md-4">
 								<label>Blood Group</label>
@@ -538,17 +569,24 @@ class AddEditUser extends Component {
 								<DatePicker
 									className="form-input"
 									selected={DOJ}
+									onBlur={() => this.onValidate('DOJ')}
 									onChange={this.handleDOJChange}
 									dateFormat="yyyy-MM-dd"
 									placeholderText="YYYY-MM-DD"
+									showYearDropdown
+									showMonthDropdown
 								/>
+								{
+									errors.DOJError &&
+									<span className="errorMsg">Please select date</span>
+								}
 							</div>
 							<div className="col-md-4">
 								<label>Role</label>
 								<Select
 									value={role}
 									onChange={this.handleRole}
-									onBlur={() => this.onValidate("role")}
+									onBlur={() => this.onValidate('role')}
 									options={roleOption}
 									valueKey="roleId"
 									labelKey="roleName"
@@ -557,7 +595,7 @@ class AddEditUser extends Component {
 									placeholder="Role"
 								/>
 								{
-									inValidRole &&
+									errors.roleError &&
 									<span className="errorMsg">Please select role</span>
 								}
 							</div>

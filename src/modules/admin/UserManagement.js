@@ -39,12 +39,11 @@ class UserManagement extends Component {
 		let obj = this.state.userData.find(obj => obj.uniqueId === val);
 		this.setState({
 			showModal: !this.state.showModal,
-			editObj: obj
+			editObj: obj ? obj.uniqueId : null
 		}, () => this.UserList())
 	}
 
 	render() {
-
 		const { search, userData } = this.state;
 		const columns = [
 			{
@@ -78,7 +77,7 @@ class UserManagement extends Component {
 				Header: 'Email ID',
 				Cell: ({ original }) => {
 					return (
-						original.officialEmail ? original.officialEmail : null
+						original.email ? original.email : null
 					);
 				},
 			},
@@ -87,7 +86,7 @@ class UserManagement extends Component {
 				width: 140,
 				Cell: ({ original }) => {
 					return (
-						original.aadharNo ? original.aadharNo : null
+						original.aadhar ? original.aadhar : null
 					);
 				},
 			},
@@ -96,7 +95,7 @@ class UserManagement extends Component {
 				width: 150,
 				Cell: ({ original }) => {
 					return (
-						original.accountNumber ? original.accountNumber : null
+						original.accountNo ? original.accountNo : null
 					);
 				},
 			},
@@ -105,7 +104,7 @@ class UserManagement extends Component {
 				width: 100,
 				Cell: ({ original }) => {
 					return (
-						original.role.roleName ? 	original.role.roleName : null
+						original.role ? original.role : null
 					);
 				},
 			},

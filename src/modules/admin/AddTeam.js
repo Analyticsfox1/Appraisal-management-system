@@ -19,6 +19,8 @@ class AddTeam extends Component {
 			errors: {
 				projectNameError: null,
 				commentError: null,
+				managerError: null,
+				employeesError: null
 			}
 		}
 	}
@@ -39,7 +41,7 @@ class AddTeam extends Component {
 
 	EmployeeList = () => {
 		getEmployeeList().then(response => {
-    console.log("TCL: AddTeam -> EmployeeList -> response", response)
+			console.log("TCL: AddTeam -> EmployeeList -> response", response)
 			this.setState({
 				employeeOption: response.data && response.data.data ? response.data.data : []
 			})
@@ -81,6 +83,27 @@ class AddTeam extends Component {
 		}
 	}
 
+	onValidate = (name) => {
+		const { manager, employees, errors } = this.state;
+		if (name === 'manager') {
+			if (manager === "" || manager === null || manager === undefined) {
+				this.setState({ errors: { ...errors, managerError: true } })
+			}
+			else {
+				this.setState({ errors: { ...errors, managerError: false } })
+			}
+		}
+		if (name === 'employee') {
+			if (employees === "" || employees === null || employees === undefined) {
+				this.setState({ errors: { ...errors, employeesError: true } })
+			}
+			else {
+				this.setState({ errors: { ...errors, employeesError: false } })
+			}
+		}
+	}
+
+
 	handleSubmit = () => {
 		const { errors, projectName, manager, employees, comment } = this.state;
 		let isAdd = true;
@@ -90,7 +113,7 @@ class AddTeam extends Component {
 				isAdd = false;
 			}
 		}
-		let managerId = manager.userId
+		let managerId = manager ? manager.userId : null
 		let obj = { projectName, managerId, employees, comment }
 		if (isAdd) {
 			addTeam(obj).then(response => {
@@ -109,8 +132,8 @@ class AddTeam extends Component {
 
 	render() {
 		const { show, projectName, manager, employees, comment, managerOption, employeeOption, errors } = this.state;
-    console.log("TCL: AddTeam -> render -> employeeOption", employeeOption)
-   
+		console.log("TCL: AddTeam -> render -> employeeOption", employeeOption)
+
 		return (
 			<div>
 				<ToastContainer />
@@ -155,12 +178,17 @@ class AddTeam extends Component {
 									value={manager}
 									onChange={this.handleManager}
 									options={managerOption}
+									onBlur={() => this.onValidate('manager')}
 									valueKey="userId"
 									labelKey="managerName"
 									getOptionLabel={(option) => option["managerName"]}
 									getOptionValue={(option) => option["userId"]}
 									placeholder="Manager"
 								/>
+								{
+									errors.managerError &&
+									<span className="errorMsg">Please select manager</span>
+								}
 							</div>
 						</div>
 
@@ -172,6 +200,7 @@ class AddTeam extends Component {
 								<Select
 									className="m-0 w-100"
 									value={employees}
+									onBlur={() => this.onValidate('employee')}
 									onChange={this.handleMember}
 									options={employeeOption}
 									valueKey="userId"
@@ -181,6 +210,10 @@ class AddTeam extends Component {
 									placeholder="Employee"
 									isMulti={true}
 								/>
+								{
+									errors.employeesError &&
+									<span className="errorMsg">Please select employee</span>
+								}
 							</div>
 							{/* <div className="col-md-2">
 								<button className="add-member ml-auto"> Add Member</button>
