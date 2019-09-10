@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import Select from 'react-select';
 import { Button, Modal } from 'react-bootstrap';
 import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 import { getManagerList, getEmployeeList, addTeam } from '../../utils/admin';
+toast.configure();
 
 class AddTeam extends Component {
 	constructor() {
@@ -122,7 +122,6 @@ class AddTeam extends Component {
 				}
 				if (response.data.error === 'true') {
 					toast.error(response.data.message, { type: toast.TYPE.ERROR, autoClose: 2000 })
-					return false;
 				}
 				this.handleClose();
 			})
@@ -132,8 +131,6 @@ class AddTeam extends Component {
 
 	render() {
 		const { show, projectName, manager, employees, comment, managerOption, employeeOption, errors } = this.state;
-		console.log("TCL: AddTeam -> render -> employeeOption", employeeOption)
-
 		return (
 			<div>
 				<ToastContainer />
@@ -142,7 +139,6 @@ class AddTeam extends Component {
 					aria-labelledby="contained-modal-title-vcenter"
 					centered
 					show={show}
-				// onHide={this.handleClose}
 				>
 					<Modal.Header>
 						<Modal.Title>Add Team</Modal.Title>

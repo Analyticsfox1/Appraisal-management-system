@@ -1,5 +1,13 @@
 import { post, get } from "./httpInterceptor";
 
+//user register API
+export const register = data => {
+	return post(`/uprise/authentication/registration`, data).then(res => {
+		console.log('RESPONSE :: Register ::: ', res);
+		return res;
+	});
+}
+
 //user login API
 export const login = data => {
 	return post(`/uprise/authentication/authenticate?username=${data.email}&password=${data.password}`).then(res => {

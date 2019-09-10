@@ -23,9 +23,9 @@ class LeftMenu extends Component {
 					<li><NavLink to="/dashboard" activeClassName="active"><i className="fas fa-home"></i><span>My Dashboard</span></NavLink></li>
 					<li className="has_drop"><NavLink><i className="fas fa-tasks"></i><span>KRA Management</span></NavLink>
 						<ul className="custom_drop">
+							<li><NavLink to="/probation-form" activeClassName="active"><i className="fas fa-hourglass-half"></i><span>Probation Form</span></NavLink></li>
 							<li><NavLink to="/performance-appraisal" activeClassName="active"><i className="fas fa-briefcase"></i><span>Performance Appraisal</span></NavLink></li>
 							<li><NavLink to="/monthly-meeting" activeClassName="active"><i className="far fa-calendar-alt"></i><span>Monthly Meeting</span></NavLink></li>
-							<li><NavLink to="/probation-form" activeClassName="active"><i className="fas fa-hourglass-half"></i><span>Probation Form</span></NavLink></li>
 						</ul>
 					</li>
 					<li><NavLink to="/account" activeClassName="active"><i className="far fa-user"></i><span>My Account</span></NavLink></li>

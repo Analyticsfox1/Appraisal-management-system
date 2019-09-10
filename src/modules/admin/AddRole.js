@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Button, Modal } from 'react-bootstrap';
 import { addRole } from '../../utils/admin';
 import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+toast.configure();
 
 class AddRole extends Component {
 	state = {
@@ -63,7 +63,6 @@ class AddRole extends Component {
 				}
 				if (response.data.error === 'true') {
 					toast.error(response.data.message, { type: toast.TYPE.ERROR, autoClose: 2000 })
-					return false;
 				}
 				this.handleClose();
 			})

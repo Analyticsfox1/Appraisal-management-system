@@ -61,9 +61,14 @@ class Login extends Component {
 					return false;
 				}
 				if (response.data && response.data.error === "false") {
-					sessionStorage.setItem("userData", JSON.stringify(response.data.data));
-					this.props.history.push('/dashboard')
-					toast.success(response.data.message, { type: toast.TYPE.SUCCESS, autoClose: 2000 })
+					if (response.data.data.role.roleId === 1) {
+						sessionStorage.setItem("userData", JSON.stringify(response.data.data));
+						this.props.history.push('/dashboard')
+						toast.success(response.data.message, { type: toast.TYPE.SUCCESS, autoClose: 2000 })
+					}
+					else {
+						toast.error("Something Went Wrong", { type: toast.TYPE.ERROR, autoClose: 2000 })
+					}
 				}
 			})
 		}
@@ -79,57 +84,59 @@ class Login extends Component {
 	render() {
 		const { email, password, invalidEmail, errors } = this.state;
 		return (
-			<section className="login-section">
+			<>
 				<ToastContainer />
 				<Header />
-				<div className="page-container">
-					<div style={{ width: '400px' }} className="content">
-						<h3 className="text-center title-font mb-3">SIGN IN</h3>
-						<div className="form-group">
-							<input
-								type="text"
-								className="form-input"
-								name="email"
-								value={email}
-								onChange={this.handleChange}
-								onBlur={this.handleValidate}
-								placeholder="Email ID" />
-							{
-								errors.emailError &&
-								<span className="errorMsg">Please enter email</span>
-							}
-							{
-								invalidEmail &&
-								<span className="errorMsg">Please enter valid email</span>
-							}
-						</div>
-						<div className="form-group">
-							<input
-								type="password"
-								className="form-input"
-								name="password"
-								value={password}
-								onChange={this.handleChange}
-								onBlur={this.handleValidate}
-								placeholder="Password" />
-							{
-								errors.passwordError &&
-								<span className="errorMsg">Please enter password</span>
-							}
-						</div>
-						<div className="form-group">
-							<Link to="/forgot-password" className="forgot-password"><i className="fas fa-key mr-2"></i>Forgot password?</Link>
-						</div>
-						<div className="form-group">
-							<button onClick={this.handleSubmit} className="form-submit" > Login</button>
-						</div>
+				<section className="login-section">
+					<div className="page-container">
+						<div style={{ width: '400px', marginTop:'140px' }} className="content">
+							<h3 className="text-center title-font mb-3">SIGN IN</h3>
+							<div className="form-group">
+								<input
+									type="text"
+									className="form-input"
+									name="email"
+									value={email}
+									onChange={this.handleChange}
+									onBlur={this.handleValidate}
+									placeholder="Email ID" />
+								{
+									errors.emailError &&
+									<span className="errorMsg">Please enter email</span>
+								}
+								{
+									invalidEmail &&
+									<span className="errorMsg">Please enter valid email</span>
+								}
+							</div>
+							<div className="form-group">
+								<input
+									type="password"
+									className="form-input"
+									name="password"
+									value={password}
+									onChange={this.handleChange}
+									onBlur={this.handleValidate}
+									placeholder="Password" />
+								{
+									errors.passwordError &&
+									<span className="errorMsg">Please enter password</span>
+								}
+							</div>
+							<div className="form-group">
+								<Link to="/forgot-password" className="forgot-password"><i className="fas fa-key mr-2"></i>Forgot password?</Link>
+							</div>
+							<div className="form-group">
+								<button onClick={this.handleSubmit} className="form-submit" > Login</button>
+							</div>
 
-						<div className="form-group m-0">
-							<p className="loginhere mt-0 mn-0"> Do you haven't an account ? <Link className="loginhere-link" to="/register">Create account</Link></p>
+							<div className="form-group m-0">
+								<p className="loginhere mt-0 mn-0"> Do you haven't an account ? <Link className="loginhere-link" to="/register">Create account</Link></p>
+							</div>
 						</div>
 					</div>
-				</div>
-			</section>
+				</section>
+			</>
 		)
 	}
 }

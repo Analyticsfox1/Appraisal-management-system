@@ -4,19 +4,12 @@ import Select from 'react-select';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { getRoleList, addUser, getUserById } from '../../utils/admin';
-import ImageUploader from 'react-images-upload';
 import moment from 'moment';
 import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-
-const statusOption = [
-	{ value: 'Active', label: 'Active' },
-	{ value: 'Inactive', label: 'Inactive' },
-];
+toast.configure();
 
 class AddEditUser extends Component {
 	state = {
-		user: [],
 		show: false,
 		role: null,
 		status: null,
@@ -40,7 +33,6 @@ class AddEditUser extends Component {
 		bankName: '',
 		accountNumber: '',
 		invalidaccountNumber: false,
-		inValidStatus: false,
 		roleOption: [],
 		errors: {
 			nameError: null,
@@ -125,10 +117,6 @@ class AddEditUser extends Component {
 
 	handleRole = (role) => {
 		this.setState({ role });
-	}
-
-	handleStatus = (status) => {
-		this.setState({ status });
 	}
 
 	handleChange = (e) => {
@@ -288,11 +276,10 @@ class AddEditUser extends Component {
 		if (isAdd) {
 			addUser(obj).then(response => {
 				if (response.data && response.data.error === 'false') {
-					toast.success(response.data.message, { type: toast.TYPE.SUCCESS, autoClose: 2000 })
+					toast.success(response.data.message, { type: toast.TYPE.SUCCESS, autoClose: 2000 });
 				}
 				if (response.data.error === 'true') {
 					toast.error(response.data.message, { type: toast.TYPE.ERROR, autoClose: 2000 })
-					return false;
 				}
 				this.handleClose();
 			})

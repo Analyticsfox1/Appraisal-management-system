@@ -182,11 +182,23 @@ input:focus {
 	text-transform: uppercase;
 	border: none;
 	background-color: #e29262;
-	/* background-image: -moz-linear-gradient(to left, #74ebd5, #9face6);
-	background-image: -ms-linear-gradient(to left, #74ebd5, #9face6);
-	background-image: -o-linear-gradient(to left, #74ebd5, #9face6);
-	background-image: -webkit-linear-gradient(to left, #74ebd5, #9face6);
-	background-image: linear-gradient(to left, #74ebd5, #9face6); */
+}
+
+.signup-form-submit {
+	width: 40%;
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-o-border-radius: 5px;
+	-ms-border-radius: 5px;
+	padding: 12px 20px;
+	box-sizing: border-box;
+	font-size: 14px;
+	font-weight: 700;
+	color: #fff;
+	text-transform: uppercase;
+	border: none;
+	background-color: #e29262;
 }
 
 input[type=checkbox]:not(old) {
@@ -576,8 +588,8 @@ span.input-group-text {
 .login-section {
 	min-height: 100vh;
 	background: url('../images/Banner.jpg') no-repeat center/cover;
-	text-align: center;
-	color: #fff;
+	/* text-align: center;
+	color: #fff; */
 }
 
 .bg-trs {
@@ -1370,7 +1382,9 @@ input[type='radio']:checked:after {
 }
 
 .dashboard .card-body {
-	min-height: 246px;
+	min-height: 250px;
+	height: 261px;
+	overflow-x: scroll;
 }
 
 .dashboard hr {
@@ -1381,7 +1395,7 @@ input[type='radio']:checked:after {
 	background: rgba(220, 53, 69, 0.15);
 	border: 1px solid #dc3544;
 	padding: 5px;
-	border-radius: 50px;
+	border-radius: 5px;
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -1391,7 +1405,7 @@ input[type='radio']:checked:after {
 	background: rgba(33, 150, 243, .15);
 	border: 1px solid #2196f3;
 	padding: 5px;
-	border-radius: 50px;
+	border-radius: 5px;
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -1401,7 +1415,7 @@ input[type='radio']:checked:after {
 	background: rgba(0, 150, 136, .15);
 	border: 1px solid #009688;
 	padding: 5px;
-	border-radius: 50px;
+	border-radius: 5px;
 }
 
 .dashboard .font-bold {
@@ -1411,4 +1425,13 @@ input[type='radio']:checked:after {
 .dashboard .team-card img {
 	height: 15px;
 	width: 15px;
+}
+
+.register-page {
+	max-width: 70%;
+	margin: 0 auto;
+}
+
+.register-page .react-datepicker__input-container{
+	width: 293px;
 }
