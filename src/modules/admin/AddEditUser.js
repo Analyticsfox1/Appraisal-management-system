@@ -4,7 +4,9 @@ import Select from 'react-select';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { getRoleList, addUser, getUserById } from '../../utils/admin';
+import { uploadDoc } from '../../utils/user';
 import moment from 'moment';
+import ImageUploader from 'react-images-upload';
 import { ToastContainer, toast } from 'react-toastify';
 toast.configure();
 
@@ -34,6 +36,7 @@ class AddEditUser extends Component {
 		accountNumber: '',
 		invalidaccountNumber: false,
 		roleOption: [],
+		document: '',
 		errors: {
 			nameError: null,
 			titleError: null,
@@ -78,6 +81,25 @@ class AddEditUser extends Component {
 		else {
 			e.preventDefault()
 		}
+	}
+
+
+	onDrop = (picture) => {
+		this.setState({
+			document: picture,
+		});
+	}
+
+	uploadImage = () => {
+		debugger
+		const { document } = this.state;
+		let documentName = document[0] ? document[0].name : null;
+		let description = "Profile Image"
+		let obj = { documentName, description }
+		console.log("TCL: AddEditUser -> uploadImage -> obj", obj)
+		// uploadDoc(obj).then(response => {
+		// 	console.log("TCL: Register -> onDrop -> response", response)
+		// })
 	}
 
 	RoleList = () => {
@@ -241,7 +263,7 @@ class AddEditUser extends Component {
 	}
 
 	handleSubmit = () => {
-		const { errors, name, title, officialEmail, personalEmail, DOJ, DOB, primaryMobileNo,
+		const { errors, name, title, officialEmail, personalEmail, DOJ, DOB, primaryMobileNo, document,
 			secondaryMobileNo, gender, bloodGroup, aadharNo, address, bankName, accountNumber, role, status, uniqueId, userId, password, token, updatedDate, probationEndDate, createdDate } = this.state;
 		let isAdd = true;
 
@@ -275,11 +297,25 @@ class AddEditUser extends Component {
 
 		if (isAdd) {
 			addUser(obj).then(response => {
+				debugger
 				if (response.data && response.data.error === 'false') {
 					toast.success(response.data.message, { type: toast.TYPE.SUCCESS, autoClose: 2000 });
 				}
 				if (response.data.error === 'true') {
 					toast.error(response.data.message, { type: toast.TYPE.ERROR, autoClose: 2000 })
+				}
+
+				let file1 = document[0] ? document[0] : null;
+				let userDoc = [{
+					documentName: document[0] ? document[0].name : null,
+					description: 'Profile Image',
+					userUniqueId: response.data.data.uniqueId
+				}]
+				let imageObj = { file1, userDoc }
+				if (imageObj) {
+					uploadDoc(imageObj).then(res => {
+						console.log("handleSubmit -> response", res)
+					})
 				}
 				this.handleClose();
 			})
@@ -352,7 +388,7 @@ class AddEditUser extends Component {
 								}
 							</div>
 
-							<div className="form-group col-md-4">
+							<div className="form-group col-md-8">
 								<label>Address</label>
 								<textarea
 									type="text"
@@ -366,6 +402,20 @@ class AddEditUser extends Component {
 									errors.addressError &&
 									<span className="errorMsg">Please enter address</span>
 								}
+							</div>
+							<div className="col-md-4">
+								<label>Profile Picture</label>
+								<ImageUploader
+									withIcon={true}
+									withPreview={true}
+									withLabel={true}
+									accept="image/*"
+									buttonText='Upload Profile Picture'
+									onChange={this.onDrop}
+									fileTypeError="is not supported file extension"
+									imgExtension={['.jpg', '.gif', '.png', '.jpeg']}
+									maxFileSize={5242880}
+								/>
 							</div>
 							<div className="col-md-4">
 								<label>Gender</label>

@@ -31,12 +31,12 @@ export const get = (url) => {
 		.catch((error) => handleError(error));
 }
 
-export const post = (url, bodyObj = {}) => {
+export const post = (url, bodyObj = {}, contentType) => {
 	return axios.post(`${url}`, bodyObj, {
 		headers:
 			{
 				'Access-Control-Allow-Origin': '*',
-				'Content-Type': 'application/json',
+				'Content-Type': contentType || 'application/json',
 				accessToken: 'roS0SOXGlvRDLoNtacLXjrI2Rh8NcmDl',
 				tokenId: 'nih.patil@gmail.com'
 			},

@@ -7,6 +7,7 @@ import Select from 'react-select';
 import { getRoleList } from '../utils/admin';
 import { register } from '../utils/user';
 import moment from 'moment';
+import ImageUploader from 'react-images-upload';
 import { ToastContainer, toast } from 'react-toastify';
 toast.configure();
 
@@ -36,6 +37,7 @@ class Register extends Component {
 			DOJ: '',
 			role: null,
 			roleOption: [],
+			// document: '',
 			errors: {
 				nameError: null,
 				titleError: null,
@@ -65,6 +67,25 @@ class Register extends Component {
 			[e.target.name]: e.target.value
 		})
 	}
+
+	// onDrop = (picture) => {
+	// 	this.setState({
+	// 		document: picture,
+	// 	}, () => this.uploadImage());
+	// }
+
+	// uploadImage = () => {
+	// 	const { document } = this.state;
+	// 	let file1 = document ? document[0].name : null;
+	// 	let userDoc = [{
+	// 		"documentName": document ? document[0].name : null,
+	// 		"description": 'Profile Image'
+	// 	}]
+	// 	let obj = { file1, userDoc }
+	// 	uploadDoc(obj).then(response => {
+	// 		console.log("TCL: Register -> onDrop -> response", response)
+	// 	})
+	// }
 
 	RoleList = () => {
 		getRoleList().then(response => {
@@ -249,6 +270,7 @@ class Register extends Component {
 		if (isRegister) {
 			register(obj).then(response => {
 				if (response.data && response.data.error === 'false') {
+					this.props.history.push('/login');
 					toast.success(response.data.message, { type: toast.TYPE.SUCCESS, autoClose: 2000 });
 				}
 				if (response.data && response.data.error === 'true') {
@@ -265,7 +287,7 @@ class Register extends Component {
 		return (
 			<>
 				<section className="login-section text-left add-user">
-				<ToastContainer />
+					<ToastContainer />
 					<Header />
 					<div className="register-page content mt-5">
 						<h3 className="text-center title-font mb-3">SIGN UP</h3>
@@ -332,6 +354,20 @@ class Register extends Component {
 									<span className="errorMsg">Please enter address</span>
 								}
 							</div>
+
+							{/* <div className="col-md-4">
+								<label>Profile Picture</label>
+								<ImageUploader
+									withIcon={true}
+									withPreview={true}
+									withLabel={true}
+									buttonText='Upload Profile Picture'
+									onChange={this.onDrop}
+									fileTypeError="is not supported file extension"
+									imgExtension={['.jpg', '.gif', '.png', '.jpeg']}
+									maxFileSize={5242880}
+								/>
+							</div> */}
 							<div className="col-md-4">
 								<label>Gender</label>
 								<div className="mt-2">
@@ -552,7 +588,7 @@ class Register extends Component {
 								}
 							</div>
 						</div>
-						<div className="row mt-3">
+						<div className="row mt-5">
 							<div className="col-sm-12 text-center">
 								<button onClick={this.handleSubmit} className="signup-form-submit" > SIGN UP</button>
 							</div>
