@@ -25,8 +25,8 @@ class AdminDashboard extends Component {
 									<div className="card-body">
 										<div className="no_data text-center">
 											<img alt="team" src="./assets/images/team.png" />
-											<h5 className="font-weight-normal m-0">Teams</h5>
-											<h5 className="font-weight-normal m-0">10</h5>
+											<h5 className="font-weight-normal m-0 mb-3">Teams</h5>
+											<h4 className="font-weight-normal title-orange m-0">10</h4>
 										</div>
 									</div>
 								</div>
@@ -34,9 +34,8 @@ class AdminDashboard extends Component {
 							<div className="col-md-4">
 								<div className="card2 bg-white">
 									<div className="card-body">
-										<div className="no_data text-center">
-											<img alt="user" src="./assets/images/user.png" />
-											<h5 className="font-weight-normal m-0">Graph</h5>
+										<div className="text-center">
+											<img alt="user" src="https://d1whtlypfis84e.cloudfront.net/guides/wp-content/uploads/2018/05/05104808/pie-300x221.png" />
 										</div>
 									</div>
 								</div>
@@ -46,8 +45,9 @@ class AdminDashboard extends Component {
 								<div className="card2 bg-white">
 									<div className="card-body">
 										<div className="no_data text-center">
-											<img alt="announcement" src="./assets/images/announcement.svg" />
-											<h5 className="font-weight-normal m-0">Member Assign to Teams</h5>
+											<img alt="team" src="./assets/images/team.png" />
+											<h5 className="font-weight-normal m-0 mb-3">Member Assign to Teams</h5>
+											<h4 className="font-weight-normal title-orange m-0">25</h4>
 										</div>
 									</div>
 								</div>
@@ -58,7 +58,8 @@ class AdminDashboard extends Component {
 									<div className="card-body">
 										<div className="no_data text-center">
 											<img alt="team" src="./assets/images/team.png" />
-											<h5 className="font-weight-normal m-0">Member not Assign to Teams</h5>
+											<h5 className="font-weight-normal m-0 mb-3">Member not Assign to Teams</h5>
+											<h4 className="font-weight-normal title-orange m-0">15</h4>
 										</div>
 									</div>
 								</div>

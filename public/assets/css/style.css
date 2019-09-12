@@ -1395,6 +1395,10 @@ input[type='radio']:checked:after {
 	overflow-x: scroll;
 }
 
+.admin-dashboard .no_data img{
+	margin: 10px auto;
+}
+
 .dashboard hr {
 	border: 0.5px solid rgba(0, 0, 0, .05);
 }
