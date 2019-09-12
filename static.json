@@ -1,7 +1,7 @@
 {
   "root": "build/",
   "proxies": {
-    "/uprise/*": {
+    "https://uprise-appraisal-management.herokuapp.com/uprise/*": {
       "origin": "http://13.126.20.61:8080"
     }
   }

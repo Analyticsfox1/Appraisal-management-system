@@ -108,7 +108,7 @@ class Dashboard extends Component {
 														<span className="d-flex justify-content-between ml-4 font-bold">{teamVal.projectName}
 															<span className="mr-4">{teamVal.status === "Active" ? <img src="./assets/images/green_light.png" /> : <img src="./assets/images/red_light.png" />}</span>
 														</span>
-														<span className="ml-4">{teamVal.comment}</span>
+														<span className="ml-4 text-justify">{teamVal.comment}</span>
 													</div>
 												) :
 												<div className="no_data text-center">
