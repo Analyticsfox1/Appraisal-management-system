@@ -1,0 +1,8 @@
+{
+  "root": "build/",
+  "proxies": {
+    "/uprise/": {
+      "origin": "http://13.126.20.61:8080"
+    }
+  }
+}
