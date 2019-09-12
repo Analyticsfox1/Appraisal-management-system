@@ -1,5 +1,5 @@
 import axios from 'axios';
-
+// const host = "http://13.126.20.61:8080"
 const handleResponse = (response) => {
 	return {
 		data: response.data

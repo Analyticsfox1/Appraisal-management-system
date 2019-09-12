@@ -9,6 +9,7 @@ import MonthlyMeeting from '../modules/user/MonthlyMeeting';
 import ProbationForm from '../modules/user/ProbationForm';
 import MyAccount from '../modules/user/MyAccount';
 //  Admin Routes 
+import AdminDashboard from '../modules/admin/AdminDashboard';
 import UserManagement from '../modules/admin/UserManagement';
 import RoleManagement from '../modules/admin/RoleManagement';
 import TeamManagement from '../modules/admin/TeamManagement';
@@ -31,6 +32,7 @@ class PrivateRoutes extends Component {
 				<Route exact path='/account' component={MyAccount} />
 				<Route exact path='/probation-form' component={ProbationForm} />
 				{/* Admin Routes */}
+				<Route exact path='/admin-dashboard' component={AdminDashboard} />
 				<Route exact path='/user-management' component={UserManagement} />
 				<Route exact path='/role-management' component={RoleManagement} />
 				<Route exact path='/team-management' component={TeamManagement} />

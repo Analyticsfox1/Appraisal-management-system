@@ -1388,6 +1388,13 @@ input[type='radio']:checked:after {
 	overflow-x: scroll;
 }
 
+.admin-dashboard .card-body {
+	min-height: 250px;
+	min-width: 250px;
+	height: 261px;
+	overflow-x: scroll;
+}
+
 .dashboard hr {
 	border: 0.5px solid rgba(0, 0, 0, .05);
 }
