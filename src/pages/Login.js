@@ -89,7 +89,7 @@ class Login extends Component {
 				<Header />
 				<section className="login-section">
 					<div className="page-container">
-						<div style={{ width: '400px', marginTop:'140px' }} className="content">
+						<div style={{ width: '400px', marginTop: '140px' }} className="content">
 							<h3 className="text-center title-font mb-3">SIGN IN</h3>
 							<div className="form-group">
 								<input

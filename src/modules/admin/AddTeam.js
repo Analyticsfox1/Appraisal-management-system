@@ -120,7 +120,7 @@ class AddTeam extends Component {
 				if (response.data && response.data.error === 'false') {
 					toast.success(response.data.message, { type: toast.TYPE.SUCCESS, autoClose: 2000 })
 				}
-				if (response.data.error === 'true') {
+				if (response.data && response.data.error === 'true') {
 					toast.error(response.data.message, { type: toast.TYPE.ERROR, autoClose: 2000 })
 				}
 				this.handleClose();
