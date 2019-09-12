@@ -56,7 +56,7 @@ class Login extends Component {
 		let obj = { email, password }
 		if (isLogin) {
 			login(obj).then(response => {
-				if (response.data.error === "true") {
+				if (response.data && response.data.error === "true") {
 					toast.error(response.data.message, { type: toast.TYPE.ERROR, autoClose: 2000 })
 					return false;
 				}

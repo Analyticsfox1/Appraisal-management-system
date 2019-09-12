@@ -10,17 +10,12 @@ export const register = data => {
 
 //user upload document API
 export const uploadDoc = data => {
-	debugger
 	const formData = new FormData();
-	// Object.keys(data).map(key => {
-	// 	formData.append(key, data[key])
-	// })
-	// data = formData;
 	Object.keys(data).map(key => {
 		formData[key] = data[key]
 	});
 	console.log("TCL: formData", formData)
-	return post(`/uprise/authentication/uploadDoc`, formData, 'multipart/form-data').then(res => {
+	return post(`/uprise/authentication/uploadDoc`, formData).then(res => {
 		console.log('RESPONSE :: Upload Document ::: ', res);
 		return res;
 	});

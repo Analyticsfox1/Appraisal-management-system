@@ -2,7 +2,6 @@ import axios from 'axios';
 
 const handleResponse = (response) => {
 	return {
-		// error: false,
 		data: response.data
 	};
 }
@@ -10,7 +9,6 @@ const handleResponse = (response) => {
 const handleError = (error) => {
 	const { response } = error;
 	return {
-		// error: true,
 		message: response ? response.data.message : null,
 		status: response ? response.status : null
 	};
@@ -31,12 +29,12 @@ export const get = (url) => {
 		.catch((error) => handleError(error));
 }
 
-export const post = (url, bodyObj = {}, contentType) => {
+export const post = (url, bodyObj = {}) => {
 	return axios.post(`${url}`, bodyObj, {
 		headers:
 			{
 				'Access-Control-Allow-Origin': '*',
-				'Content-Type': contentType || 'application/json',
+				'Content-Type': 'application/json',
 				accessToken: 'roS0SOXGlvRDLoNtacLXjrI2Rh8NcmDl',
 				tokenId: 'nih.patil@gmail.com'
 			},

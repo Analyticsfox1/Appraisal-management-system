@@ -7,7 +7,6 @@ import Select from 'react-select';
 import { getRoleList } from '../utils/admin';
 import { register } from '../utils/user';
 import moment from 'moment';
-import ImageUploader from 'react-images-upload';
 import { ToastContainer, toast } from 'react-toastify';
 toast.configure();
 
@@ -37,7 +36,6 @@ class Register extends Component {
 			DOJ: '',
 			role: null,
 			roleOption: [],
-			// document: '',
 			errors: {
 				nameError: null,
 				titleError: null,
@@ -67,25 +65,6 @@ class Register extends Component {
 			[e.target.name]: e.target.value
 		})
 	}
-
-	// onDrop = (picture) => {
-	// 	this.setState({
-	// 		document: picture,
-	// 	}, () => this.uploadImage());
-	// }
-
-	// uploadImage = () => {
-	// 	const { document } = this.state;
-	// 	let file1 = document ? document[0].name : null;
-	// 	let userDoc = [{
-	// 		"documentName": document ? document[0].name : null,
-	// 		"description": 'Profile Image'
-	// 	}]
-	// 	let obj = { file1, userDoc }
-	// 	uploadDoc(obj).then(response => {
-	// 		console.log("TCL: Register -> onDrop -> response", response)
-	// 	})
-	// }
 
 	RoleList = () => {
 		getRoleList().then(response => {
@@ -354,20 +333,6 @@ class Register extends Component {
 									<span className="errorMsg">Please enter address</span>
 								}
 							</div>
-
-							{/* <div className="col-md-4">
-								<label>Profile Picture</label>
-								<ImageUploader
-									withIcon={true}
-									withPreview={true}
-									withLabel={true}
-									buttonText='Upload Profile Picture'
-									onChange={this.onDrop}
-									fileTypeError="is not supported file extension"
-									imgExtension={['.jpg', '.gif', '.png', '.jpeg']}
-									maxFileSize={5242880}
-								/>
-							</div> */}
 							<div className="col-md-4">
 								<label>Gender</label>
 								<div className="mt-2">
