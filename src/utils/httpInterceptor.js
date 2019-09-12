@@ -1,5 +1,6 @@
 import axios from 'axios';
-// const host = "http://13.126.20.61:8080"
+import client from './client';
+
 const handleResponse = (response) => {
 	return {
 		data: response.data
@@ -15,7 +16,7 @@ const handleError = (error) => {
 }
 
 export const get = (url) => {
-	return axios.get(`${url}`, {
+	return client.get(`${url}`, {
 		headers:
 			{
 				'Access-Control-Allow-Origin': '*',
@@ -30,7 +31,7 @@ export const get = (url) => {
 }
 
 export const post = (url, bodyObj = {}) => {
-	return axios.post(`${url}`, bodyObj, {
+	return client.post(`${url}`, bodyObj, {
 		headers:
 			{
 				'Access-Control-Allow-Origin': '*',
