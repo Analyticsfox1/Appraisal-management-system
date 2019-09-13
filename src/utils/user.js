@@ -47,7 +47,6 @@ export const forgotPassword = data => {
 
 //user Update Password API
 export const updatePassword = data => {
-	debugger
 	return post(`uprise/authentication/updatePassword?newPassword=${data.newPassword}&oldPassword=${data.oldPassword}`).then(res => {
 		console.log('RESPONSE :: Update Password ::: ', res);
 		return res;

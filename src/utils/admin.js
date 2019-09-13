@@ -87,3 +87,11 @@ export const getEmployeeList = () => {
 		return res;
 	});
 }
+
+//admin Dashboard API
+export const getAdminDashboard = () => {
+	return get(`/uprise/kra/getHrDashboard`).then(res => {
+		console.log('RESPONSE :: Admin Dashboard ::: ', res);
+		return res;
+	});
+}

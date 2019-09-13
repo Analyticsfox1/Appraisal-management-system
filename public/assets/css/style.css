@@ -1392,7 +1392,6 @@ input[type='radio']:checked:after {
 	min-height: 250px;
 	min-width: 250px;
 	height: 261px;
-	overflow-x: scroll;
 }
 
 .admin-dashboard .no_data img{
