@@ -1,4 +1,6 @@
 import axios from 'axios';
+import {API_URL} from './config';
+console.log("TCL: API_URL", API_URL)
 
 let baseURL = 'http://13.126.20.61:8080';
 
