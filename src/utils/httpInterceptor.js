@@ -17,6 +17,7 @@ const handleError = (error) => {
 }
 
 export const get = (url) => {
+	console.log("TCL: get -> process.env.NODE_ENV", process.env.NODE_ENV)
 	return axios.get(process.env.NODE_ENV === 'development' ? `${url}` : `${baseURL}${url}`, {
 		headers:
 			{
