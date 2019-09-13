@@ -1388,10 +1388,9 @@ input[type='radio']:checked:after {
 	overflow-x: scroll;
 }
 
-.admin-dashboard .card-body {
-	min-height: 250px;
-	min-width: 250px;
-	height: 261px;
+.admin-dashboard .bg-white {
+	border-radius: 10px;
+	margin-bottom: 5px;
 }
 
 .admin-dashboard .no_data img{

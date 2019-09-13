@@ -3,6 +3,8 @@ import {API_URL} from './config';
 
 let baseURL = 'http://13.126.20.61:8080';
 
+console.log(';;;;', process.env);
+
 const handleResponse = (response) => {
 	return {
 		data: response.data
@@ -18,8 +20,7 @@ const handleError = (error) => {
 }
 
 export const get = (url) => {
-	console.log("TCL: get -> process.env.NODE_ENV", process.env.NODE_ENV)
-	return axios.get(process.env.NODE_ENV === 'development' ? `${url}` : `${baseURL}${url}`, {
+	return axios.get(`${url}`, {
 		headers:
 			{
 				'Access-Control-Allow-Origin': '*',
@@ -34,7 +35,7 @@ export const get = (url) => {
 }
 
 export const post = (url, bodyObj = {}) => {
-	return axios.post(process.env.NODE_ENV === 'development' ? `${url}` : `${baseURL}${url}`, bodyObj, {
+	return axios.post(`${url}`, bodyObj, {
 		headers:
 			{
 				'Access-Control-Allow-Origin': '*',
