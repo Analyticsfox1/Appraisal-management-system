@@ -95,3 +95,27 @@ export const getAdminDashboard = () => {
 		return res;
 	});
 }
+
+// get all members assigned list API
+export const getMemberAssignedList = () => {
+	return get(`/uprise/kra/getAssignedMembers`).then(res => {
+		console.log('RESPONSE :: Member Assigned List ::: ', res);
+		return res;
+	});
+}
+
+// get all members not assigned list API
+export const getMemberNotAssignedList = () => {
+	return get(`/uprise/kra/getNotAssignedMembers`).then(res => {
+		console.log('RESPONSE :: Member Not Assigned List ::: ', res);
+		return res;
+	});
+}
+
+// get all new registered list API
+export const getNewRegisteredList = () => {
+	return get(`/uprise/authentication/getAllUserTests`).then(res => {
+		console.log('RESPONSE :: New Registerd user List ::: ', res);
+		return res;
+	});
+}

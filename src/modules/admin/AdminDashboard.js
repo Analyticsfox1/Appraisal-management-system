@@ -38,10 +38,11 @@ class AdminDashboard extends Component {
 								<div className="card2 bg-white">
 									<div className="card-body">
 										<div className="text-center">
-											<i className="fas fa-users fa-2x"></i>
-											<p className="font-weight-normal m-0">Teams
-											<span className="font-weight-normal m-0"><Link className="title-orange" to="/team-management">{adminDashboardData ? adminDashboardData.teamCount : null}</Link></span>
-											</p>
+											<div className="d-flex justify-content-center">
+												<i className="fas fa-users bg1 fa-3x m-0"></i>
+											</div>
+											<p className="font-weight-normal mt-3">Teams</p>
+											<p className="font-weight-normal fs-24"><Link className="title-orange" to="/team-management">{adminDashboardData ? adminDashboardData.teamCount : null}</Link></p>
 										</div>
 									</div>
 								</div>
@@ -51,9 +52,11 @@ class AdminDashboard extends Component {
 								<div className="card2 bg-white">
 									<div className="card-body">
 										<div className="text-center">
-											<i className="fas fa-user-plus fa-2x"></i>
-											<span className="font-weight-normal mb-3">Member Assign to Teams</span>
-											<span className="font-weight-normal title-orange m-0">{adminDashboardData ? adminDashboardData.membersAssigned : null}</span>
+											<div className="d-flex justify-content-center">
+												<i className="fas fa-user-plus fa-3x bg2 m-0"></i>
+											</div>
+											<p className="font-weight-normal mt-3">Member Assign to Teams</p>
+											<p className="font-weight-normal fs-24"><Link className="title-orange" to="/member-assigned">{adminDashboardData ? adminDashboardData.membersAssigned : null}</Link></p>
 										</div>
 									</div>
 								</div>
@@ -63,9 +66,11 @@ class AdminDashboard extends Component {
 								<div className="card2 bg-white">
 									<div className="card-body">
 										<div className="text-center">
-											<i className="fas fa-user-times fa-2x"></i>
-											<span className="font-weight-normal m-0">Member not Assign to Teams</span>
-											<span className="font-weight-normal title-orange m-0">{adminDashboardData ? adminDashboardData.membersNotAssigned : null}</span>
+											<div className="d-flex justify-content-center">
+												<i className="fas fa-user-times fa-3x bg3 m-0"></i>
+											</div>
+											<p className="font-weight-normal mt-3">Member not Assign to Teams</p>
+											<p className="font-weight-normal fs-24"><Link className="title-orange" to="/member-not-assigned">{adminDashboardData ? adminDashboardData.membersNotAssigned : null}</Link></p>
 										</div>
 									</div>
 								</div>
@@ -75,24 +80,27 @@ class AdminDashboard extends Component {
 								<div className="card2 bg-white">
 									<div className="card-body">
 										<div className="text-center">
-											<i className="fas fa-user-times fa-2x"></i>
-											<span className="font-weight-normal m-0">New Registration</span>
-											<span className="font-weight-normal title-orange m-0">10</span>
+											<div className="d-flex justify-content-center">
+												<i className="fas fa-user fa-3x bg4 m-0"></i>
+											</div>
+											<p className="font-weight-normal mt-3">New Registration</p>
+											<p className="font-weight-normal fs-24"><Link className="title-orange" to="/new-register">{adminDashboardData ? adminDashboardData.newRegistrations : null}</Link></p>
 										</div>
 									</div>
 								</div>
 							</div>
 						</div>
-
-						{/* <div className="col-md-12 mt-4">
+						<div className="row">
+							<div className="col-md-12 mt-4">
 								<div className="card2 bg-white">
 									<div className="card-body">
 										<div className="text-center">
-											<img alt="user" src="https://d1whtlypfis84e.cloudfront.net/guides/wp-content/uploads/2018/05/05104808/pie-300x221.png" />
+											<img alt="user" src="https://lh6.googleusercontent.com/proxy/4kqcqzxi9mpv1Kt2QVUzLWLJY-VmGMHyH2wvkrF_bAqEzJUoUw5ZDtdjw3dY7gDW6XSnVdfvKEeRUIWuQ-tnr1VxcD9i=s0-d" />
 										</div>
 									</div>
 								</div>
-							</div> */}
+							</div>
+						</div>
 					</section>
 				</main>
 			</div>

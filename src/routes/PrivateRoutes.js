@@ -14,6 +14,9 @@ import UserManagement from '../modules/admin/UserManagement';
 import RoleManagement from '../modules/admin/RoleManagement';
 import TeamManagement from '../modules/admin/TeamManagement';
 import PushNotification from '../modules/admin/PushNotification';
+import MemberAssigned from '../modules/admin/MemberAssigned';
+import MemberNotAssigned from '../modules/admin/MemberNotAssigned';
+import NewRegistartion from '../modules/admin/NewRegistration';
 //  CEO Routes 
 import CEOKraManagement from '../modules/ceo/KraManagement';
 import CEOTeamManagement from '../modules/ceo/TeamManagement';
@@ -36,6 +39,9 @@ class PrivateRoutes extends Component {
 				<Route exact path='/user-management' component={UserManagement} />
 				<Route exact path='/role-management' component={RoleManagement} />
 				<Route exact path='/team-management' component={TeamManagement} />
+				<Route exact path='/member-assigned' component={MemberAssigned} />
+				<Route exact path='/member-not-assigned' component={MemberNotAssigned} />
+				<Route exact path='/new-register' component={NewRegistartion} />
 				<Route exact path='/push-notification' component={PushNotification} />
 				{/* CEO Routes */}
 				<Route exact path='/CEO-kra-management' component={CEOKraManagement} />

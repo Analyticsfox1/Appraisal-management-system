@@ -1391,10 +1391,63 @@ input[type='radio']:checked:after {
 .admin-dashboard .bg-white {
 	border-radius: 10px;
 	margin-bottom: 5px;
+	box-shadow: 6px 10px 10px 0px #cac8c8;
 }
 
-.admin-dashboard .no_data img{
-	margin: 10px auto;
+.fs-24 {
+	font-size: 24px;
+}
+
+.admin-dashboard .bg1 {
+	color: #dc3545;
+	background: rgba(220, 53, 69, 0.15);
+	border-radius: 100%;
+	height: 70px;
+	width: 70px;
+	display: flex;
+	font-size: 30px;
+	align-items: center;
+	justify-content: center;
+}
+
+.admin-dashboard .bg2 {
+	color: #2196f3;
+	background: rgba(33, 150, 243, .15);
+	border-radius: 100%;
+	height: 70px;
+	width: 70px;
+	display: flex;
+	font-size: 30px;
+	align-items: center;
+	justify-content: center;
+}
+
+.admin-dashboard .bg3 {
+	color: #009688;
+	background: rgba(0, 150, 136, .15);
+	border-radius: 100%;
+	height: 70px;
+	width: 70px;
+	display: flex;
+	font-size: 30px;
+	align-items: center;
+	justify-content: center;
+}
+
+.admin-dashboard .bg4 {
+	color: #fd7e14;
+	background: #fd7e1440;
+	border-radius: 100%;
+	height: 70px;
+	width: 70px;
+	display: flex;
+	font-size: 30px;
+	align-items: center;
+	justify-content: center;
+}
+
+.admin-dashboard .font-weight-normal{
+	font-weight: 500 !important;
 }
 
 .dashboard hr {
@@ -1442,6 +1495,6 @@ input[type='radio']:checked:after {
 	margin: 0 auto;
 }
 
-.register-page .react-datepicker__input-container{
+.register-page .react-datepicker__input-container {
 	width: 293px;
 }
