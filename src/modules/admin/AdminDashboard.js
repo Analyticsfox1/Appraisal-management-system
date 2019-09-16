@@ -42,7 +42,7 @@ class AdminDashboard extends Component {
 												<i className="fas fa-users bg1 fa-3x m-0"></i>
 											</div>
 											<p className="font-weight-normal mt-3">Teams</p>
-											<p className="font-weight-normal fs-24"><Link className="title-orange" to="/team-management">{adminDashboardData ? adminDashboardData.teamCount : null}</Link></p>
+											<p className="font-weight-normal fs-24"><Link className="title-orange" to="/team-management">{adminDashboardData ? adminDashboardData.teamCount : 'No teams are found'}</Link></p>
 										</div>
 									</div>
 								</div>
@@ -56,7 +56,7 @@ class AdminDashboard extends Component {
 												<i className="fas fa-user-plus fa-3x bg2 m-0"></i>
 											</div>
 											<p className="font-weight-normal mt-3">Member Assign to Teams</p>
-											<p className="font-weight-normal fs-24"><Link className="title-orange" to="/member-assigned">{adminDashboardData ? adminDashboardData.membersAssigned : null}</Link></p>
+											<p className="font-weight-normal fs-24"><Link className="title-orange" to="/member-assigned">{adminDashboardData ? adminDashboardData.membersAssigned : 'No members are found'}</Link></p>
 										</div>
 									</div>
 								</div>
@@ -70,7 +70,7 @@ class AdminDashboard extends Component {
 												<i className="fas fa-user-times fa-3x bg3 m-0"></i>
 											</div>
 											<p className="font-weight-normal mt-3">Member not Assign to Teams</p>
-											<p className="font-weight-normal fs-24"><Link className="title-orange" to="/member-not-assigned">{adminDashboardData ? adminDashboardData.membersNotAssigned : null}</Link></p>
+											<p className="font-weight-normal fs-24"><Link className="title-orange" to="/member-not-assigned">{adminDashboardData ? adminDashboardData.membersNotAssigned : 'No members are found'}</Link></p>
 										</div>
 									</div>
 								</div>
@@ -84,7 +84,7 @@ class AdminDashboard extends Component {
 												<i className="fas fa-user fa-3x bg4 m-0"></i>
 											</div>
 											<p className="font-weight-normal mt-3">New Registration</p>
-											<p className="font-weight-normal fs-24"><Link className="title-orange" to="/new-register">{adminDashboardData ? adminDashboardData.newRegistrations : null}</Link></p>
+											<p className="font-weight-normal fs-24"><Link className="title-orange" to="/new-register">{adminDashboardData ? adminDashboardData.newRegistrations : 'No new registartion found'}</Link></p>
 										</div>
 									</div>
 								</div>

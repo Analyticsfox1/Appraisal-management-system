@@ -1498,3 +1498,7 @@ input[type='radio']:checked:after {
 .register-page .react-datepicker__input-container {
 	width: 293px;
 }
+
+.access-page .css-2b097c-container{
+	width: 100%
+}

@@ -12,6 +12,7 @@ import MyAccount from '../modules/user/MyAccount';
 import AdminDashboard from '../modules/admin/AdminDashboard';
 import UserManagement from '../modules/admin/UserManagement';
 import RoleManagement from '../modules/admin/RoleManagement';
+import AccessManagement from '../modules/admin/AccessManagement';
 import TeamManagement from '../modules/admin/TeamManagement';
 import PushNotification from '../modules/admin/PushNotification';
 import MemberAssigned from '../modules/admin/MemberAssigned';
@@ -38,6 +39,7 @@ class PrivateRoutes extends Component {
 				<Route exact path='/admin-dashboard' component={AdminDashboard} />
 				<Route exact path='/user-management' component={UserManagement} />
 				<Route exact path='/role-management' component={RoleManagement} />
+				<Route exact path='/access-management' component={AccessManagement} />
 				<Route exact path='/team-management' component={TeamManagement} />
 				<Route exact path='/member-assigned' component={MemberAssigned} />
 				<Route exact path='/member-not-assigned' component={MemberNotAssigned} />

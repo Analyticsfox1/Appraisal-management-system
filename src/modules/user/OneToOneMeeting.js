@@ -13,8 +13,6 @@ class OneToOneMeeting extends Component {
 		update: '',
 		startDate: '',
 		meetingStatus: '',
-		accept: false,
-		reject: false,
 		errors: {
 			discussionError: null,
 		}

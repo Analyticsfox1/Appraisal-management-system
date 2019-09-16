@@ -119,3 +119,27 @@ export const getNewRegisteredList = () => {
 		return res;
 	});
 }
+
+// get all page list API
+export const getAllPageList = () => {
+	return get(`/uprise/access/getAllPages`).then(res => {
+		console.log('RESPONSE :: Page List ::: ', res);
+		return res;
+	});
+}
+
+// add Access API
+export const addAccess = data => {
+	return post(`/uprise/access/addAccess`, data).then(res => {
+		console.log('RESPONSE :: Add Access ::: ', res);
+		return res;
+	});
+}
+
+// get access by ID API
+export const getAccessById = data => {
+	return get(`/uprise/access/getAccessByRoleId?roleId=${data}`).then(res => {
+		console.log('RESPONSE :: Access details ::: ', res);
+		return res;
+	});
+}
