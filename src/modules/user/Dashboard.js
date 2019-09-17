@@ -41,7 +41,7 @@ class Dashboard extends Component {
 									</div>
 									<div className="card-body">
 										{
-											dashboardData.bdayList ?
+											dashboardData.bdayList && dashboardData.bdayList.length > 0 ?
 												dashboardData.bdayList.map((birthVal, index) =>
 													<div className="birthday-card mb-3" key={index}>
 														<span className="font-bold mr-5">{birthVal.name}</span>
@@ -64,7 +64,7 @@ class Dashboard extends Component {
 									</div>
 									<div className="card-body">
 										{
-											dashboardData.newJoinsList ?
+											dashboardData.newJoinsList && dashboardData.newJoinsList.length > 0 ?
 												dashboardData.newJoinsList.map((newJoinVal, index) =>
 													<div className="joinee-card mb-3" key={index}>
 														<span className="font-bold">{newJoinVal.name}</span>
@@ -102,7 +102,7 @@ class Dashboard extends Component {
 									</div>
 									<div className="card-body">
 										{
-											dashboardData.teams ?
+												dashboardData.teams && dashboardData.teams.length > 0  ?
 												dashboardData.teams.map((teamVal, index) =>
 													<div className="team-card mb-3" key={index}>
 														<span className="d-flex justify-content-between ml-4 font-bold">{teamVal.projectName}

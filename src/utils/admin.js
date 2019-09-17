@@ -143,3 +143,19 @@ export const getAccessById = data => {
 		return res;
 	});
 }
+
+// get new register details by id
+export const getUserTestById = data => {
+	return get(`/uprise/authentication/getUserTestById?userTestId=${data}`).then(res => {
+		console.log('RESPONSE :: New Register User Details ::: ', res);
+		return res;
+	});
+}
+
+// verify new register user API
+export const transferToUser = data => {
+	return post(`/uprise/authentication/transferToUser`, data).then(res => {
+		console.log('RESPONSE :: Verify Users ::: ', res);
+		return res;
+	});
+}

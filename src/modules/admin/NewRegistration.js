@@ -4,11 +4,14 @@ import AdminHeader from '../admin/AdminHeader';
 import { getNewRegisteredList } from '../../utils/admin';
 import 'react-table/react-table.css';
 import ReactTable from 'react-table';
+import VerifyUser from './VerifyUser';
 
 class NewRegistartion extends Component {
 	constructor() {
 		super();
 		this.state = {
+			showModal: false,
+			verifyObj: '',
 			registerData: []
 		}
 	}
@@ -25,15 +28,30 @@ class NewRegistartion extends Component {
 		})
 	}
 
+	userVerify = (id) => {
+		let obj = this.state.registerData.find(obj => obj.id === id);
+		this.setState({
+			showModal: !this.state.showModal,
+			verifyObj: obj ? obj.id : null
+		}, () => this.NewRegistartionList())
+	}
+
 	render() {
-		const { registerData } = this.state;
+		const { registerData, showModal, verifyObj } = this.state;
 		const columns = [
-		
+			{
+				Header: 'User Id',
+				Cell: ({ original }) => {
+					return (
+						original.id ? original.id : null
+					);
+				},
+			},
 			{
 				Header: 'Name',
 				Cell: ({ original }) => {
 					return (
-						original.name
+						original.name ? original.name : null
 					);
 				},
 			},
@@ -41,7 +59,7 @@ class NewRegistartion extends Component {
 				Header: 'Email Id',
 				Cell: ({ original }) => {
 					return (
-						original.email
+						original.email ? original.email : null
 					);
 				},
 			},
@@ -49,7 +67,7 @@ class NewRegistartion extends Component {
 				Header: 'Mobile No.',
 				Cell: ({ original }) => {
 					return (
-						original.primaryMobile
+						original.primaryMobile ? original.primaryMobile : null
 					);
 				},
 			},
@@ -57,7 +75,19 @@ class NewRegistartion extends Component {
 				Header: 'Status',
 				Cell: ({ original }) => {
 					return (
-						original.status
+						original.status ? original.status : null
+					);
+				},
+			},
+			{
+				Header: 'Action',
+				accessor: 'action',
+				width: 100,
+				Cell: ({ original }) => {
+					return (
+						<div className="cursor-pointer">
+							<i onClick={() => this.userVerify(original.id)} className="fas fa-user-check" />
+						</div>
 					);
 				},
 			},
@@ -76,8 +106,8 @@ class NewRegistartion extends Component {
 								defaultPageSize={10}
 							/>
 						</div>
+						{showModal && <VerifyUser verifyObj={verifyObj} userVerify={this.userVerify} />}
 					</section>
-
 				</main>
 			</div>
 		)

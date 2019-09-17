@@ -1,9 +1,4 @@
 import axios from 'axios';
-import {API_URL} from './config';
-
-let baseURL = 'http://13.126.20.61:8080';
-
-console.log(';;;;', process.env);
 
 const handleResponse = (response) => {
 	return {

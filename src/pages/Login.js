@@ -62,6 +62,16 @@ class Login extends Component {
 				}
 				if (response.data && response.data.error === "false") {
 					if (response.data.data.role.roleId === 1) {
+						sessionStorage.setItem("ceoData", JSON.stringify(response.data.data));
+						this.props.history.push('/CEO-kra-management')
+						toast.success(response.data.message, { type: toast.TYPE.SUCCESS, autoClose: 2000 })
+					}
+					if (response.data.data.role.roleId === 2) {
+						sessionStorage.setItem("adminData", JSON.stringify(response.data.data));
+						this.props.history.push('/admin-dashboard')
+						toast.success(response.data.message, { type: toast.TYPE.SUCCESS, autoClose: 2000 })
+					}
+					if (response.data.data.role.roleId === 4) {
 						sessionStorage.setItem("userData", JSON.stringify(response.data.data));
 						this.props.history.push('/dashboard')
 						toast.success(response.data.message, { type: toast.TYPE.SUCCESS, autoClose: 2000 })

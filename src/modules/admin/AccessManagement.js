@@ -14,8 +14,8 @@ class AccessManagement extends Component {
 	constructor() {
 		super();
 		this.state = {
-			role: null,
 			roleOption: [],
+			role: null,
 			pageData: [],
 			accessId: '',
 			accessData: [],
@@ -41,8 +41,8 @@ class AccessManagement extends Component {
 	RoleList = () => {
 		getRoleList().then(response => {
 			this.setState({
-				roleOption: response.data && response.data.data ? response.data.data : []
-			})
+				roleOption: response.data && response.data.data ? response.data.data : [], role: response.data.data[0]
+			}, () => this.handleRole(response.data.data[0]))
 		})
 	}
 
@@ -93,13 +93,12 @@ class AccessManagement extends Component {
 		const { errors, accessData } = this.state;
 		let isAdd = true;
 		for (var val in errors) {
-			if (errors[val] === null || errors[val]) {
+			if (errors[val]) {
 				errors[val] = true;
 				isAdd = false;
 			}
 		}
 		let obj = Object.values(accessData)
-
 		if (isAdd) {
 			addAccess(JSON.stringify(obj)).then(response => {
 				if (response.data && response.data.error === 'false') {

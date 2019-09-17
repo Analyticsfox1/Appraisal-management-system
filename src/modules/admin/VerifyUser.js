@@ -3,40 +3,46 @@ import { Button, Modal } from 'react-bootstrap';
 import Select from 'react-select';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { getRoleList, addUser, getUserById } from '../../utils/admin';
-import { uploadDoc } from '../../utils/user';
+import { getRoleList, getUserTestById, transferToUser } from '../../utils/admin';
 import moment from 'moment';
 import ImageUploader from 'react-images-upload';
 import { ToastContainer, toast } from 'react-toastify';
 toast.configure();
 
-class AddEditUser extends Component {
+class VerifyUser extends Component {
 	state = {
 		show: false,
 		role: null,
 		status: null,
 		name: '',
+		nameVerified: '',
 		title: '',
 		officialEmail: '',
+		officialEmailVerified: '',
 		invalidofficialEmail: false,
 		personalEmail: '',
 		invalidpersonalEmail: false,
 		primaryMobileNo: '',
+		primaryMobileNoVerified: '',
 		invalidprimaryMobileNo: false,
 		secondaryMobileNo: '',
 		invalidsecondaryMobileNo: false,
 		DOJ: '',
+		dateOfJoiningVerified: '',
 		DOB: '',
+		dateOfBirthVerified: '',
 		bloodGroup: '',
 		aadharNo: '',
+		aadharNoVerified: '',
 		invalidaadharNo: false,
 		address: '',
 		gender: '',
 		bankName: '',
+		bankNameVerified: '',
 		accountNumber: '',
+		accountNumberVerified: '',
 		invalidaccountNumber: false,
 		roleOption: [],
-		document: '',
 		errors: {
 			nameError: null,
 			titleError: null,
@@ -59,13 +65,13 @@ class AddEditUser extends Component {
 	componentDidMount() {
 		this.handleShow();
 		this.RoleList();
-		if (this.props.editObj) {
+		if (this.props.verifyObj) {
 			this.UserData();
 		}
 	}
 
 	UserData = () => {
-		getUserById(this.props.editObj).then(response => {
+		getUserTestById(this.props.verifyObj).then(response => {
 			let data = response.data.data;
 			data.DOB = new Date(data.dateOfBirth);
 			data.DOJ = new Date(data.dateOfJoining);
@@ -81,13 +87,6 @@ class AddEditUser extends Component {
 		else {
 			e.preventDefault()
 		}
-	}
-
-
-	onDrop = (picture) => {
-		this.setState({
-			document: picture,
-		});
 	}
 
 	RoleList = () => {
@@ -116,13 +115,19 @@ class AddEditUser extends Component {
 		});
 	}
 
+	onCheckboxChanged = (e) => {
+		this.setState({
+			[e.currentTarget.name]: e.currentTarget.checked
+		});
+	}
+
 	handleShow = () => {
 		this.setState({ show: true })
 	}
 
 	handleClose = () => {
 		this.setState({ show: false })
-		this.props.userAddEdit();
+		this.props.userVerify();
 	}
 
 	handleRole = (role) => {
@@ -251,11 +256,11 @@ class AddEditUser extends Component {
 	}
 
 	handleSubmit = () => {
-		const { errors, name, title, officialEmail, personalEmail, DOJ, DOB, primaryMobileNo, document,
-			secondaryMobileNo, gender, bloodGroup, aadharNo, address, bankName, accountNumber, role, status, uniqueId, userId, password, token, updatedDate, probationEndDate, createdDate } = this.state;
+		const { errors, name, title, officialEmail, personalEmail, DOJ, DOB, primaryMobileNo,
+			secondaryMobileNo, gender, bloodGroup, aadharNo, address, bankName, accountNumber, role, status, userTestId, updatedDate, createdDate, nameVerified, officialEmailVerified, primaryMobileNoVerified, aadharNoVerified, bankNameVerified, accountNumberVerified, dateOfBirthVerified, dateOfJoiningVerified } = this.state;
 		let isAdd = true;
 
-		if (this.props.editObj) {
+		if (this.props.verifyObj) {
 			for (var val in errors) {
 				if (errors[val]) {
 					errors[val] = true;
@@ -279,39 +284,26 @@ class AddEditUser extends Component {
 		}
 
 		let obj = {
+			nameVerified, officialEmailVerified, primaryMobileNoVerified, aadharNoVerified, bankNameVerified, accountNumberVerified, dateOfBirthVerified, dateOfJoiningVerified,
 			name, title, officialEmail, personalEmail, dateOfJoining, dateOfBirth, primaryMobileNo, secondaryMobileNo,
-			gender, bloodGroup, aadharNo, address, bankName, accountNumber, role, uniqueId, userId, password, token, updatedDate: +new Date(updatedDate), probationEndDate: +new Date(probationEndDate), createdDate: +new Date(createdDate), status
+			gender, bloodGroup, aadharNo, address, bankName, accountNumber, role, userTestId, updatedDate: +new Date(updatedDate), createdDate: +new Date(createdDate), status
 		}
-
 		if (isAdd) {
-			addUser(obj).then(response => {
+			transferToUser(obj).then(response => {
 				if (response.data && response.data.error === 'false') {
 					toast.success(response.data.message, { type: toast.TYPE.SUCCESS, autoClose: 2000 });
+					this.handleClose();
 				}
 				if (response.data && response.data.error === 'true') {
 					toast.error(response.data.message, { type: toast.TYPE.ERROR, autoClose: 2000 })
 				}
-
-				let file1 = document[0] ? document[0] : null;
-				let userDoc = [{
-					documentName: document[0] ? document[0].name : null,
-					description: 'Profile Image',
-					userUniqueId: response.data.data.uniqueId
-				}]
-				let imageObj = { file1, userDoc }
-				if (imageObj) {
-					uploadDoc(imageObj).then(res => {
-						console.log("handleSubmit -> response", res)
-					})
-				}
-				this.handleClose();
 			})
 		}
 		this.setState({ errors: { ...errors } });
 	}
 
 	render() {
-		const { show, role, roleOption, status, name, title, address, gender, bloodGroup, bankName, accountNumber, invalidaccountNumber, officialEmail, personalEmail, invalidpersonalEmail, invalidofficialEmail, primaryMobileNo, invalidprimaryMobileNo, secondaryMobileNo, invalidsecondaryMobileNo, DOJ, DOB, aadharNo, invalidaadharNo, inValidStatus, errors } = this.state;
+		const { show, role, roleOption, status, name, nameVerified, title, address, gender, bloodGroup, bankName, bankNameVerified, accountNumber, accountNumberVerified, invalidaccountNumber, officialEmail, officialEmailVerified, personalEmail, invalidpersonalEmail, invalidofficialEmail, primaryMobileNo, primaryMobileNoVerified, invalidprimaryMobileNo, secondaryMobileNo, invalidsecondaryMobileNo, DOJ, dateOfBirthVerified, dateOfJoiningVerified, DOB, aadharNo, aadharNoVerified, invalidaadharNo, inValidStatus, errors } = this.state;
 		return (
 			<div>
 				<ToastContainer />
@@ -322,7 +314,7 @@ class AddEditUser extends Component {
 					show={show}
 				>
 					<Modal.Header>
-						<Modal.Title>{this.props.editObj ? 'Edit' : 'Add'} User</Modal.Title>
+						<Modal.Title>Verify User</Modal.Title>
 					</Modal.Header>
 					<Modal.Body className="p-4">
 						<div className="row">
@@ -341,6 +333,16 @@ class AddEditUser extends Component {
 									errors.nameError &&
 									<span className="errorMsg">Please enter employee name</span>
 								}
+								<div className="mt-2">
+									<label className="title-orange">
+										<input
+											type="checkbox"
+											className="mr-1"
+											name="nameVerified"
+											checked={nameVerified}
+											onChange={this.onCheckboxChanged} />
+										Name Verified </label>
+								</div>
 							</div>
 							<div className="form-group col-md-4">
 								<label>Employee Title</label>
@@ -373,6 +375,16 @@ class AddEditUser extends Component {
 									errors.DOBError &&
 									<span className="errorMsg">Please select date</span>
 								}
+								<div className="mt-2">
+									<label className="title-orange">
+										<input
+											type="checkbox"
+											className="mr-1"
+											name="dateOfBirthVerified"
+											checked={dateOfBirthVerified}
+											onChange={this.onCheckboxChanged} />
+										Date of Birth Verified </label>
+								</div>
 							</div>
 
 							<div className="form-group col-md-8">
@@ -389,20 +401,6 @@ class AddEditUser extends Component {
 									errors.addressError &&
 									<span className="errorMsg">Please enter address</span>
 								}
-							</div>
-							<div className="col-md-4">
-								<label>Profile Picture</label>
-								<ImageUploader
-									withIcon={true}
-									withPreview={true}
-									withLabel={true}
-									accept="image/*"
-									buttonText='Upload Profile Picture'
-									onChange={this.onDrop}
-									fileTypeError="is not supported file extension"
-									imgExtension={['.jpg', '.gif', '.png', '.jpeg']}
-									maxFileSize={5242880}
-								/>
 							</div>
 							<div className="col-md-4">
 								<label>Gender</label>
@@ -466,6 +464,16 @@ class AddEditUser extends Component {
 									invalidofficialEmail &&
 									<span className="errorMsg">Please enter valid email</span>
 								}
+								<div className="mt-2">
+									<label className="title-orange">
+										<input
+											type="checkbox"
+											className="mr-1"
+											name="officialEmailVerified"
+											checked={officialEmailVerified}
+											onChange={this.onCheckboxChanged} />
+										Email Verified </label>
+								</div>
 							</div>
 							<div className="form-group col-md-4">
 								<label>Personal Email ID</label>
@@ -507,6 +515,16 @@ class AddEditUser extends Component {
 									invalidprimaryMobileNo &&
 									<span className="errorMsg">Please enter valid mobile number</span>
 								}
+								<div className="mt-2">
+									<label className="title-orange">
+										<input
+											type="checkbox"
+											className="mr-1"
+											name="primaryMobileNoVerified"
+											checked={primaryMobileNoVerified}
+											onChange={this.onCheckboxChanged} />
+										Mobile Number Verified </label>
+								</div>
 							</div>
 							<div className="form-group col-md-4">
 								<label>Secondary Mobile No.</label>
@@ -551,6 +569,16 @@ class AddEditUser extends Component {
 									invalidaadharNo &&
 									<span className="errorMsg">Please enter valid aadhar number</span>
 								}
+								<div className="mt-2">
+									<label className="title-orange">
+										<input
+											type="checkbox"
+											className="mr-1"
+											name="aadharNoVerified"
+											checked={aadharNoVerified}
+											onChange={this.onCheckboxChanged} />
+										Aadhar Number Verified </label>
+								</div>
 							</div>
 							<div className="form-group col-md-4">
 								<label>Bank Name</label>
@@ -566,6 +594,16 @@ class AddEditUser extends Component {
 									errors.bankNameError &&
 									<span className="errorMsg">Please enter bank name</span>
 								}
+								<div className="mt-2">
+									<label className="title-orange">
+										<input
+											type="checkbox"
+											className="mr-1"
+											name="bankNameVerified"
+											checked={bankNameVerified}
+											onChange={this.onCheckboxChanged} />
+										Bank Name Verified </label>
+								</div>
 							</div>
 							<div className="form-group col-md-4">
 								<label>Bank Account Number</label>
@@ -587,6 +625,16 @@ class AddEditUser extends Component {
 									invalidaccountNumber &&
 									<span className="errorMsg">Please enter valid account number</span>
 								}
+								<div className="mt-2">
+									<label className="title-orange">
+										<input
+											type="checkbox"
+											className="mr-1"
+											name="accountNumberVerified"
+											checked={accountNumberVerified}
+											onChange={this.onCheckboxChanged} />
+										Account Number Verified </label>
+								</div>
 							</div>
 							<div className="col-md-4">
 								<label>Date Of Joining</label><br />
@@ -604,6 +652,16 @@ class AddEditUser extends Component {
 									errors.DOJError &&
 									<span className="errorMsg">Please select date</span>
 								}
+								<div className="mt-2">
+									<label className="title-orange">
+										<input
+											type="checkbox"
+											className="mr-1"
+											name="dateOfJoiningVerified"
+											checked={dateOfJoiningVerified}
+											onChange={this.onCheckboxChanged} />
+										Date of Joining Verified </label>
+								</div>
 							</div>
 							<div className="col-md-4">
 								<label>Role</label>
@@ -627,7 +685,7 @@ class AddEditUser extends Component {
 					</Modal.Body>
 					<Modal.Footer>
 						<Button className="btn-danger" onClick={this.handleClose}>Cancel</Button>
-						<Button className="btn-success" onClick={this.handleSubmit}>{this.props.editObj ? 'Update' : 'Create'}</Button>
+						<Button className="btn-success" onClick={this.handleSubmit}>Verify</Button>
 					</Modal.Footer>
 				</Modal>
 			</div>
@@ -635,5 +693,5 @@ class AddEditUser extends Component {
 	}
 }
 
-export default AddEditUser
+export default VerifyUser
 
