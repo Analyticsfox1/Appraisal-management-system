@@ -1,5 +1,7 @@
 import axios from 'axios';
 
+const baseURL = "http://13.126.20.61:8080"
+
 const handleResponse = (response) => {
 	return {
 		data: response.data
@@ -15,7 +17,7 @@ const handleError = (error) => {
 }
 
 export const get = (url) => {
-	return axios.get(`${url}`, {
+	return axios.get(process.env.NODE_ENV === "development" ? `${url}` : `${baseURL}${url}`, {
 		headers:
 			{
 				'Access-Control-Allow-Origin': '*',
@@ -30,7 +32,7 @@ export const get = (url) => {
 }
 
 export const post = (url, bodyObj = {}) => {
-	return axios.post(`${url}`, bodyObj, {
+	return axios.post(process.env.NODE_ENV === "development" ? `${url}` : `${baseURL}${url}`, bodyObj, {
 		headers:
 			{
 				'Access-Control-Allow-Origin': '*',

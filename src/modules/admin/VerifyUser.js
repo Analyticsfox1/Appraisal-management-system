@@ -334,14 +334,16 @@ class VerifyUser extends Component {
 									<span className="errorMsg">Please enter employee name</span>
 								}
 								<div className="mt-2">
-									<label className="title-orange">
+									<label className="title-orange checkbox_2">
 										<input
 											type="checkbox"
-											className="mr-1"
+											className="mr-1 checkbox2"
 											name="nameVerified"
 											checked={nameVerified}
-											onChange={this.onCheckboxChanged} />
-										Name Verified </label>
+											onChange={this.onCheckboxChanged} id="check_name" />
+										Name Verified
+										<label className="check_label" for="check_name"></label>
+									</label>
 								</div>
 							</div>
 							<div className="form-group col-md-4">
@@ -376,14 +378,16 @@ class VerifyUser extends Component {
 									<span className="errorMsg">Please select date</span>
 								}
 								<div className="mt-2">
-									<label className="title-orange">
+									<label className="title-orange checkbox_2 ">
 										<input
 											type="checkbox"
-											className="mr-1"
+											className="mr-1 checkbox2"
 											name="dateOfBirthVerified"
 											checked={dateOfBirthVerified}
-											onChange={this.onCheckboxChanged} />
-										Date of Birth Verified </label>
+											onChange={this.onCheckboxChanged} id="check_DOB" />
+										Date of Birth Verified
+										<label className="check_label" for="check_DOB"></label>
+									</label>
 								</div>
 							</div>
 
@@ -465,14 +469,16 @@ class VerifyUser extends Component {
 									<span className="errorMsg">Please enter valid email</span>
 								}
 								<div className="mt-2">
-									<label className="title-orange">
+									<label className="title-orange checkbox_2">
 										<input
 											type="checkbox"
-											className="mr-1"
+											className="mr-1 checkbox2"
 											name="officialEmailVerified"
 											checked={officialEmailVerified}
-											onChange={this.onCheckboxChanged} />
-										Email Verified </label>
+											onChange={this.onCheckboxChanged} id="check_email" />
+										Email Verified
+										<label className="check_label" for="check_email"></label>
+									</label>
 								</div>
 							</div>
 							<div className="form-group col-md-4">
@@ -516,14 +522,17 @@ class VerifyUser extends Component {
 									<span className="errorMsg">Please enter valid mobile number</span>
 								}
 								<div className="mt-2">
-									<label className="title-orange">
+									<label className="title-orange checkbox_2" >
 										<input
 											type="checkbox"
-											className="mr-1"
+											className="mr-1 checkbox2"
 											name="primaryMobileNoVerified"
 											checked={primaryMobileNoVerified}
-											onChange={this.onCheckboxChanged} />
-										Mobile Number Verified </label>
+											onChange={this.onCheckboxChanged} id="check_mobile" />
+										Mobile Number Verified
+										<label className="check_label" for="check_mobile"></label>
+
+									</label>
 								</div>
 							</div>
 							<div className="form-group col-md-4">
@@ -570,14 +579,16 @@ class VerifyUser extends Component {
 									<span className="errorMsg">Please enter valid aadhar number</span>
 								}
 								<div className="mt-2">
-									<label className="title-orange">
+									<label className="title-orange checkbox_2" >
 										<input
 											type="checkbox"
-											className="mr-1"
+											className="mr-1 checkbox2"
 											name="aadharNoVerified"
 											checked={aadharNoVerified}
-											onChange={this.onCheckboxChanged} />
-										Aadhar Number Verified </label>
+											onChange={this.onCheckboxChanged} id="check_aadhar" />
+										Aadhar Number Verified
+										<label className="check_label" for="check_aadhar"></label>
+									</label>
 								</div>
 							</div>
 							<div className="form-group col-md-4">
@@ -595,14 +606,16 @@ class VerifyUser extends Component {
 									<span className="errorMsg">Please enter bank name</span>
 								}
 								<div className="mt-2">
-									<label className="title-orange">
+									<label className="title-orange checkbox_2" >
 										<input
 											type="checkbox"
-											className="mr-1"
+											className="mr-1 checkbox2"
 											name="bankNameVerified"
 											checked={bankNameVerified}
-											onChange={this.onCheckboxChanged} />
-										Bank Name Verified </label>
+											onChange={this.onCheckboxChanged} id="check_bankName"/>
+										Bank Name Verified
+										<label className="check_label" for="check_bankName"></label>
+									</label>
 								</div>
 							</div>
 							<div className="form-group col-md-4">
@@ -626,14 +639,16 @@ class VerifyUser extends Component {
 									<span className="errorMsg">Please enter valid account number</span>
 								}
 								<div className="mt-2">
-									<label className="title-orange">
+									<label className="title-orange checkbox_2" >
 										<input
 											type="checkbox"
-											className="mr-1"
+											className="mr-1 checkbox2"
 											name="accountNumberVerified"
 											checked={accountNumberVerified}
-											onChange={this.onCheckboxChanged} />
-										Account Number Verified </label>
+											onChange={this.onCheckboxChanged} id="check_account" />
+										Account Number Verified
+										<label className="check_label" for="check_account"></label>
+									</label>
 								</div>
 							</div>
 							<div className="col-md-4">
@@ -653,14 +668,16 @@ class VerifyUser extends Component {
 									<span className="errorMsg">Please select date</span>
 								}
 								<div className="mt-2">
-									<label className="title-orange">
+									<label className="title-orange checkbox_2" >
 										<input
 											type="checkbox"
-											className="mr-1"
+											className="mr-1 checkbox2"
 											name="dateOfJoiningVerified"
 											checked={dateOfJoiningVerified}
-											onChange={this.onCheckboxChanged} />
-										Date of Joining Verified </label>
+											onChange={this.onCheckboxChanged} id="check_DOJ" />
+										Date of Joining Verified
+										<label className="check_label" for="check_DOJ"></label>
+									</label>
 								</div>
 							</div>
 							<div className="col-md-4">

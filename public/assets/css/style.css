@@ -1502,3 +1502,49 @@ input[type='radio']:checked:after {
 .access-page .css-2b097c-container{
 	width: 100%
 }
+
+.checkbox_2 {
+	line-height: 1;
+	position: relative;
+	padding-left: 25px;
+}
+
+.checkbox2 {
+	z-index: -1;
+	position: absolute;
+}
+
+.checkbox2+.check_label {
+	position: absolute;
+	top: 0;
+	left: 2px;
+	width: 17px;
+	height: 17px;
+	border: 1px solid #ccc;
+	margin: 0;
+	transition: .3s;
+	background: #fff;
+}
+
+.checkbox2+.check_label:after {
+	position: absolute;
+	top: 5px;
+	left: 3px;
+	width: 8px;
+	height: 4px;
+	border: 2px solid #fff;
+	content: '';
+	transform: rotate(-45deg) scale(0);
+	border-top: none;
+	border-right: none;
+	transition: .3s;
+}
+
+.checkbox2:checked+.check_label {
+	background: #f08745;
+	border-color: #f08745;
+}
+
+.checkbox2:checked+.check_label:After {
+	transform: rotate(-45deg) scale(1);
+}
