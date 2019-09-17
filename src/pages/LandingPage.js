@@ -16,7 +16,7 @@ class LandingPage extends Component {
 				</section>
 				<section className="w3-aboutbg w3-container pt-5">
 					<h3 className="w3-center">Introduction</h3>
-					<p className="text-center p-5">Manual tracking can be wrong most of the times. Due to this reason, companies across the world are relying on software to track performance. Uprise comes with various features which make performance tracking easy. This software stores data regarding employee performance. Because it is easy to use, human resource department can derive ample benefits by using it. Goal setting and revising, coaching, development and planning, everything can be done using Uprise. This is a complete appraisal tracking solution designed to ease the difficulties of human resource job.</p>
+					<p className="text-center p-4">Manual tracking can be wrong most of the times. Due to this reason, companies across the world are relying on software to track performance. Uprise comes with various features which make performance tracking easy. This software stores data regarding employee performance. Because it is easy to use, human resource department can derive ample benefits by using it. Goal setting and revising, coaching, development and planning, everything can be done using Uprise. This is a complete appraisal tracking solution designed to ease the difficulties of human resource job.</p>
 					<hr />
 				</section>
 				<section className="w3-aboutbg w3-container pt-5">
