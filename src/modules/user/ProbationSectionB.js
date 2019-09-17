@@ -10,6 +10,7 @@ const ratingOption = [
 class ProbationSectionB extends Component {
 
 	state = {
+		probPerfApprList: [],
 		rating1: null,
 		rating2: null,
 		rating3: null,
