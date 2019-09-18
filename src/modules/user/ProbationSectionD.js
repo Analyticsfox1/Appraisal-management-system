@@ -5,11 +5,11 @@ class ProbationSectionD extends Component {
 	constructor() {
 		super();
 		this.state = {
-			overallQ1: '',
-			overallQ2: '',
+			ovrallEmpPerfRate: '',
+			mangrComment: '',
 			errors: {
-				overallQ1Error: null,
-				overallQ2Error: null,
+				ovrallEmpPerfRateError: null,
+				mangrCommentError: null,
 			}
 		}
 	}
@@ -33,22 +33,22 @@ class ProbationSectionD extends Component {
 	}
 
 	render() {
-		const { overallQ1, overallQ2, errors } = this.state;
+		const { ovrallEmpPerfRate, mangrComment, errors } = this.state;
 		return (
-			<section className="tab-body dash_space text-justify">
+			<section className="tab-body dash_space text-justify probation">
 				<div className="row mt-3">
 					<span className="col-md-4">Based on the ratings above, rate the employee's overall performance</span>
 					<div className="col-md-8">
 						<input
 							type="text"
 							className="form-input"
-							name="overallQ1"
-							value={overallQ1}
+							name="ovrallEmpPerfRate"
+							value={ovrallEmpPerfRate}
 							onChange={this.handleChange}
 							onBlur={this.handleValidate}
 							placeholder="Enter Answer" />
 						{
-							errors.overallQ1Error &&
+							errors.ovrallEmpPerfRateError &&
 							<span className="errorMsg">Please enter answer</span>
 						}
 					</div>
@@ -59,15 +59,20 @@ class ProbationSectionD extends Component {
 						<input
 							type="text"
 							className="form-input"
-							name="overallQ2"
-							value={overallQ2}
+							name="mangrComment"
+							value={mangrComment}
 							onChange={this.handleChange}
 							onBlur={this.handleValidate}
 							placeholder="Enter Answer" />
 						{
-							errors.overallQ2Error &&
+							errors.mangrCommentError &&
 							<span className="errorMsg">Please enter answer</span>
 						}
+					</div>
+				</div>
+				<div className="d-flex justify-content-center mt-5">
+					<div className="form-group">
+						<button onClick={this.handleSubmit} className="form-submit" > Next</button>
 					</div>
 				</div>
 			</section>

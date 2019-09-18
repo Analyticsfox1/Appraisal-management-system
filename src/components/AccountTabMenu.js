@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 import { Tabs, Tab } from 'react-bootstrap';
-import UpdatePassword from '../pages/UpdatePassword';
+import UpdatePassword from '../modules/user/UpdatePassword';
 
 class AccountTabMenu extends Component {
 	state = {
-		key: 'update-password'
+		key: 'account-info'
 	}
 
 	render() {
@@ -13,8 +13,9 @@ class AccountTabMenu extends Component {
 			<div className="mt-4 tabs border_0">
 				<Tabs activeKey={key} onSelect={(key) => this.setState({ key })}>
 					<Tab eventKey="account-info" title="Account Details">
-						<section className="tab-body">
-							<h5 className="title-blue">Account Details</h5>
+						<section className="tab-body text-center">
+							<p className="fs-22 title-blue">Account Details</p>
+							<img src="./assets/images/home.jpg" />
 						</section>
 					</Tab>
 					<Tab eventKey="update-password" title="Update Password">

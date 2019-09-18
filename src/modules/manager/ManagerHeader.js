@@ -3,7 +3,7 @@ import { logout } from '../../utils/user';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-class CeoHeader extends Component {
+class ManagerHeader extends Component {
 
 	onLogOut = () => {
 		logout().then(response => {
@@ -29,4 +29,4 @@ class CeoHeader extends Component {
 	}
 }
 
-export default CeoHeader
+export default ManagerHeader

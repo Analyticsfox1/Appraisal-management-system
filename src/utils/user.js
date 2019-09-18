@@ -61,4 +61,11 @@ export const getUserDashboard = () => {
 	});
 }
 
+//Add probation form API
+export const addProbationForm = data => {
+	return post(`/uprise/kra/addProbationForm`, data).then(res => {
+		console.log('RESPONSE :: Add Probation form ::: ', res);
+		return res;
+	});
+}
 

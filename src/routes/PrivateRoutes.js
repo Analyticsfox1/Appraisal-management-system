@@ -8,6 +8,7 @@ import PerformanceAppraisal from '../modules/user/PerformanceAppraisal';
 import MonthlyMeeting from '../modules/user/MonthlyMeeting';
 import ProbationForm from '../modules/user/ProbationForm';
 import MyAccount from '../modules/user/MyAccount';
+import UpdatePassword from '../modules/user/UpdatePassword';
 //  Admin Routes 
 import AdminDashboard from '../modules/admin/AdminDashboard';
 import UserManagement from '../modules/admin/UserManagement';
@@ -23,6 +24,8 @@ import CEOKraManagement from '../modules/ceo/KraManagement';
 import CEOTeamManagement from '../modules/ceo/TeamManagement';
 import CEOOrganizationGoal from '../modules/ceo/OrganizationGoal';
 import CEOPushNotification from '../modules/ceo/PushNotification';
+//  Manager Routes 
+import ManagerDashboard from '../modules/manager/ManagerDashboard';
 
 class PrivateRoutes extends Component {
 
@@ -34,6 +37,7 @@ class PrivateRoutes extends Component {
 				<Route exact path='/performance-appraisal' component={PerformanceAppraisal} />
 				<Route exact path='/monthly-meeting' component={MonthlyMeeting} />
 				<Route exact path='/account' component={MyAccount} />
+				<Route exact path='/update-password' component={UpdatePassword} />
 				<Route exact path='/probation-form' component={ProbationForm} />
 				{/* Admin Routes */}
 				<Route exact path='/admin-dashboard' component={AdminDashboard} />
@@ -50,6 +54,9 @@ class PrivateRoutes extends Component {
 				<Route exact path='/CEO-team-management' component={CEOTeamManagement} />
 				<Route exact path='/CEO-organizational-goal' component={CEOOrganizationGoal} />
 				<Route exact path='/CEO-push-notification' component={CEOPushNotification} />
+				{/* Manager Routes */}
+				<Route exact path='/manager-dashboard' component={ManagerDashboard} />
+				
 				{/* <Route path="*" component={PageNotFound} /> */}
 			</>
 		)

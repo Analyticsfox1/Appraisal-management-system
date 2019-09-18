@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import Header from './Header';
-import { updatePassword } from '../utils/user';
+import { updatePassword } from '../../utils/user';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 

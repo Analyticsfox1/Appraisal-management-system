@@ -29,6 +29,10 @@
 	},
 	"homepage": "http://13.126.20.61/uprise",
 	"proxy": "http://13.126.20.61:8080",
+	"/uprise": {
+		"target": "http://13.126.20.61:8080",
+		"changeOrigin": true
+	},
 	"eslintConfig": {
 		"extends": "react-app"
 	},

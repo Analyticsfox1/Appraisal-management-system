@@ -7,7 +7,6 @@ import AboutUs from '../pages/AboutUs';
 import Register from '../pages/Register';
 import ForgotPassword from '../pages/ForgotPassword';
 import OTPCode from '../pages/OTPCode';
-import UpdatePassword from '../pages/UpdatePassword';
 import PrivateRoutes from './PrivateRoutes';
 
 class PublicRoutes extends Component {
@@ -21,7 +20,6 @@ class PublicRoutes extends Component {
 					<Route exact path='/login' component={Login} />
 					<Route exact path='/register' component={Register} />
 					<Route exact path='/forgot-password' component={ForgotPassword} />
-					<Route exact path='/update-password' component={UpdatePassword} />
 					<PrivateRoutes />
 				</Switch>
 			</Router>

@@ -72,7 +72,7 @@ class Dashboard extends Component {
 												) :
 												<div className="no_data text-center">
 													<img alt="user" src="./assets/images/user.png" />
-													No New Joinees i past 15 days.
+													No New Joinees in past 15 days.
 												</div>
 										}
 									</div>

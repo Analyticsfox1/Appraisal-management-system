@@ -1198,16 +1198,6 @@ input.form-input.signature {
 	border-radius: 0px;
 }
 
-.probation-form .css-yk16xz-control {
-	height: 51px;
-	;
-}
-
-.probation-form .css-1pahdxg-control {
-	height: 51px;
-	;
-}
-
 .table-border {
 	border: #e46a22 solid 1px;
 	padding: 8px 15px;
@@ -1446,7 +1436,7 @@ input[type='radio']:checked:after {
 	justify-content: center;
 }
 
-.admin-dashboard .font-weight-normal{
+.admin-dashboard .font-weight-normal {
 	font-weight: 500 !important;
 }
 
@@ -1499,14 +1489,14 @@ input[type='radio']:checked:after {
 	width: 293px;
 }
 
-.access-page .css-2b097c-container{
+.access-page .css-2b097c-container {
 	width: 100%
 }
 
 .checkbox_2 {
 	line-height: 1;
 	position: relative;
-	padding-left: 25px;
+	padding-left: 30px;
 }
 
 .checkbox2 {
@@ -1520,7 +1510,7 @@ input[type='radio']:checked:after {
 	left: 2px;
 	width: 17px;
 	height: 17px;
-	border: 1px solid #ccc;
+	border: 2px solid #a7a4a4;
 	margin: 0;
 	transition: .3s;
 	background: #fff;
@@ -1547,4 +1537,19 @@ input[type='radio']:checked:after {
 
 .checkbox2:checked+.check_label:After {
 	transform: rotate(-45deg) scale(1);
+}
+
+.probation .form-submit {
+	width: 175px;
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	-o-border-radius: 5px;
+	-ms-border-radius: 5px;
+	padding: 10px 0px;
+	box-sizing: border-box;
+	font-size: 16px;
+	font-weight: 600;
+	color: #fff;
+	border: none;
+	background-color: #d16425;
 }

@@ -90,7 +90,7 @@ export const getEmployeeList = () => {
 
 //admin Dashboard API
 export const getAdminDashboard = () => {
-	return get(`/uprise/kra/getHrDashboard`).then(res => {
+	return get(`/uprise/access/getHrDashboard`).then(res => {
 		console.log('RESPONSE :: Admin Dashboard ::: ', res);
 		return res;
 	});
@@ -98,7 +98,7 @@ export const getAdminDashboard = () => {
 
 // get all members assigned list API
 export const getMemberAssignedList = () => {
-	return get(`/uprise/kra/getAssignedMembers`).then(res => {
+	return get(`/uprise/access/getAssignedMembers`).then(res => {
 		console.log('RESPONSE :: Member Assigned List ::: ', res);
 		return res;
 	});
@@ -106,7 +106,7 @@ export const getMemberAssignedList = () => {
 
 // get all members not assigned list API
 export const getMemberNotAssignedList = () => {
-	return get(`/uprise/kra/getNotAssignedMembers`).then(res => {
+	return get(`/uprise/access/getNotAssignedMembers`).then(res => {
 		console.log('RESPONSE :: Member Not Assigned List ::: ', res);
 		return res;
 	});

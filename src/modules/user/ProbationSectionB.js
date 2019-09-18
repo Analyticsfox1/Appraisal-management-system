@@ -10,113 +10,86 @@ const ratingOption = [
 class ProbationSectionB extends Component {
 
 	state = {
-		probPerfApprList: [],
-		rating1: null,
-		rating2: null,
-		rating3: null,
-		rating4: null,
-		rating5: null,
-		rating6: null,
-		rating7: null,
-		rating8: null,
-		manager1: '',
-		manager2: '',
-		manager3: '',
-		manager4: '',
-		manager5: '',
-		manager6: '',
-		manager7: '',
-		manager8: '',
-		employee1: '',
-		employee2: '',
-		employee3: '',
-		employee4: '',
-		employee5: '',
-		employee6: '',
-		employee7: '',
-		employee8: '',
+		probPerfApprList: {},
 		errors: {
-			manager1Error: null,
-			manager2Error: null,
-			manager3Error: null,
-			manager4Error: null,
-			manager5Error: null,
-			manager6Error: null,
-			manager7Error: null,
-			manager8Error: null,
-			employee1Error: null,
-			employee2Error: null,
-			employee3Error: null,
-			employee4Error: null,
-			employee5Error: null,
-			employee6Error: null,
-			employee7Error: null,
-			employee8Error: null,
+			managerCommentsError: null,
+			employeeCommentsError: null,
+			ratingError: null
 		}
 	}
 
-	handleChange = (e) => {
-		this.setState({
-			[e.target.name]: e.target.value
-		})
-	}
-
-	handleValidate = (e) => {
-		const { errors } = this.state;
-		let name = e.target.name;
+	handleManagerChange = (e, name) => {
 		let value = e.target.value;
-		if (value === "" || value === null || value === undefined) {
-			this.setState({ errors: { ...errors, [name + 'Error']: true } });
+		this.setState(state => ({
+			selectedManager: {
+				...state.selectedManager,
+				[name]: value,
+			},
+			probPerfApprList: {
+				...state.probPerfApprList,
+				[name]: {
+					...state.probPerfApprList[name],
+					managerComments: value
+				}
+			}
+		}))
+	}
+
+	handleEmployeeChange = (e, name) => {
+		let value = e.target.value;
+		this.setState(state => ({
+			selectedEmployee: {
+				...state.selectedEmployee,
+				[name]: value,
+			},
+			probPerfApprList: {
+				...state.probPerfApprList,
+				[name]: {
+					...state.probPerfApprList[name],
+					employeeComments: value
+				}
+			}
+		}))
+	}
+
+	handleRating = (select, name) => {
+		this.setState(state => ({
+			selectedRating: {
+				...state.selectedRating,
+				[name]: select,
+			},
+			probPerfApprList: {
+				...state.probPerfApprList,
+				[name]: {
+					...state.probPerfApprList[name],
+					competency: name,
+					rating: select.value
+				}
+			}
+		}))
+	}
+
+	handleSubmit = () => {
+		const { errors, probPerfApprList } = this.state;
+		for (var val in errors) {
+			if (errors[val] === null) {
+				errors[val] = true;
+			}
 		}
-		else {
-			this.setState({ errors: { ...errors, [name + 'Error']: false } });
-		}
-	}
-
-	handleRating1 = rating1 => {
-		this.setState({ rating1 });
-	}
-
-	handleRating2 = rating2 => {
-		this.setState({ rating2 });
-	}
-
-	handleRating3 = rating3 => {
-		this.setState({ rating3 });
-	}
-
-	handleRating4 = rating4 => {
-		this.setState({ rating4 });
-	}
-
-	handleRating5 = rating5 => {
-		this.setState({ rating5 });
-	}
-
-	handleRating6 = rating6 => {
-		this.setState({ rating6 });
-	}
-
-	handleRating7 = rating7 => {
-		this.setState({ rating7 });
-	}
-
-	handleRating8 = rating8 => {
-		this.setState({ rating8 });
+		this.setState({ errors: { ...errors } });
 	}
 
 	render() {
-		const { rating1, rating2, rating3, rating4, rating5, rating6, rating7, rating8, manager1, manager2, manager3, manager4, manager5, manager6, manager7, manager8,
-			employee1, employee2, employee3, employee4, employee5, employee6, employee7, employee8, errors } = this.state;
+		const { selectedRating, selectedManager, selectedEmployee, probPerfApprList, errors } = this.state;
 		return (
-			<section className="tab-body probation-form dash_space">
+			<section className="tab-body probation-form dash_space probation">
 				<div className="row">
 					<div className="col-md-8">
 						<div className="rating-box">
 							<h6 className="title-orange text-center">Rating Description</h6>
 							<div className="row mt-3">
 								<span className="col-md-4"> 1. Below Expectations</span>
-								<span className="col-md-8 text-justify"> Performing in some areas only, needs significant improvement to achieve the required standard.  There are weaknesses apparent in the performance of the employee which can/cannot be overcome at this time.</span>
+								<span className="col-md-8 text-justify"> Performing in some areas only, needs significant improvement to achieve the required standard.  There are weaknesses apparent in the performance of the employeeComments which can/cannot be overcome at this time.</span>
 							</div>
 							<div className="row mt-2">
 								<span className="col-md-4"> 2. Met Expectations</span>
@@ -124,7 +97,7 @@ class ProbationSectionB extends Component {
 							</div>
 							<div className="row mt-2">
 								<span className="col-md-4"> 3. Expectations met at high standard</span>
-								<span className="col-md-8 text-justify"> Very good performance, employee performing very well to a noticeably good quality, with a high level of output to a high standard.</span>
+								<span className="col-md-8 text-justify"> Very good performance, employeeComments performing very well to a noticeably good quality, with a high level of output to a high standard.</span>
 							</div>
 							<div className="row mt-2">
 								<span className="col-md-4"> 4. Not relevant to the role</span>
@@ -136,13 +109,13 @@ class ProbationSectionB extends Component {
 						<div className="rating-box text-justify">
 							<h6 className="title-orange text-center">Notes</h6>
 							<div className="row mt-3">
-								<span className="col-md-12"> 1. Rate the employee's performance against the competencies, concluding with the overall rating for this probation review. </span>
+								<span className="col-md-12"> 1. Rate the employeeComments's performance against the competencies, concluding with the overall rating for this probation review. </span>
 							</div>
 							<div className="row mt-3">
 								<span className="col-md-12"> 2. If the competency is not relevant, select "Not relevant to the role". </span>
 							</div>
 							<div className="row mt-3">
-								<span className="col-md-12"> 3. For ratings that are "Below Expectations", agree for Performance Improvement Plan (PIP) for the employee </span>
+								<span className="col-md-12"> 3. For ratings that are "Below Expectations", agree for Performance Improvement Plan (PIP) for the employeeComments </span>
 							</div>
 						</div>
 					</div>
@@ -169,8 +142,8 @@ class ProbationSectionB extends Component {
 						</div>
 						<div className="col-md-3">
 							<Select
-								value={rating1}
-								onChange={this.handleRating1}
+								value={selectedRating && selectedRating["Time Keeping"]}
+								onChange={(select) => this.handleRating(select, "Time Keeping")}
 								options={ratingOption}
 							/>
 						</div>
@@ -178,13 +151,11 @@ class ProbationSectionB extends Component {
 							<textarea
 								type="text"
 								className="form-input"
-								name="manager1"
-								value={manager1}
-								onChange={this.handleChange}
-								onBlur={this.handleValidate}
+								value={selectedManager && selectedManager["Time Keeping"]}
+								onChange={(e) => this.handleManagerChange(e, "Time Keeping")}
 								placeholder="Enter Comment" />
 							{
-								errors.manager1Error &&
+								errors.managerCommentsError &&
 								<span className="errorMsg">Please enter comment</span>
 							}
 						</div>
@@ -192,13 +163,11 @@ class ProbationSectionB extends Component {
 							<textarea
 								type="text"
 								className="form-input"
-								name="employee1"
-								value={employee1}
-								onChange={this.handleChange}
-								onBlur={this.handleValidate}
+								value={selectedEmployee && selectedEmployee["Time Keeping"]}
+								onChange={(e) => this.handleEmployeeChange(e, "Time Keeping")}
 								placeholder="Enter Comment" />
 							{
-								errors.employee1Error &&
+								errors.employeeCommentsError &&
 								<span className="errorMsg">Please enter comment</span>
 							}
 						</div>
@@ -211,8 +180,8 @@ class ProbationSectionB extends Component {
 						</div>
 						<div className="col-md-3">
 							<Select
-								value={rating2}
-								onChange={this.handleRating2}
+								value={selectedRating && selectedRating["Knowledge of Testing/ Development Process"]}
+								onChange={(select) => this.handleRating(select, "Knowledge of Testing/ Development Process")}
 								options={ratingOption}
 							/>
 						</div>
@@ -220,13 +189,11 @@ class ProbationSectionB extends Component {
 							<textarea
 								type="text"
 								className="form-input"
-								name="manager2"
-								value={manager2}
-								onChange={this.handleChange}
-								onBlur={this.handleValidate}
+								value={selectedManager && selectedManager["Knowledge of Testing/ Development Process"]}
+								onChange={(e) => this.handleManagerChange(e, "Knowledge of Testing/ Development Process")}
 								placeholder="Enter Comment" />
 							{
-								errors.manager2Error &&
+								errors.managerCommentsError &&
 								<span className="errorMsg">Please enter comment</span>
 							}
 						</div>
@@ -234,13 +201,11 @@ class ProbationSectionB extends Component {
 							<textarea
 								type="text"
 								className="form-input"
-								name="employee2"
-								value={employee2}
-								onChange={this.handleChange}
-								onBlur={this.handleValidate}
+								value={selectedEmployee && selectedEmployee["Knowledge of Testing/ Development Process"]}
+								onChange={(e) => this.handleEmployeeChange(e, "Knowledge of Testing/ Development Process")}
 								placeholder="Enter Comment" />
 							{
-								errors.employee2Error &&
+								errors.employeeCommentsError &&
 								<span className="errorMsg">Please enter comment</span>
 							}
 						</div>
@@ -253,8 +218,8 @@ class ProbationSectionB extends Component {
 						</div>
 						<div className="col-md-3">
 							<Select
-								value={rating3}
-								onChange={this.handleRating3}
+								value={selectedRating && selectedRating["Motivation, Flexibility and Dependability"]}
+								onChange={(select) => this.handleRating(select, "Motivation, Flexibility and Dependability")}
 								options={ratingOption}
 							/>
 						</div>
@@ -262,13 +227,11 @@ class ProbationSectionB extends Component {
 							<textarea
 								type="text"
 								className="form-input"
-								name="manager3"
-								value={manager3}
-								onChange={this.handleChange}
-								onBlur={this.handleValidate}
+								value={selectedManager && selectedManager["Motivation, Flexibility and Dependability"]}
+								onChange={(e) => this.handleManagerChange(e, "Motivation, Flexibility and Dependability")}
 								placeholder="Enter Comment" />
 							{
-								errors.manager3Error &&
+								errors.managerCommentsError &&
 								<span className="errorMsg">Please enter comment</span>
 							}
 						</div>
@@ -276,13 +239,11 @@ class ProbationSectionB extends Component {
 							<textarea
 								type="text"
 								className="form-input"
-								name="employee3"
-								value={employee3}
-								onChange={this.handleChange}
-								onBlur={this.handleValidate}
+								value={selectedEmployee && selectedEmployee["Motivation, Flexibility and Dependability"]}
+								onChange={(e) => this.handleEmployeeChange(e, "Motivation, Flexibility and Dependability")}
 								placeholder="Enter Comment" />
 							{
-								errors.employee3Error &&
+								errors.employeeCommentsError &&
 								<span className="errorMsg">Please enter comment</span>
 							}
 						</div>
@@ -295,8 +256,8 @@ class ProbationSectionB extends Component {
 						</div>
 						<div className="col-md-3">
 							<Select
-								value={rating4}
-								onChange={this.handleRating4}
+								value={selectedRating && selectedRating["Initiative and openness to learning"]}
+								onChange={(select) => this.handleRating(select, "Initiative and openness to learning")}
 								options={ratingOption}
 							/>
 						</div>
@@ -304,13 +265,11 @@ class ProbationSectionB extends Component {
 							<textarea
 								type="text"
 								className="form-input"
-								name="manager4"
-								value={manager4}
-								onChange={this.handleChange}
-								onBlur={this.handleValidate}
+								value={selectedManager && selectedManager["Initiative and openness to learning"]}
+								onChange={(e) => this.handleManagerChange(e, "Initiative and openness to learning")}
 								placeholder="Enter Comment" />
 							{
-								errors.manager4Error &&
+								errors.managerCommentsError &&
 								<span className="errorMsg">Please enter comment</span>
 							}
 						</div>
@@ -318,13 +277,11 @@ class ProbationSectionB extends Component {
 							<textarea
 								type="text"
 								className="form-input"
-								name="employee4"
-								value={employee4}
-								onChange={this.handleChange}
-								onBlur={this.handleValidate}
+								value={selectedEmployee && selectedEmployee["Initiative and openness to learning"]}
+								onChange={(e) => this.handleEmployeeChange(e, "Initiative and openness to learning")}
 								placeholder="Enter Comment" />
 							{
-								errors.employee4Error &&
+								errors.employeeCommentsError &&
 								<span className="errorMsg">Please enter comment</span>
 							}
 						</div>
@@ -337,8 +294,8 @@ class ProbationSectionB extends Component {
 						</div>
 						<div className="col-md-3">
 							<Select
-								value={rating5}
-								onChange={this.handleRating5}
+								value={selectedRating && selectedRating["Communication Skills /Interpersonal Skills"]}
+								onChange={(select) => this.handleRating(select, "Communication Skills /Interpersonal Skills")}
 								options={ratingOption}
 							/>
 						</div>
@@ -346,13 +303,11 @@ class ProbationSectionB extends Component {
 							<textarea
 								type="text"
 								className="form-input"
-								name="manager5"
-								value={manager5}
-								onChange={this.handleChange}
-								onBlur={this.handleValidate}
+								value={selectedManager && selectedManager["Communication Skills /Interpersonal Skills"]}
+								onChange={(e) => this.handleManagerChange(e, "Communication Skills /Interpersonal Skills")}
 								placeholder="Enter Comment" />
 							{
-								errors.manager5Error &&
+								errors.managerCommentsError &&
 								<span className="errorMsg">Please enter comment</span>
 							}
 						</div>
@@ -360,13 +315,11 @@ class ProbationSectionB extends Component {
 							<textarea
 								type="text"
 								className="form-input"
-								name="employee5"
-								value={employee5}
-								onChange={this.handleChange}
-								onBlur={this.handleValidate}
+								value={selectedEmployee && selectedEmployee["Communication Skills /Interpersonal Skills"]}
+								onChange={(e) => this.handleEmployeeChange(e, "Communication Skills /Interpersonal Skills")}
 								placeholder="Enter Comment" />
 							{
-								errors.employee5Error &&
+								errors.employeeCommentsError &&
 								<span className="errorMsg">Please enter comment</span>
 							}
 						</div>
@@ -379,8 +332,8 @@ class ProbationSectionB extends Component {
 						</div>
 						<div className="col-md-3">
 							<Select
-								value={rating6}
-								onChange={this.handleRating6}
+								value={selectedRating && selectedRating["Team Work"]}
+								onChange={(select) => this.handleRating(select, "Team Work")}
 								options={ratingOption}
 							/>
 						</div>
@@ -388,13 +341,11 @@ class ProbationSectionB extends Component {
 							<textarea
 								type="text"
 								className="form-input"
-								name="manager6"
-								value={manager6}
-								onChange={this.handleChange}
-								onBlur={this.handleValidate}
+								value={selectedManager && selectedManager["Team Work"]}
+								onChange={(e) => this.handleManagerChange(e, "Team Work")}
 								placeholder="Enter Comment" />
 							{
-								errors.manager6Error &&
+								errors.managerCommentsError &&
 								<span className="errorMsg">Please enter comment</span>
 							}
 						</div>
@@ -402,13 +353,11 @@ class ProbationSectionB extends Component {
 							<textarea
 								type="text"
 								className="form-input"
-								name="employee6"
-								value={employee6}
-								onChange={this.handleChange}
-								onBlur={this.handleValidate}
+								value={selectedEmployee && selectedEmployee["Team Work"]}
+								onChange={(e) => this.handleEmployeeChange(e, "Team Work")}
 								placeholder="Enter Comment" />
 							{
-								errors.employee6Error &&
+								errors.employeeCommentsError &&
 								<span className="errorMsg">Please enter comment</span>
 							}
 						</div>
@@ -421,8 +370,8 @@ class ProbationSectionB extends Component {
 						</div>
 						<div className="col-md-3">
 							<Select
-								value={rating7}
-								onChange={this.handleRating7}
+								value={selectedRating && selectedRating["Diligence"]}
+								onChange={(select) => this.handleRating(select, "Diligence")}
 								options={ratingOption}
 							/>
 						</div>
@@ -430,13 +379,11 @@ class ProbationSectionB extends Component {
 							<textarea
 								type="text"
 								className="form-input"
-								name="manager7"
-								value={manager7}
-								onChange={this.handleChange}
-								onBlur={this.handleValidate}
+								value={selectedManager && selectedManager["Diligence"]}
+								onChange={(e) => this.handleManagerChange(e, "Diligence")}
 								placeholder="Enter Comment" />
 							{
-								errors.manager7Error &&
+								errors.managerCommentsError &&
 								<span className="errorMsg">Please enter comment</span>
 							}
 						</div>
@@ -444,13 +391,11 @@ class ProbationSectionB extends Component {
 							<textarea
 								type="text"
 								className="form-input"
-								name="employee7"
-								value={employee7}
-								onChange={this.handleChange}
-								onBlur={this.handleValidate}
+								value={selectedEmployee && selectedEmployee["Diligence"]}
+								onChange={(e) => this.handleEmployeeChange(e, "Diligence")}
 								placeholder="Enter Comment" />
 							{
-								errors.employee7Error &&
+								errors.employeeCommentsError &&
 								<span className="errorMsg">Please enter comment</span>
 							}
 						</div>
@@ -463,8 +408,8 @@ class ProbationSectionB extends Component {
 						</div>
 						<div className="col-md-3">
 							<Select
-								value={rating8}
-								onChange={this.handleRating8}
+								value={selectedRating && selectedRating["Attention to Detail"]}
+								onChange={(select) => this.handleRating(select, "Attention to Detail")}
 								options={ratingOption}
 							/>
 						</div>
@@ -472,13 +417,11 @@ class ProbationSectionB extends Component {
 							<textarea
 								type="text"
 								className="form-input"
-								name="manager8"
-								value={manager8}
-								onChange={this.handleChange}
-								onBlur={this.handleValidate}
+								value={selectedManager && selectedManager["Attention to Detail"]}
+								onChange={(e) => this.handleManagerChange(e, "Attention to Detail")}
 								placeholder="Enter Comment" />
 							{
-								errors.manager8Error &&
+								errors.managerCommentsError &&
 								<span className="errorMsg">Please enter comment</span>
 							}
 						</div>
@@ -486,15 +429,18 @@ class ProbationSectionB extends Component {
 							<textarea
 								type="text"
 								className="form-input"
-								name="employee8"
-								value={employee8}
-								onChange={this.handleChange}
-								onBlur={this.handleValidate}
+								value={selectedEmployee && selectedEmployee["Attention to Detail"]}
+								onChange={(e) => this.handleEmployeeChange(e, "Attention to Detail")}
 								placeholder="Enter Comment" />
 							{
-								errors.employee8Error &&
+								errors.employeeCommentsError &&
 								<span className="errorMsg">Please enter comment</span>
 							}
+						</div>
+					</div>
+					<div className="d-flex justify-content-center mt-5">
+						<div className="form-group">
+							<button onClick={this.handleSubmit} className="form-submit" > Next</button>
 						</div>
 					</div>
 				</div>
