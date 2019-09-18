@@ -63,48 +63,50 @@ class ProbationSectionC extends Component {
 	render() {
 		const { coursesAttndToDate, coursesFuture, errors } = this.state;
 		return (
-			<section className="tab-body dash_space text-justify probation">
+			<>
 				<ToastContainer />
-				<div className="row mt-3">
-					<span className="col-md-4">Outline any courses the employee has attended to date.</span>
-					<div className="col-md-8">
-						<input
-							type="text"
-							className="form-input"
-							name="coursesAttndToDate"
-							value={coursesAttndToDate}
-							onChange={this.handleChange}
-							onBlur={this.handleValidate}
-							placeholder="Enter Answer" />
-						{
-							errors.coursesAttndToDateError &&
-							<span className="errorMsg">Please enter answer</span>
-						}
+				<section className="tab-body dash_space text-justify probation">
+					<div className="row mt-3">
+						<span className="col-md-4">Outline any courses the employee has attended to date.</span>
+						<div className="col-md-8">
+							<input
+								type="text"
+								className="form-input"
+								name="coursesAttndToDate"
+								value={coursesAttndToDate}
+								onChange={this.handleChange}
+								onBlur={this.handleValidate}
+								placeholder="Enter Answer" />
+							{
+								errors.coursesAttndToDateError &&
+								<span className="errorMsg">Please enter answer</span>
+							}
+						</div>
 					</div>
-				</div>
-				<div className="row mt-3">
-					<span className="col-md-4">Indicate any future courses that the employee should complete and wheteher they are mandatory or recommended in order to complete the probationary period.</span>
-					<div className="col-md-8">
-						<input
-							type="text"
-							className="form-input"
-							name="coursesFuture"
-							value={coursesFuture}
-							onChange={this.handleChange}
-							onBlur={this.handleValidate}
-							placeholder="Enter Answer" />
-						{
-							errors.coursesFutureError &&
-							<span className="errorMsg">Please enter answer</span>
-						}
+					<div className="row mt-3">
+						<span className="col-md-4">Indicate any future courses that the employee should complete and wheteher they are mandatory or recommended in order to complete the probationary period.</span>
+						<div className="col-md-8">
+							<input
+								type="text"
+								className="form-input"
+								name="coursesFuture"
+								value={coursesFuture}
+								onChange={this.handleChange}
+								onBlur={this.handleValidate}
+								placeholder="Enter Answer" />
+							{
+								errors.coursesFutureError &&
+								<span className="errorMsg">Please enter answer</span>
+							}
+						</div>
 					</div>
-				</div>
-				<div className="d-flex justify-content-center mt-5">
-					<div className="form-group">
-						<button onClick={this.handleSubmit} className="form-submit" > Next</button>
+					<div className="d-flex justify-content-center mt-5">
+						<div className="form-group">
+							<button onClick={this.handleSubmit} className="form-submit" > Next</button>
+						</div>
 					</div>
-				</div>
-			</section>
+				</section>
+			</>
 		)
 	}
 }
