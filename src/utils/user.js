@@ -15,7 +15,7 @@ export const uploadDoc = data => {
 		formData[key] = data[key]
 	});
 	console.log("TCL: formData", formData)
-	return post(`/uprise/authentication/uploadDoc`, formData).then(res => {
+	return post(`/uprise/authentication/uploadDoc`, formData, 'multipart/form-data').then(res => {
 		console.log('RESPONSE :: Upload Document ::: ', res);
 		return res;
 	});
@@ -65,6 +65,14 @@ export const getUserDashboard = () => {
 export const addProbationForm = data => {
 	return post(`/uprise/kra/addProbationForm`, data).then(res => {
 		console.log('RESPONSE :: Add Probation form ::: ', res);
+		return res;
+	});
+}
+
+//get probation form from user ID API
+export const getProbationFormByUniqueId = data => {
+	return get(`/uprise/kra/getProbationFormByUniqueId?userUniqueId=${data}`).then(res => {
+		console.log('RESPONSE ::get Probation form ::: ', res);
 		return res;
 	});
 }
