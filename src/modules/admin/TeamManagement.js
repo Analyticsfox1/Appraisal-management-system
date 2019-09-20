@@ -60,7 +60,7 @@ class TeamManagement extends Component {
 				width: 250,
 				Cell: ({ original }) => {
 					return (
-						original.projectName
+						original.projectName ? original.projectName : null
 					);
 				},
 			},
@@ -69,7 +69,7 @@ class TeamManagement extends Component {
 				width: 250,
 				Cell: ({ original }) => {
 					return (
-						original.managerName
+						original.managerName ? original.managerName : null
 					);
 				},
 			},
@@ -77,7 +77,7 @@ class TeamManagement extends Component {
 				Header: 'Comment',
 				Cell: ({ original }) => {
 					return (
-						original.comment
+						original.comment ? original.comment : null
 					);
 				},
 			},
@@ -86,13 +86,13 @@ class TeamManagement extends Component {
 				width: 200,
 				Cell: ({ original }) => {
 					return (
-						original.status
+						original.status ? original.status === 'Active' ? <img src="./assets/images/green_light.png" /> : <img src="./assets/images/red_light.png" /> : null
 					);
 				},
 			},
 		]
 		return (
-			<div className="dash_grid">
+			<div className="dash_grid user-page">
 				<LeftMenu />
 				<main className="bg-white">
 					<AdminHeader {...this.props} />

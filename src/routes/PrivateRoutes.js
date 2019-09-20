@@ -26,6 +26,8 @@ import CEOOrganizationGoal from '../modules/ceo/OrganizationGoal';
 import CEOPushNotification from '../modules/ceo/PushNotification';
 //  Manager Routes 
 import ManagerDashboard from '../modules/manager/ManagerDashboard';
+import ManagerTeamManagement from '../modules/manager/ManagerTeamManagement';
+import ManagerEmployeeProbation from '../modules/manager/ManagerEmployeeProbation';
 
 class PrivateRoutes extends Component {
 
@@ -56,6 +58,8 @@ class PrivateRoutes extends Component {
 				<Route exact path='/CEO-push-notification' component={CEOPushNotification} />
 				{/* Manager Routes */}
 				<Route exact path='/manager-dashboard' component={ManagerDashboard} />
+				<Route exact path='/manager-team-management' component={ManagerTeamManagement} />
+				<Route exact path='/manager-employee-probation-management' component={ManagerEmployeeProbation} />
 				
 				{/* <Route path="*" component={PageNotFound} /> */}
 			</>

@@ -99,21 +99,22 @@ class UserManagement extends Component {
 					);
 				},
 			},
+		
+			{
+				Header: 'Status',
+				width: 100,
+				Cell: ({ original }) => {
+					return (
+						original.status ? original.status === 'Active' ? <img src="./assets/images/green_light.png" /> : <img src="./assets/images/red_light.png" /> : null
+					);
+				},
+			},
 			{
 				Header: 'Role',
 				width: 100,
 				Cell: ({ original }) => {
 					return (
 						original.role ? original.role : null
-					);
-				},
-			},
-			{
-				Header: 'Status',
-				width: 100,
-				Cell: ({ original }) => {
-					return (
-						original.status ? original.status : null
 					);
 				},
 			},
@@ -132,7 +133,7 @@ class UserManagement extends Component {
 		]
 
 		return (
-			<div className="dash_grid">
+			<div className="dash_grid user-page">
 				<LeftMenu />
 				<main className="bg-white">
 					<AdminHeader {...this.props} />

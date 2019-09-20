@@ -2,12 +2,25 @@ import React, { Component } from 'react'
 import { NavLink } from 'react-router-dom';
 
 class LeftMenu extends Component {
+
+	state = {
+		admin: {}
+	}
+
+	componentWillMount() {
+		let data = JSON.parse(sessionStorage.getItem('adminData'));
+		this.setState({
+			admin: data
+		})
+	}
+
 	render() {
+		const { admin } = this.state;
 		return (
 			<aside className="LeftMenu">
 				<div className="logo-image"></div>
 				<ul className="dash_ul">
-					<p className="text-white"><img src="./assets/images/admin.png" style={{ height: '100px', width: '100px' }} />Welcome, Admin</p>
+					<p className="text-white"><img src="./assets/images/admin.png" style={{ height: '100px', width: '100px' }} />Welcome, {admin ? admin.name : 'Admin'}</p>
 					<li><NavLink to="/admin-dashboard" activeClassName="active"><i className="fas fa-home"></i><span>My Dashboard</span></NavLink></li>
 					<li><NavLink to="/user-management" activeClassName="active"><i className="fas fa-user"></i><span>&nbsp;User Management</span></NavLink></li>
 					<li><NavLink to="/role-management" activeClassName="active"><i className="fas fa-tasks"></i><span>&nbsp;Role Management</span></NavLink></li>

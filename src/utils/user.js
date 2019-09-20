@@ -1,5 +1,16 @@
 import { post, get } from "./httpInterceptor";
 
+// const baseURL = "http://13.126.20.61:8080"
+// const URL = "http://13.126.20.61/uprise";
+
+//user login API
+export const login = data => {
+	return post(`/uprise/authentication/authenticate?username=${data.email}&password=${data.password}`).then(res => {
+		console.log('RESPONSE :: login ::: ', res);
+		return res;
+	});
+}
+
 //user register API
 export const register = data => {
 	return post(`/uprise/authentication/registration`, data).then(res => {
@@ -21,15 +32,6 @@ export const uploadDoc = data => {
 	});
 }
 
-//user login API
-export const login = data => {
-	return post(`/uprise/authentication/authenticate?username=${data.email}&password=${data.password}`).then(res => {
-		console.log('RESPONSE :: login ::: ', res);
-		return res;
-	});
-}
-
-//user logout API
 export const logout = () => {
 	return get(`/uprise/authentication/logout`).then(res => {
 		console.log('RESPONSE :: logout ::: ', res);
@@ -47,7 +49,7 @@ export const forgotPassword = data => {
 
 //user Update Password API
 export const updatePassword = data => {
-	return post(`uprise/authentication/updatePassword?newPassword=${data.newPassword}&oldPassword=${data.oldPassword}`).then(res => {
+	return post(`/uprise/authentication/updatePassword?newPassword=${data.newPassword}&oldPassword=${data.oldPassword}`).then(res => {
 		console.log('RESPONSE :: Update Password ::: ', res);
 		return res;
 	});

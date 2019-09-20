@@ -1,7 +1,5 @@
 import axios from 'axios';
 
-let baseURL = "http://13.126.20.61:8080"
-
 const handleResponse = (response) => {
 	return {
 		data: response.data
@@ -16,10 +14,11 @@ const handleError = (error) => {
 	};
 }
 
-export const get = (url) => {
-	return axios.get(`${url}`, {
+export const get = (apiURL) => {
+	return axios.get(`${apiURL}`, {
 		headers:
 			{
+				'Access-Control-Allow-Method': 'get',
 				'Access-Control-Allow-Origin': '*',
 				'Content-Type': 'application/json',
 				accessToken: 'roS0SOXGlvRDLoNtacLXjrI2Rh8NcmDl',
@@ -31,10 +30,11 @@ export const get = (url) => {
 		.catch((error) => handleError(error));
 }
 
-export const post = (url, bodyObj = {}, contentType) => {
-	return axios.post(`${url}`, bodyObj, {
+export const post = (apiURL, bodyObj = {}, contentType) => {
+	return axios.post(`${apiURL}`, bodyObj, {
 		headers:
 			{
+				'Access-Control-Allow-Method': 'post',
 				'Access-Control-Allow-Origin': '*',
 				'Content-Type': contentType ||  'application/json',
 				accessToken: 'roS0SOXGlvRDLoNtacLXjrI2Rh8NcmDl',

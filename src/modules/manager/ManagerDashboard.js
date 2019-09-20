@@ -1,22 +1,67 @@
 import React, { Component } from 'react';
 import LeftMenu from '../manager/LeftMenu';
 import ManagerHeader from '../manager/ManagerHeader';
+import { Link } from "react-router-dom";
+import { getManagerDashboard } from '../../utils/manager';
 
 class ManagerDashboard extends Component {
 	constructor() {
 		super();
 		this.state = {
+			managerDashboardData: [],
 		}
 	}
 
+	componentDidMount() {
+		this.managerDashboardList();
+	}
+
+	managerDashboardList = () => {
+		let obj = JSON.parse(sessionStorage.getItem('managerData'));
+		getManagerDashboard(obj ? obj.userId : null).then(response => {
+			this.setState({
+				managerDashboardData: response && response.data ? response.data : []
+			})
+		})
+	}
+
 	render() {
+		const { managerDashboardData } = this.state;
 		return (
 			<div className="dash_grid">
 				<LeftMenu />
-				<main className="bg-white">
+				<main>
 					<ManagerHeader {...this.props} />
-					<section className="container-fluid">
-						<h5 className="text-center mt-2 mx-auto user-box">Dashboard</h5>
+					<section className="container-fluid dash_space admin-dashboard">
+						<div className="row">
+							<div className="col-md-3">
+								<div className="card2 bg-white">
+									<div className="card-body">
+										<div className="text-center">
+											<div className="d-flex justify-content-center">
+												<i className="fas fa-users bg1 fa-3x m-0"></i>
+											</div>
+											<p className="font-weight-normal mt-3">Teams</p>
+											<p className="font-weight-normal fs-24"><Link className="title-orange" to="/manager-team-management">{managerDashboardData ? managerDashboardData.teamCount : 'No teams are found'}</Link></p>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<div className="col-md-3">
+								<div className="card2 bg-white">
+									<div className="card-body">
+										<div className="text-center">
+											<div className="d-flex justify-content-center">
+												<i className="fas fa-user-clock fa-3x bg2 m-0"></i>
+											</div>
+											<p className="font-weight-normal mt-3">Employee in probation</p>
+											<p className="font-weight-normal fs-24"><Link className="title-orange" to="/manager-employee-probation-management">{managerDashboardData ? managerDashboardData.inProbEmpCount : 'No employees are found'}</Link></p>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
 					</section>
 				</main>
 			</div>

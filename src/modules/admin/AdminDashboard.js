@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import LeftMenu from '../admin/LeftMenu';
 import AdminHeader from '../admin/AdminHeader';
-import moment from 'moment';
 import { Link } from "react-router-dom";
 import { getAdminDashboard } from '../../utils/admin';
 class AdminDashboard extends Component {

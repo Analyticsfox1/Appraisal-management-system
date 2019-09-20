@@ -19,6 +19,12 @@ class Login extends Component {
 		}
 	}
 
+	handleKeyDown = (e) => {
+		if (e.key === 'Enter') {
+			this.handleSubmit(e);
+		}
+	}
+
 	handleValidate = (e) => {
 		const { errors } = this.state;
 		let name = e.target.name;
@@ -114,6 +120,7 @@ class Login extends Component {
 									value={email}
 									onChange={this.handleChange}
 									onBlur={this.handleValidate}
+									onKeyDown={this.handleKeyDown}
 									placeholder="Email ID" />
 								{
 									errors.emailError &&
@@ -132,6 +139,7 @@ class Login extends Component {
 									value={password}
 									onChange={this.handleChange}
 									onBlur={this.handleValidate}
+									onKeyDown={this.handleKeyDown}
 									placeholder="Password" />
 								{
 									errors.passwordError &&

@@ -1553,3 +1553,13 @@ input[type='radio']:checked:after {
 	border: none;
 	background-color: #d16425;
 }
+
+.user-page img {
+	height: 15px;
+	width: 15px;
+}
+
+.probation .css-1fhf3k1-control {
+	background-color: hsl(0, 0%, 93%);
+	border-color: hsl(0, 0%, 80%);
+}

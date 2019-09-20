@@ -23,6 +23,7 @@ class ProbationSection extends Component {
 		finalRecommendation: null,
 		empCheckbox: null,
 		mangrCheckbox: null,
+		probFormId: null,
 		errors: {
 			coursesAttndToDateError: null,
 			coursesFutureError: null,
@@ -40,6 +41,7 @@ class ProbationSection extends Component {
 	}
 
 	ProbationFormData = () => {
+		const { PerfApprList, selectedRating } = this.state;
 		let userObj = JSON.parse(sessionStorage.getItem('userData'));
 		this.setState({
 			user: userObj
@@ -47,7 +49,11 @@ class ProbationSection extends Component {
 		getProbationFormByUniqueId(userObj ? userObj.uniqueId : null).then(response => {
 			if (response.data && response.data.error === 'false') {
 				let data = response.data.data;
+				Object.keys(data.probPerfApprList).map(key => {
+					PerfApprList[data.probPerfApprList[key].compentency] = data.probPerfApprList[key];
+				});
 				this.setState(data)
+				this.setState({ probFormId: response.data && response.data.data.probFormId })
 				toast.success(response.data.message, { type: toast.TYPE.SUCCESS, autoClose: 2000 })
 			}
 			if (response.data && response.data.error === 'true') {
@@ -79,6 +85,7 @@ class ProbationSection extends Component {
 				...state.PerfApprList,
 				[name]: {
 					...state.PerfApprList[name],
+					compentency: name,
 					managerComments: value
 				}
 			}
@@ -96,6 +103,7 @@ class ProbationSection extends Component {
 				...state.PerfApprList,
 				[name]: {
 					...state.PerfApprList[name],
+					compentency: name,
 					employeeComments: value
 				}
 			}
@@ -192,18 +200,15 @@ class ProbationSection extends Component {
 	}
 
 	handleSubmit = () => {
-		const { PerfApprList, coursesAttndToDate, coursesFuture, ovrallEmpPerfRate, mangrComment, finalRecommendation, empCheckbox, mangrCheckbox, user } = this.state;
-		
+		const { PerfApprList, coursesAttndToDate, coursesFuture, ovrallEmpPerfRate, mangrComment, finalRecommendation, empCheckbox, mangrCheckbox, user, probFormId } = this.state;
+
 		let probPerfApprList = Object.values(PerfApprList);
-    console.log("TCL: ProbationSection -> handleSubmit -> PerfApprList", probPerfApprList)
-		let uniqueId = user ? user.uniqueId : null
+		let userUniqueId = user ? user.uniqueId : null
 		let createdDate = null
 		let updatedDate = null
 		let inProbation = false
-		let obj = { probPerfApprList, coursesAttndToDate, coursesFuture, ovrallEmpPerfRate, mangrComment, finalRecommendation, empCheckbox, mangrCheckbox, uniqueId, createdDate, updatedDate, inProbation }
+		let obj = { probPerfApprList, coursesAttndToDate, coursesFuture, ovrallEmpPerfRate, mangrComment, finalRecommendation, empCheckbox, mangrCheckbox, userUniqueId, createdDate, updatedDate, inProbation, probFormId }
 
-		console.log("TCL: ProbationSection -> handleSubmit -> obj", obj)
-		
 		addProbationForm(obj).then(response => {
 			if (response.data && response.data.error === 'false') {
 				toast.success(response.data.message, { type: toast.TYPE.SUCCESS, autoClose: 2000 });
@@ -215,7 +220,7 @@ class ProbationSection extends Component {
 	}
 
 	render() {
-		const { selectedRating, selectedManager, selectedEmployee, PerfApprList, coursesAttndToDate, coursesFuture, ovrallEmpPerfRate, mangrComment, finalRecommendation, empCheckbox, mangrCheckbox, errors } = this.state;
+		const { selectedRating, selectedManager, selectedEmployee, PerfApprList, coursesAttndToDate, coursesFuture, ovrallEmpPerfRate, mangrComment, finalRecommendation, empCheckbox, mangrCheckbox, errors, data } = this.state;
 		return (
 			<>
 				<ToastContainer />
@@ -280,9 +285,10 @@ class ProbationSection extends Component {
 							</div>
 							<div className="col-md-3">
 								<Select
-									value={selectedRating && selectedRating["Time Keeping"]}
+									value={selectedRating && selectedRating['Time Keeping']}
 									onChange={(select) => this.handleRating(select, "Time Keeping", "rating")}
 									onBlur={(e) => this.onValidate(e, "Time Keeping", "rating")}
+									isDisabled={true}
 									options={ratingOption}
 								/>
 								{
@@ -295,9 +301,10 @@ class ProbationSection extends Component {
 									type="text"
 									name="managerComments"
 									className="form-input"
-									value={selectedManager && selectedManager["Time Keeping"]}
+									value={PerfApprList["Time Keeping"] && PerfApprList["Time Keeping"].managerComments}
 									onChange={(e) => this.handleManagerChange(e, "Time Keeping")}
 									onBlur={(e) => this.handleValidate(e, "Time Keeping")}
+									disabled={true}
 									placeholder="Enter Comment" />
 								{
 									errors["Time Keeping"] && errors["Time Keeping"].managerCommentsError &&
@@ -309,7 +316,7 @@ class ProbationSection extends Component {
 									type="text"
 									name="employeeComments"
 									className="form-input"
-									value={selectedEmployee && selectedEmployee["Time Keeping"]}
+									value={PerfApprList["Time Keeping"] && PerfApprList["Time Keeping"].employeeComments}
 									onChange={(e) => this.handleEmployeeChange(e, "Time Keeping")}
 									onBlur={(e) => this.handleValidate(e, "Time Keeping")}
 									placeholder="Enter Comment" />
@@ -327,9 +334,10 @@ class ProbationSection extends Component {
 							</div>
 							<div className="col-md-3">
 								<Select
-									value={selectedRating && selectedRating["Knowledge of Testing/ Development Process"]}
+									value={selectedRating && selectedRating['Knowledge of Testing/ Development Process']}
 									onChange={(select) => this.handleRating(select, "Knowledge of Testing/ Development Process")}
 									onBlur={(e) => this.onValidate(e, "Knowledge of Testing/ Development Process", "rating")}
+									isDisabled={true}
 									options={ratingOption}
 								/>
 								{
@@ -342,9 +350,10 @@ class ProbationSection extends Component {
 									type="text"
 									className="form-input"
 									name="managerComments"
-									value={selectedManager && selectedManager["Knowledge of Testing/ Development Process"]}
+									value={PerfApprList["Knowledge of Testing/ Development Process"] && PerfApprList["Knowledge of Testing/ Development Process"].managerComments}
 									onChange={(e) => this.handleManagerChange(e, "Knowledge of Testing/ Development Process")}
 									onBlur={(e) => this.handleValidate(e, "Knowledge of Testing/ Development Process")}
+									disabled={true}
 									placeholder="Enter Comment" />
 								{
 									errors["Knowledge of Testing/ Development Process"] && errors["Knowledge of Testing/ Development Process"].managerCommentsError &&
@@ -356,7 +365,7 @@ class ProbationSection extends Component {
 									type="text"
 									className="form-input"
 									name="employeeComments"
-									value={selectedEmployee && selectedEmployee["Knowledge of Testing/ Development Process"]}
+									value={PerfApprList["Knowledge of Testing/ Development Process"] && PerfApprList["Knowledge of Testing/ Development Process"].employeeComments}
 									onChange={(e) => this.handleEmployeeChange(e, "Knowledge of Testing/ Development Process")}
 									onBlur={(e) => this.handleValidate(e, "Knowledge of Testing/ Development Process")}
 									placeholder="Enter Comment" />
@@ -377,6 +386,7 @@ class ProbationSection extends Component {
 									value={selectedRating && selectedRating["Motivation, Flexibility and Dependability"]}
 									onChange={(select) => this.handleRating(select, "Motivation, Flexibility and Dependability")}
 									onBlur={(e) => this.onValidate(e, "Motivation, Flexibility and Dependability", "rating")}
+									isDisabled={true}
 									options={ratingOption}
 								/>
 								{
@@ -389,9 +399,10 @@ class ProbationSection extends Component {
 									type="text"
 									className="form-input"
 									name="managerComments"
-									value={selectedManager && selectedManager["Motivation, Flexibility and Dependability"]}
+									value={PerfApprList["Motivation, Flexibility and Dependability"] && PerfApprList["Motivation, Flexibility and Dependability"].managerComments}
 									onChange={(e) => this.handleManagerChange(e, "Motivation, Flexibility and Dependability")}
 									onBlur={(e) => this.handleValidate(e, "Motivation, Flexibility and Dependability")}
+									disabled={true}
 									placeholder="Enter Comment" />
 								{
 									errors["Motivation, Flexibility and Dependability"] && errors["Motivation, Flexibility and Dependability"].managerCommentsError &&
@@ -403,7 +414,7 @@ class ProbationSection extends Component {
 									type="text"
 									className="form-input"
 									name="employeeComments"
-									value={selectedEmployee && selectedEmployee["Motivation, Flexibility and Dependability"]}
+									value={PerfApprList["Motivation, Flexibility and Dependability"] && PerfApprList["Motivation, Flexibility and Dependability"].employeeComments}
 									onChange={(e) => this.handleEmployeeChange(e, "Motivation, Flexibility and Dependability")}
 									onBlur={(e) => this.handleValidate(e, "Motivation, Flexibility and Dependability")}
 									placeholder="Enter Comment" />
@@ -424,6 +435,7 @@ class ProbationSection extends Component {
 									value={selectedRating && selectedRating["Initiative and openness to learning"]}
 									onChange={(select) => this.handleRating(select, "Initiative and openness to learning")}
 									onBlur={(e) => this.onValidate(e, "Initiative and openness to learning", "rating")}
+									isDisabled={true}
 									options={ratingOption}
 								/>
 								{
@@ -436,9 +448,10 @@ class ProbationSection extends Component {
 									type="text"
 									className="form-input"
 									name="managerComments"
-									value={selectedManager && selectedManager["Initiative and openness to learning"]}
+									value={PerfApprList["Initiative and openness to learning"] && PerfApprList["Initiative and openness to learning"].managerComments}
 									onChange={(e) => this.handleManagerChange(e, "Initiative and openness to learning")}
 									onBlur={(e) => this.handleValidate(e, "Initiative and openness to learning")}
+									disabled={true}
 									placeholder="Enter Comment" />
 								{
 									errors["Initiative and openness to learning"] && errors["Initiative and openness to learning"].managerCommentsError &&
@@ -450,7 +463,7 @@ class ProbationSection extends Component {
 									type="text"
 									className="form-input"
 									name="employeeComments"
-									value={selectedEmployee && selectedEmployee["Initiative and openness to learning"]}
+									value={PerfApprList["Initiative and openness to learning"] && PerfApprList["Initiative and openness to learning"].employeeComments}
 									onChange={(e) => this.handleEmployeeChange(e, "Initiative and openness to learning")}
 									onBlur={(e) => this.handleValidate(e, "Initiative and openness to learning")}
 									placeholder="Enter Comment" />
@@ -471,6 +484,7 @@ class ProbationSection extends Component {
 									value={selectedRating && selectedRating["Communication Skills /Interpersonal Skills"]}
 									onChange={(select) => this.handleRating(select, "Communication Skills /Interpersonal Skills")}
 									onBlur={(e) => this.onValidate(e, "Communication Skills /Interpersonal Skills", "rating")}
+									isDisabled={true}
 									options={ratingOption}
 								/>
 								{
@@ -483,9 +497,10 @@ class ProbationSection extends Component {
 									type="text"
 									className="form-input"
 									name="managerComments"
-									value={selectedManager && selectedManager["Communication Skills /Interpersonal Skills"]}
+									value={PerfApprList["Communication Skills /Interpersonal Skills"] && PerfApprList["Communication Skills /Interpersonal Skills"].managerComments}
 									onChange={(e) => this.handleManagerChange(e, "Communication Skills /Interpersonal Skills")}
 									onBlur={(e) => this.handleValidate(e, "Communication Skills /Interpersonal Skills")}
+									disabled={true}
 									placeholder="Enter Comment" />
 								{
 									errors["Communication Skills /Interpersonal Skills"] && errors["Communication Skills /Interpersonal Skills"].managerCommentsError &&
@@ -497,7 +512,7 @@ class ProbationSection extends Component {
 									type="text"
 									className="form-input"
 									name="employeeComments"
-									value={selectedEmployee && selectedEmployee["Communication Skills /Interpersonal Skills"]}
+									value={PerfApprList["Communication Skills /Interpersonal Skills"] && PerfApprList["Communication Skills /Interpersonal Skills"].employeeComments}
 									onChange={(e) => this.handleEmployeeChange(e, "Communication Skills /Interpersonal Skills")}
 									onBlur={(e) => this.handleValidate(e, "Communication Skills /Interpersonal Skills")}
 									placeholder="Enter Comment" />
@@ -518,6 +533,7 @@ class ProbationSection extends Component {
 									value={selectedRating && selectedRating["Team Work"]}
 									onChange={(select) => this.handleRating(select, "Team Work")}
 									onBlur={(e) => this.onValidate(e, "Team Work", "rating")}
+									isDisabled={true}
 									options={ratingOption}
 								/>
 								{
@@ -530,8 +546,9 @@ class ProbationSection extends Component {
 									type="text"
 									className="form-input"
 									name="managerComments"
-									value={selectedManager && selectedManager["Team Work"]}
+									value={PerfApprList["Team Work"] && PerfApprList["Team Work"].managerComments}
 									onChange={(e) => this.handleManagerChange(e, "Team Work")}
+									disabled={true}
 									onBlur={(e) => this.handleValidate(e, "Team Work")}
 									placeholder="Enter Comment" />
 								{
@@ -544,7 +561,7 @@ class ProbationSection extends Component {
 									type="text"
 									className="form-input"
 									name="employeeComments"
-									value={selectedEmployee && selectedEmployee["Team Work"]}
+									value={PerfApprList["Team Work"] && PerfApprList["Team Work"].employeeComments}
 									onChange={(e) => this.handleEmployeeChange(e, "Team Work")}
 									onBlur={(e) => this.handleValidate(e, "Team Work")}
 									placeholder="Enter Comment" />
@@ -565,6 +582,7 @@ class ProbationSection extends Component {
 									value={selectedRating && selectedRating["Diligence"]}
 									onChange={(select) => this.handleRating(select, "Diligence")}
 									onBlur={(e) => this.onValidate(e, "Diligence", "rating")}
+									isDisabled={true}
 									options={ratingOption}
 								/>
 								{
@@ -577,8 +595,9 @@ class ProbationSection extends Component {
 									type="text"
 									className="form-input"
 									name="managerComments"
-									value={selectedManager && selectedManager["Diligence"]}
+									value={PerfApprList["Diligence"] && PerfApprList["Diligence"].managerComments}
 									onChange={(e) => this.handleManagerChange(e, "Diligence")}
+									disabled={true}
 									onBlur={(e) => this.handleValidate(e, "Diligence")}
 									placeholder="Enter Comment" />
 								{
@@ -591,7 +610,7 @@ class ProbationSection extends Component {
 									type="text"
 									className="form-input"
 									name="employeeComments"
-									value={selectedEmployee && selectedEmployee["Diligence"]}
+									value={PerfApprList["Diligence"] && PerfApprList["Diligence"].employeeComments}
 									onChange={(e) => this.handleEmployeeChange(e, "Diligence")}
 									onBlur={(e) => this.handleValidate(e, "Diligence")}
 									placeholder="Enter Comment" />
@@ -612,6 +631,7 @@ class ProbationSection extends Component {
 									value={selectedRating && selectedRating["Attention to Detail"]}
 									onChange={(select) => this.handleRating(select, "Attention to Detail")}
 									onBlur={(e) => this.onValidate(e, "Attention to Detail", "rating")}
+									isDisabled={true}
 									options={ratingOption}
 								/>
 								{
@@ -624,8 +644,9 @@ class ProbationSection extends Component {
 									type="text"
 									className="form-input"
 									name="managerComments"
-									value={selectedManager && selectedManager["Attention to Detail"]}
+									value={PerfApprList["Attention to Detail"] && PerfApprList["Attention to Detail"].managerComments}
 									onChange={(e) => this.handleManagerChange(e, "Attention to Detail")}
+									disabled={true}
 									onBlur={(e) => this.handleValidate(e, "Attention to Detail")}
 									placeholder="Enter Comment" />
 								{
@@ -638,7 +659,7 @@ class ProbationSection extends Component {
 									type="text"
 									className="form-input"
 									name="employeeComments"
-									value={selectedEmployee && selectedEmployee["Attention to Detail"]}
+									value={PerfApprList["Attention to Detail"] && PerfApprList["Attention to Detail"].employeeComments}
 									onChange={(e) => this.handleEmployeeChange(e, "Attention to Detail")}
 									onBlur={(e) => this.handleValidate(e, "Attention to Detail")}
 									placeholder="Enter Comment" />
@@ -661,6 +682,7 @@ class ProbationSection extends Component {
 									value={coursesAttndToDate}
 									onChange={this.handleChange}
 									onBlur={this.handleSectionValidate}
+									disabled={true}
 									placeholder="Enter Answer" />
 								{
 									errors.coursesAttndToDateError &&
@@ -677,6 +699,7 @@ class ProbationSection extends Component {
 									name="coursesFuture"
 									value={coursesFuture}
 									onChange={this.handleChange}
+									disabled={true}
 									onBlur={this.handleSectionValidate}
 									placeholder="Enter Answer" />
 								{
@@ -697,6 +720,7 @@ class ProbationSection extends Component {
 									name="ovrallEmpPerfRate"
 									value={ovrallEmpPerfRate}
 									onChange={this.handleChange}
+									disabled={true}
 									onBlur={this.handleSectionValidate}
 									placeholder="Enter Answer" />
 								{
@@ -714,6 +738,7 @@ class ProbationSection extends Component {
 									name="mangrComment"
 									value={mangrComment}
 									onChange={this.handleChange}
+									disabled={true}
 									onBlur={this.handleSectionValidate}
 									placeholder="Enter Answer" />
 								{
@@ -732,8 +757,9 @@ class ProbationSection extends Component {
 									<input
 										type="radio"
 										name="finalRecommendation"
-										value="1"
-										checked={finalRecommendation === "1"}
+										value={1}
+										disabled={true}
+										checked={finalRecommendation == 1}
 										onChange={this.onChanged} />
 								</div>
 								<div className="col-md-11">
@@ -746,8 +772,9 @@ class ProbationSection extends Component {
 									<input
 										type="radio"
 										name="finalRecommendation"
-										value={"2"}
-										checked={finalRecommendation === "2"}
+										value={2}
+										disabled={true}
+										checked={finalRecommendation == 2}
 										onChange={this.onChanged} />
 								</div>
 								<div className="col-md-11">
@@ -778,17 +805,22 @@ class ProbationSection extends Component {
 										className="checkbox2"
 										name="mangrCheckbox"
 										checked={mangrCheckbox}
+										disabled={true}
 										onChange={this.onCheckboxChanged} id="check_manager"
 									/>Manager <label className="check_label" htmlFor="check_manager"></label>
 								</label>
 							</div>
 						</div>
 					</div>
-					<div className="d-flex justify-content-center mt-5">
-						<div className="form-group mb-0">
-							<button onClick={this.handleSubmit} className="form-submit" > Submit</button>
-						</div>
-					</div>
+					{
+						mangrCheckbox ?
+							<div className="d-flex justify-content-center mt-5">
+								<div className="form-group mb-0">
+									<button onClick={this.handleSubmit} className="form-submit" > Submit</button>
+								</div>
+							</div> :
+							null
+					}
 				</section>
 			</>
 		)
