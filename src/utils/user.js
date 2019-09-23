@@ -1,8 +1,5 @@
 import { post, get } from "./httpInterceptor";
 
-// const baseURL = "http://13.126.20.61:8080"
-// const URL = "http://13.126.20.61/uprise";
-
 //user login API
 export const login = data => {
 	return post(`/uprise/authentication/authenticate?username=${data.email}&password=${data.password}`).then(res => {

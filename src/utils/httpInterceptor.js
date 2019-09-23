@@ -1,5 +1,7 @@
 import axios from 'axios';
 
+const baseURL = "http://13.126.20.61:8080"
+
 const handleResponse = (response) => {
 	return {
 		data: response.data
@@ -15,7 +17,7 @@ const handleError = (error) => {
 }
 
 export const get = (apiURL) => {
-	return axios.get(`${apiURL}`, {
+	return axios.get(`${baseURL}${apiURL}`, {
 		headers:
 			{
 				'Access-Control-Allow-Method': 'get',
@@ -31,7 +33,7 @@ export const get = (apiURL) => {
 }
 
 export const post = (apiURL, bodyObj = {}, contentType) => {
-	return axios.post(`${apiURL}`, bodyObj, {
+	return axios.post(`${baseURL}${apiURL}`, bodyObj, {
 		headers:
 			{
 				'Access-Control-Allow-Method': 'post',
