@@ -24,6 +24,7 @@ class ManagerProbationSection extends Component {
 		empCheckbox: null,
 		mangrCheckbox: null,
 		probFormId: null,
+		selectedRating: [],
 		errors: {
 			coursesAttndToDateError: null,
 			coursesFutureError: null,
@@ -46,14 +47,16 @@ class ManagerProbationSection extends Component {
 		this.setState({
 			user: userObj
 		})
+		let selectedRate = {};
 		getProbationFormByUniqueId(userObj ? userObj.uniqueId : null).then(response => {
 			if (response.data && response.data.error === 'false') {
 				let data = response.data.data;
-				Object.keys(data.probPerfApprList).map(key => {
-					PerfApprList[data.probPerfApprList[key].compentency] = data.probPerfApprList[key];
+				data.probPerfApprList.map(value => {
+					selectedRate[value.compentency] = { value: value.rating, label: value.rating }
+					PerfApprList[value.compentency] = value;
 				});
 				this.setState(data)
-				this.setState({ probFormId: response.data && response.data.data.probFormId })
+				this.setState({ probFormId: response.data && response.data.data.probFormId, selectedRating: selectedRate })
 				toast.success(response.data.message, { type: toast.TYPE.SUCCESS, autoClose: 2000 })
 			}
 			if (response.data && response.data.error === 'true') {
@@ -773,7 +776,7 @@ class ManagerProbationSection extends Component {
 						</div>
 						<div className="row mt-3 mb-4">
 							<div className="col-md-2" style={{ paddingLeft: '54px' }}>
-								<label className="pt-0 title-orange checkbox_2">
+								<label className="pt-0 title-orange checkbox_2 disabled">
 									<input
 										type="checkbox"
 										className="checkbox2"
@@ -798,15 +801,12 @@ class ManagerProbationSection extends Component {
 							</div>
 						</div>
 					</div>
-					{
-						mangrCheckbox ?
-							<div className="d-flex justify-content-center mt-5">
-								<div className="form-group mb-0">
-									<button onClick={this.handleSubmit} className="form-submit" > Submit</button>
-								</div>
-							</div> :
-							null
-					}
+
+					<div className="d-flex justify-content-center mt-5">
+						<div className="form-group mb-0">
+							<button onClick={this.handleSubmit} className="form-submit" > Submit</button>
+						</div>
+					</div>
 				</section>
 			</>
 		)
