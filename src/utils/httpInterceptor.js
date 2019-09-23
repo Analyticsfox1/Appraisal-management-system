@@ -17,7 +17,7 @@ const handleError = (error) => {
 }
 
 export const get = (apiURL) => {
-	return axios.get(`${baseURL}${apiURL}`, {
+	return axios.get(`${apiURL}`, {
 		headers:
 			{
 				'Access-Control-Allow-Method': 'get',
@@ -33,7 +33,7 @@ export const get = (apiURL) => {
 }
 
 export const post = (apiURL, bodyObj = {}, contentType) => {
-	return axios.post(`${baseURL}${apiURL}`, bodyObj, {
+	return axios.post(`${apiURL}`, bodyObj, {
 		headers:
 			{
 				'Access-Control-Allow-Method': 'post',

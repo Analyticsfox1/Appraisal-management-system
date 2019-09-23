@@ -1563,3 +1563,15 @@ input[type='radio']:checked:after {
 	background-color: hsl(0, 0%, 93%);
 	border-color: hsl(0, 0%, 80%);
 }
+
+input[disabled]:after {
+	background: #eee;
+}
+
+[disabled] {
+	cursor: not-allowed;
+}
+
+.disabled {
+	cursor: not-allowed;
+}

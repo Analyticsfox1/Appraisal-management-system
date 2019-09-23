@@ -236,9 +236,9 @@ class AddTeam extends Component {
 							</div>
 						</div>
 
-						<div className="col-md-3">
+						{/* <div className="col-md-3">
 							<button className="add-member"> Initiate KRA</button>
-						</div>
+						</div> */}
 
 					</Modal.Body>
 					<Modal.Footer>

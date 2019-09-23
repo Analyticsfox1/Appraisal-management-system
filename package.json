@@ -27,7 +27,7 @@
 		"eject": "react-scripts eject",
 		"dev-start": "react-scripts start --proxy-config proxy.config.js"
 	},
-
+	"proxy": "http://13.126.20.61:8080",
 	"eslintConfig": {
 		"extends": "react-app"
 	},
