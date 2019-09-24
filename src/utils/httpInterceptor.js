@@ -22,7 +22,8 @@ export const get = (apiURL) => {
 		headers:
 			{
 				'Access-Control-Allow-Method': 'get',
-				'Access-Control-Allow-Origin': '*',
+				// 'Access-Control-Allow-Origin': '*',
+				// 'Access-Control-Allow-Header': 'X-PINGOTHER,Content-Type,X-Requested-With,accept,Origin,Access-Control-Request-Method,Access-Control-Request-Headers,Authorization',
 				'Content-Type': 'application/json',
 				accessToken: 'roS0SOXGlvRDLoNtacLXjrI2Rh8NcmDl',
 				tokenId: 'nih.patil@gmail.com'
@@ -34,11 +35,12 @@ export const get = (apiURL) => {
 }
 
 export const post = (apiURL, bodyObj = {}, contentType) => {
-	return axios.post(`${baseURL}${apiURL}`, bodyObj, {
+	return axios.post(`${serverURL}${baseURL}${apiURL}`, bodyObj, {
 		headers:
 			{
 				'Access-Control-Allow-Method': 'post',
-				'Access-Control-Allow-Origin': '*',
+				// 'Access-Control-Allow-Origin': '*',
+				// 'Access-Control-Allow-Header': 'X-PINGOTHER,Content-Type,X-Requested-With,accept,Origin,Access-Control-Request-Method,Access-Control-Request-Headers,Authorization',				
 				'Content-Type': contentType || 'application/json',
 				accessToken: 'roS0SOXGlvRDLoNtacLXjrI2Rh8NcmDl',
 				tokenId: 'nih.patil@gmail.com'
