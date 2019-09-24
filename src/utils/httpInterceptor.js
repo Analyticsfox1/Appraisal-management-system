@@ -1,6 +1,7 @@
 import axios from 'axios';
 
 const baseURL = "http://13.126.20.61:8080"
+const serverURL = "https://cors-anywhere.herokuapp.com/"
 
 const handleResponse = (response) => {
 	return {
@@ -17,7 +18,7 @@ const handleError = (error) => {
 }
 
 export const get = (apiURL) => {
-	return axios.get(`${baseURL}${apiURL}`, {
+	return axios.get(`${serverURL}${baseURL}${apiURL}`, {
 		headers:
 			{
 				'Access-Control-Allow-Method': 'get',
@@ -38,7 +39,7 @@ export const post = (apiURL, bodyObj = {}, contentType) => {
 			{
 				'Access-Control-Allow-Method': 'post',
 				'Access-Control-Allow-Origin': '*',
-				'Content-Type': contentType ||  'application/json',
+				'Content-Type': contentType || 'application/json',
 				accessToken: 'roS0SOXGlvRDLoNtacLXjrI2Rh8NcmDl',
 				tokenId: 'nih.patil@gmail.com'
 			},

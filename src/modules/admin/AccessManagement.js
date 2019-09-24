@@ -41,7 +41,7 @@ class AccessManagement extends Component {
 	RoleList = () => {
 		getRoleList().then(response => {
 			this.setState({
-				roleOption: response.data && response.data.data ? response.data.data : [], role: response.data.data[0]
+				roleOption: response.data && response.data.data ? response.data.data : [], role: response.data && response.data.data && response.data.data[0]
 			}, () => this.handleRole(response.data.data[0]))
 		})
 	}
