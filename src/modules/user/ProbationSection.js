@@ -265,7 +265,7 @@ class ProbationSection extends Component {
 							</div>
 						</div>
 					</div>
-					<h5 className="mt-4 text-center title-blue"> Performance Appraisal </h5>
+					<h5 className="mt-4 d-flex justify-content-center align-items-center title-blue"><i className="fas fa-briefcase fa-lg icon-probation"></i>Performance Appraisal </h5>
 					<div className="table-border mt-4">
 						<div className="row d-flex align-items-center  light-orange text-center table-border-bottom">
 							<div className="col-md-3">
@@ -674,7 +674,7 @@ class ProbationSection extends Component {
 							</div>
 						</div>
 					</div>
-					<h5 className="mt-4 text-center title-blue"> Training Needs / Undertaken </h5>
+					<h5 className="mt-4 d-flex justify-content-center align-items-center title-blue"><i className="fas fa-graduation-cap fa-lg icon-probation"></i>Training Needs / Undertaken </h5>
 					<div className="table-border mt-4 p-3">
 						<div className="row mt-3">
 							<span className="col-md-4">Outline any courses the employee has attended to date.</span>
@@ -713,7 +713,7 @@ class ProbationSection extends Component {
 							</div>
 						</div>
 					</div>
-					<h5 className="mt-4 text-center title-blue"> Overall Rating </h5>
+					<h5 className="mt-4 d-flex justify-content-center align-items-center title-blue"> <i className="fas fa-star-half-alt fa-lg icon-probation"></i>Overall Rating </h5>
 					<div className="table-border mt-4 p-3">
 						<div className="row mt-3">
 							<span className="col-md-4">Based on the ratings above, rate the employee's overall performance</span>
@@ -752,7 +752,7 @@ class ProbationSection extends Component {
 							</div>
 						</div>
 					</div>
-					<h5 className="mt-4 text-center title-blue"> Final Outcome </h5>
+					<h5 className="mt-4 d-flex justify-content-center align-items-center title-blue"><i className="fas fa-landmark fa-lg icon-probation"></i> Final Outcome </h5>
 					<div className="table-border mt-4 p-3">
 						<div className="row">
 							<p className="ml-4 title-orange">Select one of the two final recommendations:</p>
