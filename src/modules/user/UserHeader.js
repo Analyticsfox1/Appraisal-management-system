@@ -8,6 +8,7 @@ class UserHeader extends Component {
 	onLogOut = () => {
 		logout().then(response => {
 			if (response.data && response.data.error === "false") {
+				sessionStorage.removeItem('userData');
 				this.props.history.push('/login')
 				toast.success("Logout Successfully", { type: toast.TYPE.SUCCESS, autoClose: 2000 })
 			}

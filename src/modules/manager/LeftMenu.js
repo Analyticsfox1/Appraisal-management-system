@@ -20,7 +20,18 @@ class LeftMenu extends Component {
 			<aside className="LeftMenu">
 				<div className="logo-image"></div>
 				<ul className="dash_ul">
-					<p className="text-white"><img src="./assets/images/admin.png" style={{ height: '100px', width: '100px' }} />Welcome, {manager ? manager.name : 'PM'} </p>
+					<div className="row px-3">
+						<div>
+							<img src="./assets/images/admin.png" style={{ height: '100px', width: '100px' }} />
+						</div>
+						<div className="text-center p-2 mt-4">
+							<h6 className="title-orange">Welcome </h6>
+							<h6 style={{ overflowWrap: 'break-word' }} className="text-white">{manager ? manager.name : 'PM'}</h6>
+						</div>
+					</div>
+					<div className="custom-hr">
+						<hr />
+					</div>
 					<li><NavLink to="/manager-dashboard" activeClassName="active"><i className="fas fa-home"></i><span>My Dashboard</span></NavLink></li>
 					<li><NavLink to="/manager-team-management" activeClassName="active"><i className="fas fa-users"></i><span>Team Management</span></NavLink></li>
 					<li><NavLink to="/manager-employee-probation-management" activeClassName="active"><i className="fas fa-user-clock"></i><span>Employee In Probation</span></NavLink></li>

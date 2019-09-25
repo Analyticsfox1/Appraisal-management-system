@@ -1587,3 +1587,15 @@ input[disabled]:after {
 	line-height: 40px;
 	margin-right: 10px;
 }
+
+.profile-img {
+	height: 100px;
+	width: 100px;
+}
+
+.custom-hr hr {
+	border-top: 1px solid #585858;
+	opacity: 0.3;
+	margin-top: 5px;
+	margin-bottom: 0;
+}

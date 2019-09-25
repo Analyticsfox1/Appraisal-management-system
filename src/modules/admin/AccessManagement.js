@@ -58,13 +58,13 @@ class AccessManagement extends Component {
 				this.setState({
 					accessData: newData
 				});
-				toast.success(response.data.message, { type: toast.TYPE.SUCCESS, autoClose: 2000 })
+				toast.success("Access is assigned to role", { type: toast.TYPE.SUCCESS, autoClose: 2000 })
 			}
 			if (response.data && response.data.error === 'true') {
 				this.setState({
 					accessData: ''
 				})
-				toast.error(response.data.message, { type: toast.TYPE.ERROR, autoClose: 2000 })
+				toast.error("Access is not assigned to role", { type: toast.TYPE.ERROR, autoClose: 2000 })
 			}
 		})
 		this.setState({ role });
