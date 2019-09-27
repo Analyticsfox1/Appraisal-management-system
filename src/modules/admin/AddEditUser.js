@@ -4,7 +4,7 @@ import Select from 'react-select';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { getRoleList, addUser, getUserById } from '../../utils/admin';
-import { uploadDoc } from '../../utils/user';
+import { uploadDoc } from '../../utils/admin';
 import moment from 'moment';
 import ImageUploader from 'react-images-upload';
 import { ToastContainer, toast } from 'react-toastify';
@@ -291,7 +291,7 @@ class AddEditUser extends Component {
 				if (response.data && response.data.error === 'true') {
 					toast.error(response.data.message, { type: toast.TYPE.ERROR, autoClose: 2000 })
 				}
-
+				debugger
 				let file1 = document[0] ? document[0] : null;
 				let userDoc = [{
 					documentName: document[0] ? document[0].name : null,
