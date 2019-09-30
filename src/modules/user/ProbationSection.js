@@ -51,11 +51,15 @@ class ProbationSection extends Component {
 		getProbationFormByUniqueId(userObj ? userObj.uniqueId : null).then(response => {
 			if (response.data && response.data.error === 'false') {
 				let data = response.data.data;
+				console.log(data);
+				
 				data.probPerfApprList.map(value => {
 					selectedRate[value.compentency] = { value: value.rating, label: value.rating }
 					PerfApprList[value.compentency] = value;
 				});
 				this.setState(data)
+				console.log(data);
+				
 				this.setState({ probFormId: response.data && response.data.data.probFormId, selectedRating: selectedRate })
 				toast.success(response.data.message, { type: toast.TYPE.SUCCESS, autoClose: 2000 })
 			}

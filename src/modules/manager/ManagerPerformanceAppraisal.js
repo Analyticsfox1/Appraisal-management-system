@@ -1,21 +1,20 @@
 import React, { Component } from "react";
 import LeftMenu from "./LeftMenu";
-import UserHeader from "./UserHeader";
-// import PerformanceTabMenu from "../../components/PerformanceTabMenu";
-import Performance from "./Performance";
+import ManagerHeader from "./ManagerHeader";
+import ManagerPerformance from "./ManagerPerformance";
 
-class PerformanceAppraisal extends Component {
+export class ManagerPerformanceAppraisal extends Component {
   render() {
     return (
       <div className="dash_grid">
         <LeftMenu />
         <main>
-          <UserHeader {...this.props} />
+          <ManagerHeader {...this.props} />
           <section className="container-fluid">
             <h5 className="text-center mt-2 mx-auto user-box">
               Performance Appraisal
             </h5>
-            <Performance />
+            <ManagerPerformance />
           </section>
         </main>
       </div>
@@ -23,4 +22,4 @@ class PerformanceAppraisal extends Component {
   }
 }
 
-export default PerformanceAppraisal;
+export default ManagerPerformanceAppraisal;

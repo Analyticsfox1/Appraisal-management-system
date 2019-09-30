@@ -36,21 +36,31 @@ class ManagerProbationSection extends Component {
 	}
 
 	componentDidMount() {
-		if (sessionStorage.getItem('userData')) {
+		// if (sessionStorage.getItem('userData')) {
+		// 	this.ProbationFormData();
+		// }
+		// this.props.userid && this.props.userid ? this.ProbationFormData() : '' 
+		if (this.props.userid && this.props.userid) {
 			this.ProbationFormData();
 		}
+		// this.props.userid && console.log('------------>',this.props.userid, this.props.userid.uniqueId);
+		
 	}
 
 	ProbationFormData = () => {
 		const { PerfApprList, selectedRating } = this.state;
-		let userObj = JSON.parse(sessionStorage.getItem('userData'));
+		// let userObj = JSON.parse(sessionStorage.getItem('userData'));
+		let userObj = this.props.userid && this.props.userid
 		this.setState({
 			user: userObj
 		})
+		console.log(userObj);
 		let selectedRate = {};
 		getProbationFormByUniqueId(userObj ? userObj.uniqueId : null).then(response => {
 			if (response.data && response.data.error === 'false') {
 				let data = response.data.data;
+				console.log(data);
+				
 				data.probPerfApprList.map(value => {
 					selectedRate[value.compentency] = { value: value.rating, label: value.rating }
 					PerfApprList[value.compentency] = value;
@@ -223,6 +233,9 @@ class ManagerProbationSection extends Component {
 	}
 
 	render() {
+		// console.log(this.props.userid);
+		
+		
 		const { selectedRating, selectedManager, selectedEmployee, PerfApprList, coursesAttndToDate, coursesFuture, ovrallEmpPerfRate, mangrComment, finalRecommendation, empCheckbox, mangrCheckbox, errors, data } = this.state;
 		return (
 			<>
