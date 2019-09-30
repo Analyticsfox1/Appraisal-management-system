@@ -18,23 +18,6 @@ export const register = data => {
   });
 };
 
-//user upload document API
-export const uploadDoc = data => {
-  const formData = new FormData();
-  Object.keys(data).map(key => {
-    formData[key] = data[key];
-  });
-  console.log("TCL: formData", formData);
-  return post(
-    `/uprise/authentication/uploadDoc`,
-    formData,
-    "multipart/form-data"
-  ).then(res => {
-    console.log("RESPONSE :: Upload Document ::: ", res);
-    return res;
-  });
-};
-
 export const logout = () => {
   return get(`/uprise/authentication/logout`).then(res => {
     console.log("RESPONSE :: logout ::: ", res);

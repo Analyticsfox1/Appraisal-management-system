@@ -22,8 +22,7 @@ export const get = apiURL => {
     .get(`${serverURL}${baseURL}${apiURL}`, {
       headers: {
         "Access-Control-Allow-Method": "get",
-        // 'Access-Control-Allow-Origin': '*',
-        // 'Access-Control-Allow-Header': 'X-PINGOTHER,Content-Type,X-Requested-With,accept,Origin,Access-Control-Request-Method,Access-Control-Request-Headers,Authorization',
+        "Access-Control-Allow-Origin": "*",
         "Content-Type": "application/json",
         accessToken: "roS0SOXGlvRDLoNtacLXjrI2Rh8NcmDl",
         tokenId: "nih.patil@gmail.com"
@@ -39,8 +38,7 @@ export const post = (apiURL, bodyObj = {}, contentType) => {
     .post(`${serverURL}${baseURL}${apiURL}`, bodyObj, {
       headers: {
         "Access-Control-Allow-Method": "post",
-        // 'Access-Control-Allow-Origin': '*',
-        // 'Access-Control-Allow-Header': 'X-PINGOTHER,Content-Type,X-Requested-With,accept,Origin,Access-Control-Request-Method,Access-Control-Request-Headers,Authorization',
+        "Access-Control-Allow-Origin": "*",
         "Content-Type": contentType || "application/json",
         accessToken: "roS0SOXGlvRDLoNtacLXjrI2Rh8NcmDl",
         tokenId: "nih.patil@gmail.com"
