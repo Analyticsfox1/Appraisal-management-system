@@ -14,7 +14,7 @@ class ManagerProbationForm extends Component {
           <ManagerHeader {...this.props} />
           <section className="container-fluid mt-3">
             <h5 className="text-center mx-auto mb-3 user-box">
-              Probation Form
+              Probation Form{" "}
             </h5>
             <ManagerProbationSection {...this.props.location.userid} />
           </section>

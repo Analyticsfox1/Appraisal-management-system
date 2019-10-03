@@ -214,7 +214,7 @@ class ManagerProbationSection extends Component {
 
 	handleSubmit = () => {
 		const { PerfApprList, coursesAttndToDate, coursesFuture, ovrallEmpPerfRate, mangrComment, finalRecommendation, empCheckbox, mangrCheckbox, user, probFormId } = this.state;
-
+		
 		let probPerfApprList = Object.values(PerfApprList);
 		let userUniqueId = user ? user.uniqueId : null
 		let createdDate = null

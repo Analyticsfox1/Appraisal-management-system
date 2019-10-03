@@ -76,7 +76,7 @@ export class Performance extends Component {
 		
 		this.setState({
 			user: userObj,
-		});
+		});	
 		
 		getPerformance(userObj ? userObj.uniqueId : null).then(response => {
 			if (response.data && response.data.error === 'false') {
@@ -92,7 +92,10 @@ export class Performance extends Component {
 					goal: data.kraSettings.goals[0].goal,
 					employeeAchievement: data.kraSettings.goals[0].employeeAchievement,
 					managerGoalDescription: data.kraSettings.goals[0].managerGoalDescription,
-					managerFeedback: data.kraSettings.goals[0].managerFeedback
+					managerFeedback: data.kraSettings.goals[0].managerFeedback,
+					employeeSelfRating: data.kraSettings.goals[0].employeeSelfRating,
+					managerRating: data.kraSettings.goals[0].managerRating,	
+					// overallRating: data.overallRating
 
 				})
 				data.Performanceapp && data.Performanceapp.map(value => {

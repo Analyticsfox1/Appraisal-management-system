@@ -1,11 +1,15 @@
 import React, { Component } from 'react';
 import Select from 'react-select';
+import { addPerformance, getPerformance } from '../../utils/user';
 import StarRatingComponent from 'react-star-rating-component';
+import { ToastContainer, toast } from 'react-toastify';
+toast.configure();
 
 export class ManagerPerformance extends Component {
     constructor() {
 		super();
 		this.state = {
+            user: {},
 			goal: '',
 			managerGoalDescription: '',
 			employeeAchievement: '',
@@ -20,20 +24,57 @@ export class ManagerPerformance extends Component {
             thingsTheyShouldContinue: "",
             overallRating: 0,
 			errors: {
-				goalError: null,
+				// goalError: null,
 				managerGoalDescriptionError: null,
-				employeeAchievementError: null,
+				// employeeAchievementError: null,
 				managerFeedbackError: null,
-				employeeSelfRatingError: null,
+				// employeeSelfRatingError: null,
                 managerRatingError: null,
-                thingsManagerShouldStartError: null,
-                thingsManagerShouldStopError: null,
-                thingsManagerShouldContinueError: null,
+                // thingsManagerShouldStartError: null,
+                // thingsManagerShouldStopError: null,
+                // thingsManagerShouldContinueError: null,
                 thingsTheyShouldStartError: null,
                 thingsTheyShouldStopError: null,
                 thingsTheyShouldContinueError: null
 			}
 		}
+    }
+    componentDidMount(){
+        if (this.props.userid && this.props.userid) {
+			this.PerformanceFormData();
+		}   
+    }
+
+    PerformanceFormData = () => {
+        let userObj = this.props.userid && this.props.userid
+		this.setState({
+			user: userObj
+		})
+        console.log(userObj);
+        getPerformance(userObj ? userObj.uniqueId : null).then(response => {
+            if(response.data && response.data.error === 'false'){
+                let data =  response.data.data;
+				console.log(data);
+				this.setState({
+					thingsManagerShouldStart: data.selfDevlopmentGoal.thingsManagerShouldStart,
+					thingsManagerShouldStop: data.selfDevlopmentGoal.thingsManagerShouldStop,
+					thingsManagerShouldContinue: data.selfDevlopmentGoal.thingsManagerShouldContinue,
+					thingsTheyShouldStart: data.selfDevlopmentGoal.thingsTheyShouldStart,
+					thingsTheyShouldStop: data.selfDevlopmentGoal.thingsTheyShouldStop,
+					thingsTheyShouldContinue: data.selfDevlopmentGoal.thingsTheyShouldContinue,
+					goal: data.kraSettings.goals[0].goal,
+					employeeAchievement: data.kraSettings.goals[0].employeeAchievement,
+					managerGoalDescription: data.kraSettings.goals[0].managerGoalDescription,
+					managerFeedback: data.kraSettings.goals[0].managerFeedback
+
+                });
+                toast.success(response.data.message, { type: toast.TYPE.SUCCESS, autoClose: 2000 })
+            };
+            if (response.data && response.data.error === 'true') {
+				toast.error(response.data.message, { type: toast.TYPE.ERROR, autoClose: 2000 })
+			}
+        })
+        
     }
 
     onStarClick = (nextValue, prevValue, name) => {
@@ -59,21 +100,52 @@ export class ManagerPerformance extends Component {
 	}
 
 	handleSubmit = () => {
-		const { errors, employeeSelfRating } = this.state;
-		let isAdd = true;
-		for (var val in errors) {
-			if (errors[val] === null || errors[val]) {
-				errors[val] = true;
-				isAdd = false;
-			}
-		}
-		if (employeeSelfRating === 0) {
-			this.setState({ errors: { ...errors, employeeSelfRatingError: true } })
-		}
-		else {
-			this.setState({ errors: { ...errors, employeeSelfRatingError: false } })
-		}
-		this.setState({ errors: { ...errors } });
+        const {managerGoalDescription, managerFeedback, user, thingsTheyShouldStart,  thingsTheyShouldStopError,
+            thingsTheyShouldContinueError ,managerRating, errors  } = this.state;
+        
+        let userUniqueId = user ? user.uniqueId : null;
+        console.log(userUniqueId);
+        debugger;
+        
+        let selfDevlopmentGoal = {
+            thingsTheyShouldStart,  thingsTheyShouldStopError,
+            thingsTheyShouldContinueError
+        }
+        let kraSettings = {
+            goals: [{
+                managerGoalDescription, managerFeedback
+            }]
+        };
+
+        let obj = 	{ kraSettings, selfDevlopmentGoal, userUniqueId}
+   
+           addPerformance(obj).then(response => {
+           if (response.data && response.data.error === 'false') {
+               toast.success(response.data.message, { type: toast.TYPE.SUCCESS, autoClose: 2000 });
+           }
+           
+           
+           if (response.data && response.data.error === 'true') {
+               toast.error(response.data.message, { type: toast.TYPE.ERROR, autoClose: 2000 })
+           }
+       })
+
+       
+        
+		// let isAdd = true;
+		// for (var val in errors) {
+		// 	if (errors[val] === null || errors[val]) {
+		// 		errors[val] = true;
+		// 		isAdd = false;
+		// 	}
+		// }
+		// if (managerRating === 0) {
+		// 	this.setState({ errors: { ...errors, managerRatingError: true } })
+		// }
+		// else {
+		// 	this.setState({ errors: { ...errors, managerRatingError: false } })
+		// }
+		// this.setState({ errors: { ...errors } });
 	}
 
 	restrictAlphabets = (e) => {
@@ -96,6 +168,7 @@ export class ManagerPerformance extends Component {
             overallRating, errors } = this.state;
         return (
             <div>
+                <ToastContainer />
                 <section className="tab-body mt-5 mb-5">
 					<div className="row">
 						<div className="col-md-12 text-right">

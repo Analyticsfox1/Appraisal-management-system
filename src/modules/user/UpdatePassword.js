@@ -69,7 +69,7 @@ class UpdatePassword extends Component {
   //   }
   // }
 
-  handleSubmit = () => {
+  handleSubmit = e => {
     const {
       errors,
       invalidPassword,
@@ -77,6 +77,7 @@ class UpdatePassword extends Component {
       oldPassword,
       newPassword
     } = this.state;
+
     let isSuccess = true;
     for (var val in errors) {
       if (errors[val] === null || errors[val]) {
@@ -84,39 +85,46 @@ class UpdatePassword extends Component {
         isSuccess = false;
       }
     }
-    if (invalidPassword || invalidConfPassword) {
-      isSuccess = false;
-    }
+    // if (invalidPassword || invalidConfPassword) {
+    //   isSuccess = false;
+    // }
 
     let USER = JSON.parse(sessionStorage.getItem("userData"));
     // let UserData = sessionStorage.setItem("USER", USER);
     console.log(USER);
+    console.log(USER.officialEmail);
+    var username = USER.officialEmail;
 
     // console.log(UserData.password);
-    if (USER) {
+
+    let obj = { newPassword, oldPassword, username };
+    if (isSuccess) {
       debugger;
-      let obj = { newPassword, oldPassword };
-      if (isSuccess) {
-        updatePassword(obj).then(response => {
-          if (response.data && response.data.error === "true") {
-            toast.error(response.data.message, {
-              type: toast.TYPE.ERROR,
-              autoClose: 2000
-            });
-          }
-          if (response.data && response.data.error === "false") {
-            toast.success(response.data.message, {
-              type: toast.TYPE.SUCCESS,
-              autoClose: 2000
-            });
-          }
-        });
-      }
-    } else {
-      console.log("password Not match");
+      updatePassword(obj).then(response => {
+        console.log("res------------>", response);
+        if (response.data && response.data.error === "false") {
+          toast.success(response.data.message, {
+            type: toast.TYPE.SUCCESS,
+            autoClose: 2000
+          });
+        }
+        if (response.data && response.data.error === "true") {
+          toast.error(response.data.message, {
+            type: toast.TYPE.ERROR,
+            autoClose: 2000
+          });
+          // return false;
+        }
+      });
     }
 
     this.setState({ errors: { ...errors } });
+    e.preventDefault();
+    this.setState({
+      newPassword: "",
+      oldPassword: "",
+      confPassword: ""
+    });
   };
 
   render() {

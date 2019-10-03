@@ -38,7 +38,7 @@ export const forgotPassword = data => {
 //user Update Password API
 export const updatePassword = data => {
   return post(
-    `/uprise/authentication/updatePassword?newPassword=${data.newPassword}&oldPassword=${data.oldPassword}`
+    `/uprise/authentication/updatePassword?newPassword=${data.newPassword}&oldPassword=${data.oldPassword}&username=${data.username}`
   ).then(res => {
     console.log("RESPONSE :: Update Password ::: ", res);
     return res;

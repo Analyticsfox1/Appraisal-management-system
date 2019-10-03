@@ -30,7 +30,10 @@ class UserManagement extends Component {
   UserList = () => {
     getUserList().then(response => {
       this.setState({
-        userData: response.data && response.data.data ? response.data.data : []
+        userData:
+          response.data && response.data.data
+            ? response.data.data.reverse()
+            : []
       });
     });
   };
@@ -48,6 +51,8 @@ class UserManagement extends Component {
 
   render() {
     const { search, userData } = this.state;
+    console.log(userData);
+
     const columns = [
       {
         Header: "Employee ID",

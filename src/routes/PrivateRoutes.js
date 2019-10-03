@@ -30,6 +30,7 @@ import ManagerTeamManagement from "../modules/manager/ManagerTeamManagement";
 import ManagerEmployeeProbation from "../modules/manager/ManagerEmployeeProbation";
 import ManagerProbationForm from "../modules/manager/ManagerProbationForm";
 import ManagerPerformanceAppraisal from "../modules/manager/ManagerPerformanceAppraisal";
+import ManagerEmployeePerformance from "../modules/manager/ManagerEmployeePerformance";
 
 const PrivateRouteUser = ({ component: Component }) => {
   return (
@@ -207,6 +208,11 @@ class PrivateRoutes extends Component {
             exact
             path="/manager-performance"
             component={ManagerPerformanceAppraisal}
+          />
+          <PrivateRouteManager
+            exact
+            path="/employee-performance"
+            component={ManagerEmployeePerformance}
           />
           {/* <Route path="*" component={PageNotFound} /> */}
         </Switch>

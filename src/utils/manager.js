@@ -28,3 +28,12 @@ export const getAllInProbationEmployees = data => {
   });
 };
 
+//get all employee under manger performance
+export const getAllPerfApprUnderManager = data => {
+  return get(`/uprise/kra/getAllPerfApprUnderManager?managerId=${data}`).then(
+    res => {
+      console.log("RESPONSE :: Performance Of Employee ::: ", res);
+      return res;
+    }
+  );
+};

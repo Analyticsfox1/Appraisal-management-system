@@ -10,6 +10,11 @@ import ImageUploader from 'react-images-upload';
 import { ToastContainer, toast } from 'react-toastify';
 toast.configure();
 
+const statusOption = [
+	{ id: 1, value: 'Active', label: 'Active' },
+	{ id: 2, value: 'Inactive', label: 'Inactive' },
+  ];
+
 class AddEditUser extends Component {
 	state = {
 		show: false,
@@ -55,9 +60,11 @@ class AddEditUser extends Component {
 			DOJError: null
 		}
 	}
+	
 
 	componentDidMount() {
 		this.handleShow();
+		this.handleStatus();
 		this.RoleList();
 		if (this.props.editObj) {
 			this.UserData();
@@ -133,6 +140,21 @@ class AddEditUser extends Component {
 		this.setState({
 			[e.target.name]: e.target.value
 		})
+	}
+
+	handleStatus = (status) => {
+		if(status) {
+			this.setState({
+				status: status.value
+			})
+			console.log("status", status);
+			
+			
+		}
+		// this.setState({status},
+		// 	() => console.log(`Option selected:`, status && status.label)
+		// )
+			
 	}
 
 	handleValidate = (e) => {
@@ -250,9 +272,14 @@ class AddEditUser extends Component {
 		}
 	}
 
+
 	handleSubmit = () => {
+	
+		
 		const { errors, name, title, officialEmail, personalEmail, DOJ, DOB, primaryMobileNo, document,
 			secondaryMobileNo, gender, bloodGroup, aadharNo, address, bankName, accountNumber, role, status, uniqueId, userId, password, token, updatedDate, probationEndDate, createdDate } = this.state;
+			console.log(status && status.value);
+
 		let isAdd = true;
 
 		if (this.props.editObj) {
@@ -277,10 +304,15 @@ class AddEditUser extends Component {
 		if (role) {
 			role.createdDate = +new Date(role.createdDate);
 		}
-
+		let employeeId = 5656565;
+		
+		
+	// status = status && status.value;
+		console.log(status, '....');
+		
 		let obj = {
 			name, title, officialEmail, personalEmail, dateOfJoining, dateOfBirth, primaryMobileNo, secondaryMobileNo,
-			gender, bloodGroup, aadharNo, address, bankName, accountNumber, role, uniqueId, userId, password, token, updatedDate: +new Date(updatedDate), probationEndDate: +new Date(probationEndDate), createdDate: +new Date(createdDate), status
+			gender, bloodGroup, aadharNo, address, bankName, accountNumber, role, uniqueId, userId, password, token, updatedDate: +new Date(updatedDate), probationEndDate: +new Date(probationEndDate), createdDate: +new Date(createdDate), status, employeeId
 		}
 
 		if (isAdd) {
@@ -296,7 +328,7 @@ class AddEditUser extends Component {
 				let userDoc = [{
 					documentName: document[0] ? document[0].name : null,
 					description: 'Profile Image',
-					userUniqueId: response.data.data.uniqueId
+					// userUniqueId: response.data.data.uniqueId
 				}]
 				let imageObj = { file1, userDoc }
 				if (imageObj) {
@@ -311,6 +343,7 @@ class AddEditUser extends Component {
 	}
 
 	render() {
+		
 		const { show, role, roleOption, status, name, title, address, gender, bloodGroup, bankName, accountNumber, invalidaccountNumber, officialEmail, personalEmail, invalidpersonalEmail, invalidofficialEmail, primaryMobileNo, invalidprimaryMobileNo, secondaryMobileNo, invalidsecondaryMobileNo, DOJ, DOB, aadharNo, invalidaadharNo, inValidStatus, errors } = this.state;
 		return (
 			<div>
@@ -570,7 +603,7 @@ class AddEditUser extends Component {
 							<div className="form-group col-md-4">
 								<label>Bank Account Number</label>
 								<input
-									type="text"
+									type="number"
 									pattern="\d*"
 									maxLength="18"
 									className="form-input"
@@ -622,6 +655,26 @@ class AddEditUser extends Component {
 									errors.roleError &&
 									<span className="errorMsg">Please select role</span>
 								}
+							</div>
+							<div className="col-md-4">
+								<label>Status</label>
+								<Select
+									value={status}
+									onChange={this.handleStatus}
+									name = "status"
+									// onBlur={this.handleValidate}
+									options={statusOption}
+									// valueKey="roleId"
+									// labelKey="roleName"
+									// getStatus={(option) => option["name"]}
+									// getOptionValue={(option) => option["roleId"]}
+									placeholder="Status"
+								/>	
+								
+								{/* {
+									inValidStatus &&
+									<span className="errorMsg">Please select Status</span>
+								} */}
 							</div>
 						</div>
 					</Modal.Body>

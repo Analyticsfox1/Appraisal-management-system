@@ -43,7 +43,7 @@ class PushNotification extends Component {
     let obj = { alertMessage };
     pushNotifcation(obj).then(response => {
       if (response.data && response.data.error === "false") {
-        toast.success("Notification Send Successfully", {
+        toast.success("Notification Sent Successfully", {
           type: toast.TYPE.SUCCESS,
           autoClose: 3000
         });

@@ -14,7 +14,7 @@ export class ManagerPerformanceAppraisal extends Component {
             <h5 className="text-center mt-2 mx-auto user-box">
               Performance Appraisal
             </h5>
-            <ManagerPerformance />
+            <ManagerPerformance {...this.props.location.userid} />
           </section>
         </main>
       </div>

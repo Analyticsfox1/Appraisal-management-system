@@ -64,6 +64,12 @@ class LeftMenu extends Component {
             </NavLink>
           </li>
           <li>
+            <NavLink to="/employee-performance" activeClassName="active">
+              &nbsp;<i className="fas fa-hourglass-half"></i>
+              <span>&nbsp;Employee Performance</span>
+            </NavLink>
+          </li>
+          <li>
             <NavLink to="/manager-performance" activeClassName="active">
               &nbsp;<i className="fas fa-hourglass-half"></i>
               <span>&nbsp;PerformanceAppraisal</span>

@@ -499,7 +499,7 @@ class Register extends Component {
 							<div className="form-group col-md-4">
 								<label>Bank Account Number</label>
 								<input
-									type="text"
+									type="number"
 									pattern="\d*"
 									maxLength="18"
 									className="form-input"
