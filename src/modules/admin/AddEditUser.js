@@ -13,7 +13,7 @@ toast.configure();
 const statusOption = [
 	{ id: 1, value: 'Active', label: 'Active' },
 	{ id: 2, value: 'Inactive', label: 'Inactive' },
-  ];
+];
 
 class AddEditUser extends Component {
 	state = {
@@ -60,7 +60,7 @@ class AddEditUser extends Component {
 			DOJError: null
 		}
 	}
-	
+
 
 	componentDidMount() {
 		this.handleShow();
@@ -143,18 +143,7 @@ class AddEditUser extends Component {
 	}
 
 	handleStatus = (status) => {
-		if(status) {
-			this.setState({
-				status: status.value
-			})
-			console.log("status", status);
-			
-			
-		}
-		// this.setState({status},
-		// 	() => console.log(`Option selected:`, status && status.label)
-		// )
-			
+		this.setState({ status })
 	}
 
 	handleValidate = (e) => {
@@ -274,11 +263,8 @@ class AddEditUser extends Component {
 
 
 	handleSubmit = () => {
-	
-		
 		const { errors, name, title, officialEmail, personalEmail, DOJ, DOB, primaryMobileNo, document,
 			secondaryMobileNo, gender, bloodGroup, aadharNo, address, bankName, accountNumber, role, status, uniqueId, userId, password, token, updatedDate, probationEndDate, createdDate } = this.state;
-			console.log(status && status.value);
 
 		let isAdd = true;
 
@@ -304,17 +290,13 @@ class AddEditUser extends Component {
 		if (role) {
 			role.createdDate = +new Date(role.createdDate);
 		}
+
 		let employeeId = 5656565;
-		
-		
-	// status = status && status.value;
-		console.log(status, '....');
-		
 		let obj = {
 			name, title, officialEmail, personalEmail, dateOfJoining, dateOfBirth, primaryMobileNo, secondaryMobileNo,
-			gender, bloodGroup, aadharNo, address, bankName, accountNumber, role, uniqueId, userId, password, token, updatedDate: +new Date(updatedDate), probationEndDate: +new Date(probationEndDate), createdDate: +new Date(createdDate), status, employeeId
+			gender, bloodGroup, aadharNo, address, bankName, accountNumber, role, uniqueId, userId, password, token, updatedDate: +new Date(updatedDate), probationEndDate: +new Date(probationEndDate), createdDate: +new Date(createdDate), status: status.value, employeeId
 		}
-
+		
 		if (isAdd) {
 			addUser(obj).then(response => {
 				if (response.data && response.data.error === 'false') {
@@ -343,7 +325,7 @@ class AddEditUser extends Component {
 	}
 
 	render() {
-		
+
 		const { show, role, roleOption, status, name, title, address, gender, bloodGroup, bankName, accountNumber, invalidaccountNumber, officialEmail, personalEmail, invalidpersonalEmail, invalidofficialEmail, primaryMobileNo, invalidprimaryMobileNo, secondaryMobileNo, invalidsecondaryMobileNo, DOJ, DOB, aadharNo, invalidaadharNo, inValidStatus, errors } = this.state;
 		return (
 			<div>
@@ -661,7 +643,7 @@ class AddEditUser extends Component {
 								<Select
 									value={status}
 									onChange={this.handleStatus}
-									name = "status"
+									name="status"
 									// onBlur={this.handleValidate}
 									options={statusOption}
 									// valueKey="roleId"
@@ -669,8 +651,8 @@ class AddEditUser extends Component {
 									// getStatus={(option) => option["name"]}
 									// getOptionValue={(option) => option["roleId"]}
 									placeholder="Status"
-								/>	
-								
+								/>
+
 								{/* {
 									inValidStatus &&
 									<span className="errorMsg">Please select Status</span>
